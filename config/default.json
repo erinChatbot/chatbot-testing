@@ -1,6 +1,6 @@
 {
-    "appSecret": "0a9f018790800a4fc052bad03a435ed1",
-    "pageAccessToken": "EAAQ4Kurty70BAMOyIkVe5cxuYPUoDkcGQ3RoZAryQ0OsYtRRTiXjrz5heZCqY9hjjzZAwlPuHQws2ZAAFiZCUQo6jCjjtSpBZBPhKanpvxEWQQtZA89svDeimedb6b74KYZCGvBgyqbllX89f0zcSYBHC85w5ph7Gv0XaqSIdvjfRU4xiX9Obh3XrokGCZBcOtmAZD",
-    "validationToken": "erin-test-fb-bot-20181214",
-    "serverURL": "https://loyalty-chatbot.herokuapp.com/"
+    "appSecret": "4ededbda9905dafdb48837dea00ee388",
+    "pageAccessToken": "EAAoyrOdFwpMBAEAkZBvjnT0ZBmH1ebZCu3jNpHajeI3m3yZCguLHiCvEUenRrkaauaRkPgpt7YjCiA49K6G4QUZABLumfQfYRHDZAb2R7BMrw7GhkZCt0l8J3aLd5jpHy2d07rr50xZBTUpFr0kqKDTJ4hjDrHoVW1Ojmbv8d8jziIQma87EPZBl5gZAGxWwxkw6kZD",
+    "validationToken": "erin-test-fb-bot-20181217",
+    "serverURL": "https://loyalty-chatbot-test.herokuapp.com"
 }
