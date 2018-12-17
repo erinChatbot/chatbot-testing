@@ -1,2 +1,2 @@
-# test-fb-bot_v3
+# loyalty chatbot testing
 copy from FB bot official sample
