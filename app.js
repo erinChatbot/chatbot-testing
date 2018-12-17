@@ -1,32 +1,13 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger Platform Quick Start Tutorial
- *
- * This is the completed code for the Messenger Platform quick start tutorial
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- * To run this code, you must do the following:
- *
- * 1. Deploy this code to a server running Node.js
- * 2. Run `npm install`
- * 3. Update the VERIFY_TOKEN
- * 4. Add your PAGE_ACCESS_TOKEN to your environment vars
- *
- */
-
 'use strict'
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
 // Imports dependencies and set up http server
 const
   request = require('request'),
   express = require('express'),
-  body_parser = require('body-parser'),
-  app = express().use(body_parser.json()) // creates express http server
+  bodyParser = require('body-parser'),
+  config = require('config'),
+  app = express().use(bodyParser.json()) // creates express http server
+
+const PAGE_ACCESS_TOKEN = (process.env.PAGE_ACCESS_TOKEN) ? (process.env.MESSENGER_PAGE_ACCESS_TOKEN) : config.get('pageAccessToken')
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'))
@@ -40,19 +21,19 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
     body.entry.forEach(function (entry) {
       // Gets the body of the webhook event
-      let webhook_event = entry.messaging[0]
-      console.log(webhook_event)
+      let webhookEvent = entry.messaging[0]
+      console.log(webhookEvent)
 
       // Get the sender PSID
-      let sender_psid = webhook_event.sender.id
-      console.log('Sender ID: ' + sender_psid)
+      let senderPsid = webhookEvent.sender.id
+      console.log('Sender ID: ' + senderPsid)
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message)
-      } else if (webhook_event.postback) {
-        handlePostback(sender_psid, webhook_event.postback)
+      if (webhookEvent.message) {
+        handleMessage(senderPsid, webhookEvent.message)
+      } else if (webhookEvent.postback) {
+        handlePostback(senderPsid, webhookEvent.postback)
       }
     })
     // Return a '200 OK' response to all events
@@ -87,19 +68,19 @@ app.get('/webhook', (req, res) => {
   }
 })
 
-function handleMessage (sender_psid, received_message) {
+function handleMessage (senderPsid, receivedMessage) {
   let response
 
   // Checks if the message contains text
-  if (received_message.text) {
+  if (receivedMessage.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      'text': `You sent the message: "${received_message.text}". Now send me an attachment!`
+      'text': `You sent the message: "${receivedMessage.text}". Now send me an attachment!`
     }
-  } else if (received_message.attachments) {
+  } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url
+    let attachmentUrl = receivedMessage.attachments[0].payload.url
     response = {
       'attachment': {
         'type': 'template',
@@ -108,7 +89,7 @@ function handleMessage (sender_psid, received_message) {
           'elements': [{
             'title': 'Is this the right picture?',
             'subtitle': 'Tap a button to answer.',
-            'image_url': attachment_url,
+            'image_url': attachmentUrl,
             'buttons': [
               {
                 'type': 'postback',
@@ -128,35 +109,30 @@ function handleMessage (sender_psid, received_message) {
   }
 
   // Send the response message
-  callSendAPI(sender_psid, response)
+  callSendAPI(senderPsid, response)
 }
 
-function handlePostback (sender_psid, received_postback) {
+function handlePostback (senderPsid, receivedPostback) {
   console.log('ok')
   let response
   // Get the payload for the postback
-  let payload = received_postback.payload
+  let payload = receivedPostback.payload
 
   // Set the response based on the postback payload
-  // if (payload === 'yes') {
-  //   response = { 'text': 'Thanks!' }
-  // } else if (payload === 'no') {
-  //   response = { 'text': 'Oops, try sending another image.' }
-  // }
-
-  if (payload === 'USER_DEFINED_PAYLOAD') {
-    response = { 'text': '你好呀親，仲未做好~' }
+  if (payload === 'yes') {
+    response = { 'text': 'Thanks!' }
+  } else if (payload === 'no') {
+    response = { 'text': 'Oops, try sending another image.' }
   }
-
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response)
+  callSendAPI(senderPsid, response)
 }
 
-function callSendAPI (sender_psid, response) {
+function callSendAPI (senderPsid, response) {
   // Construct the message body
-  let request_body = {
+  let requestBody = {
     'recipient': {
-      'id': sender_psid
+      'id': senderPsid
     },
     'message': response
   }
@@ -166,7 +142,7 @@ function callSendAPI (sender_psid, response) {
     'uri': 'https://graph.facebook.com/v2.6/me/messages',
     'qs': { 'access_token': PAGE_ACCESS_TOKEN },
     'method': 'POST',
-    'json': request_body
+    'json': requestBody
   }, (err, res, body) => {
     if (!err) {
       console.log('message sent!')
