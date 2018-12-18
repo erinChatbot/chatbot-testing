@@ -203,6 +203,18 @@ function receivedMessage(event) {
       sendTextMessage(senderID,"好，再需要我就打 /start 搵我\uD83D\uDC4D")
     }
 
+    if (quickReplyPayload == 'PAYLOAD_FOR_SIGN_UP_FLOW'){
+          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    }
+
+    if (quickReplyPayload == 'PAYLOAD_FOR_POINT_QUERY'){
+          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    }
+
+    if (quickReplyPayload == 'PAYLOAD_FOR_RECEIVE_OFFER'){
+          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    }
+
     if (quickReplyPayload == 'PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT'){
       aboutLoyaltyChatbot(senderID);
     }
