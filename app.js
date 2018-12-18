@@ -196,15 +196,15 @@ function receivedMessage(event) {
       messageId, quickReplyPayload);
 
     if (quickReplyPayload == 'PAYLOAD_FOR_NEED_TUTORIAL'){
-      sendTextMessage(senderID,"好簡單，輸入關鍵字就可以訂閱指定新聞。")
+      sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
     }
 
     if (quickReplyPayload == 'PAYLOAD_FOR_NO_TUTORIAL'){
       sendTextMessage(senderID,"好，再需要我就打 /start 搵我\uD83D\uDC4D")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_ABOUT_UNEWS'){
-      aboutUNews(senderID);
+    if (quickReplyPayload == 'PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT'){
+      aboutLoyaltyChatbot(senderID);
     }
 
     //sendTextMessage(senderID, "Quick reply tapped");
@@ -286,27 +286,27 @@ function sendQuickReply(recipientId) {
       id: recipientId
     },
     message: {
-      text: "你可使用 UNews Bot 訂閱特定主題的網上新聞。請選擇以下服務：",
+      text: "請選擇以下服務：",
       quick_replies: [
         {
           "content_type":"text",
-          "title":"熱門關鍵字",
-          "payload":"PAYLOAD_FOR_HOT_SEARCH_KEY"
+          "title":"試SignUp flow",
+          "payload":"PAYLOAD_FOR_SIGN_UP_FLOW"
         },
         {
           "content_type":"text",
-          "title":"訂閱關鍵字",
-          "payload":"PAYLOAD_FOR_SUBSCRIBED_KEY"
+          "title":"睇下有幾多point",
+          "payload":"PAYLOAD_FOR_POINT_QUERY"
         },
         {
           "content_type":"text",
-          "title":"取消訂閱",
-          "payload":"PAYLOAD_FOR_CANCEL_SUBSCRIBE"
+          "title":"睇有咩offer",
+          "payload":"PAYLOAD_FOR_RECEIVE_OFFER"
         },
         {
           "content_type":"text",
-          "title":"關於UNews",
-          "payload":"PAYLOAD_FOR_ABOUT_UNEWS"
+          "title":"關於Loyalty Chatbot",
+          "payload":"PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT"
         }
       ]
     }
@@ -489,9 +489,9 @@ function getStartedBtnReply(recipientId){
 }
 
 // AboutBtnDidClick
-function aboutUNews(recipientId){
-  var msg1 = 'UNews 係由 Zensis (https://www.zensis.com/) 開發及設計。如有任何意見，請電郵至 service@zensis.com 。';
-  var msg2 = '如果你覺得好用，歡迎分享 UNews 俾親朋戚友\uD83D\uDE4C';
+function aboutLoyaltyChatbot(recipientId){
+  var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
+  var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
   var msg3 = 'https://t.me/UNewsMyBot';
   sendTextMessageWithoutQuickReply(recipientId,msg1);
   setTimeout(function() {

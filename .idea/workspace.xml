@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="250" column="21" lean-forward="true" selection-start-line="250" selection-start-column="21" selection-end-line="250" selection-end-column="21" />
+            <state relative-caret-position="435">
+              <caret line="290" column="9" lean-forward="true" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -58,6 +58,10 @@
       <find>sendGreetingQuickReply</find>
       <find>sendTextMessageWithoutQuickReply</find>
       <find>greeting</find>
+      <find>PAYLOAD_FOR_HOT_SEARCH_KEY</find>
+      <find>aboutUNews</find>
+      <find>PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT</find>
+      <find>PAYLOAD_FOR_NEED_TUTORIAL</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,7 +107,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545127702437" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545129191764" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -201,8 +205,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="250" column="21" lean-forward="true" selection-start-line="250" selection-start-column="21" selection-end-line="250" selection-end-column="21" />
+        <state relative-caret-position="435">
+          <caret line="290" column="9" lean-forward="true" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
         </state>
       </provider>
     </entry>
