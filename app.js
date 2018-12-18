@@ -391,19 +391,22 @@ function sendTextMessage(recipientId, messageText) {
   }, 2000)
 }
 
-function sendTextMessageWithoutQuickReply(recipientId, messageText) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: messageText,
-      metadata: "DEVELOPER_DEFINED_METADATA"
-    }
-  };
+module.exports = {
+    sendTextMessageWithoutQuickReply: function(recipientId, messageText) {
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: messageText,
+          metadata: "DEVELOPER_DEFINED_METADATA"
+        }
+      };
 
-  callSendAPI(messageData);
+      callSendAPI(messageData);
+    }
 }
+
 
 function aboutUNews(recipientId){
   var msg1 = 'UNews 係由 Zensis (https://www.zensis.com/) 開發及設計。如有任何意見，請電郵至 service@zensis.com 。';
