@@ -1,5 +1,4 @@
 'use strict';
-var logger = require(./log);
 
 const
   bodyParser = require('body-parser'),
@@ -8,6 +7,8 @@ const
   express = require('express'),
   https = require('https'),
   request = require('request');
+
+var logger = require('./log');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
