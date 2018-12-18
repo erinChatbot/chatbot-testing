@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="290" column="9" lean-forward="true" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
+            <state relative-caret-position="676">
+              <caret line="500" column="12" lean-forward="true" selection-start-line="498" selection-start-column="4" selection-end-line="500" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -107,7 +107,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545129191764" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545129328053" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -205,8 +205,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="290" column="9" lean-forward="true" selection-start-line="290" selection-start-column="9" selection-end-line="290" selection-end-column="9" />
+        <state relative-caret-position="676">
+          <caret line="500" column="12" lean-forward="true" selection-start-line="498" selection-start-column="4" selection-end-line="500" selection-end-column="12" />
         </state>
       </provider>
     </entry>

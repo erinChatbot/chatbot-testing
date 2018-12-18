@@ -492,14 +492,13 @@ function getStartedBtnReply(recipientId){
 function aboutLoyaltyChatbot(recipientId){
   var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
   var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
-  var msg3 = 'https://t.me/UNewsMyBot';
   sendTextMessageWithoutQuickReply(recipientId,msg1);
   setTimeout(function() {
     sendTextMessageWithoutQuickReply(recipientId,msg2);
   }, 1000)
-  setTimeout(function() {
-    sendTextMessage(recipientId,msg3);
-  }, 2000)
+//  setTimeout(function() {
+//    sendTextMessage(recipientId,msg3);
+//  }, 2000)
 }
 
 // Start server
