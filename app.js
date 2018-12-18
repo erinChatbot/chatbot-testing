@@ -1,6 +1,5 @@
 'use strict';
-
-var customReply = require('./customReply')
+var logger = require(./log);
 
 const
   bodyParser = require('body-parser'),
@@ -319,8 +318,8 @@ function receivedPostback(event) {
     // get started
     //response_text = 'Hi，我係UNews\u270b\n我可以幫你留意指定主題嘅資訊同新聞，有新消息嗰陣就會通知你。';
     //sendTextMessage(senderID,response_text_1);
-//    sendGreetingQuickReply(senderID);
-    customReply.getStartedBtnReply(senderID);
+    sendGreetingQuickReply(senderID);
+    logger.info("called sendGreetingQuickReply!!")
   }
 
   console.log("Received postback for user %d and page %d with payload '%s' " +
@@ -390,23 +389,19 @@ function sendTextMessage(recipientId, messageText) {
   }, 2000)
 }
 
-exports.module = {
-    sendTextMessageWithoutQuickReply: function(recipientId, messageText) {
-      var messageData = {
-        recipient: {
-          id: recipientId
-        },
-        message: {
-          text: messageText,
-          metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-      };
-
-      callSendAPI(messageData);
+function sendTextMessageWithoutQuickReply(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
+      metadata: "DEVELOPER_DEFINED_METADATA"
     }
+  };
+
+  callSendAPI(messageData);
 }
-
-
 
 function aboutUNews(recipientId){
   var msg1 = 'UNews 係由 Zensis (https://www.zensis.com/) 開發及設計。如有任何意見，請電郵至 service@zensis.com 。';
