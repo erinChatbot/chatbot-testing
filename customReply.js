@@ -1,4 +1,3 @@
-var app = require('./app')
 var logger = require('./log')
 
 var customReply = {
