@@ -1,8 +1,8 @@
 var app = require('./app')
 
 module.exports = {
-    testfunc: function() {
-        console.log('test customReply')
+    testfunc: function(recipientId) {
+        console.log('test customReply: ' + recipientId)
     }
 }
 
