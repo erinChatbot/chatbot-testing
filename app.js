@@ -319,7 +319,8 @@ function receivedPostback(event) {
     // get started
     //response_text = 'Hi，我係UNews\u270b\n我可以幫你留意指定主題嘅資訊同新聞，有新消息嗰陣就會通知你。';
     //sendTextMessage(senderID,response_text_1);
-    sendGreetingQuickReply(senderID);
+//    sendGreetingQuickReply(senderID);
+    customReply.getStartedBtnReply(senderID);
   }
 
   console.log("Received postback for user %d and page %d with payload '%s' " +
