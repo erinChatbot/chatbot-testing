@@ -9,6 +9,7 @@ const
   request = require('request');
 
 var logger = require('./log');
+var customReply = require('./customReply');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -321,6 +322,7 @@ function receivedPostback(event) {
     //sendTextMessage(senderID,response_text_1);
     sendGreetingQuickReply(senderID);
     logger.info("called sendGreetingQuickReply!!")
+    customReply.getStartedBtnReply(senderID);
   }
 
   console.log("Received postback for user %d and page %d with payload '%s' " +
@@ -597,6 +599,14 @@ function callSendAPI(messageData) {
     }
   });
 }
+
+var test = {
+    test: function() {
+        logger.info("from app.js test success")
+    }
+};
+
+module.exports = test
 
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
