@@ -1,7 +1,7 @@
 'use strict'
 
 // module
-var customReply = require('customReply')
+var customReply = require('./customReply')
 
 // const
 const bodyParser = require('body-parser'),

@@ -1,4 +1,4 @@
-var app = require('app')
+var app = require('./app')
 
 function getStartedBtnReply(recipientId) {
   var msg1 = 'Hi，我係Loyalty chatbot\uD83D\uDC4B'
