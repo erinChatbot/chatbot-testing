@@ -1,5 +1,5 @@
-var app = require('./app')
-var logger = require('./log')
+var app = require('./app');
+var logger = require('./log');
 
 var sendResponse = {
     sendGetStartedMsg: function(recipientId) {
