@@ -1,22 +1,15 @@
-/*
- * Copyright 2016-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-/* jshint node: true, devel: true */
 'use strict'
 
-const
-  bodyParser = require('body-parser'),
-  config = require('config'),
-  crypto = require('crypto'),
-  express = require('express'),
-  https = require('https'),
-  request = require('request')
+// module
+var customReply = require('customReply')
+
+// const
+const bodyParser = require('body-parser'),
+const config = require('config'),
+const crypto = require('crypto'),
+const express = require('express'),
+const https = require('https'),
+const request = require('request')
 
 var app = express()
 app.set('port', process.env.PORT || 5000)
@@ -25,28 +18,22 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }))
 app.use(express.static('public'))
 
 /*
- * Be sure to setup your config values before running this code. You can 
+ * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
  *
  */
-
-// App Secret can be retrieved from the App Dashboard
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) 
+const APP_SECRET = (process.env.MESSENGER_APP_SECRET)
   ? process.env.MESSENGER_APP_SECRET
   : config.get('appSecret')
 
-// Arbitrary value used to validate a webhook
 const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN)
   ? (process.env.MESSENGER_VALIDATION_TOKEN)
   : config.get('validationToken')
 
-// Generate a page access token for your page from the App Dashboard
 const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN)
   ? (process.env.MESSENGER_PAGE_ACCESS_TOKEN)
   : config.get('pageAccessToken')
 
-// URL where the app is running (include protocol). Used to point to scripts and 
-// assets located at this address. 
 const SERVER_URL = (process.env.SERVER_URL)
   ? (process.env.SERVER_URL)
   : config.get('serverURL')
@@ -68,15 +55,14 @@ app.get('/webhook', function (req, res) {
     res.status(200).send(req.query['hub.challenge'])
   } else {
     console.error('Failed validation. Make sure the validation tokens match.')
-    res.sendStatus(403)          
+    res.sendStatus(403)
   }
 })
-
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
  * webhook. Be sure to subscribe your app to your page to receive callbacks
- * for your page. 
+ * for your page.
  * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
  *
  */
@@ -111,26 +97,22 @@ app.post('/webhook', function (req, res) {
       })
     })
 
-    // Assume all went well.
-    //
-    // You must send back a 200, within 20 seconds, to let us know you've 
-    // successfully received the callback. Otherwise, the request will time out.
-    res.sendStatus(200)
+    res.sendStatus(200) // You must send back a 200, within 20 seconds. Otherwise, the request will time out.
   }
 })
 
 /*
  * This path is used for account linking. The account linking call-to-action
- * (sendAccountLinking) is pointed to this URL. 
- * 
+ * (sendAccountLinking) is pointed to this URL.
+ *
  */
 app.get('/authorize', function (req, res) {
   var accountLinkingToken = req.query.account_linking_token
   var redirectURI = req.query.redirect_uri
 
-  // Authorization Code should be generated per user by the developer. This will 
+  // Authorization Code should be generated per user by the developer. This will
   // be passed to the Account Linking callback.
-  var authCode = '1234567890';
+  var authCode = '1234567890'
 
   // Redirect users to this URI on successful login
   var redirectURISuccess = redirectURI + '&authorization_code=' + authCode
@@ -143,8 +125,8 @@ app.get('/authorize', function (req, res) {
 })
 
 /*
- * Verify that the callback came from Facebook. Using the App Secret from 
- * the App Dashboard, we can verify the signature that is sent with each 
+ * Verify that the callback came from Facebook. Using the App Secret from
+ * the App Dashboard, we can verify the signature that is sent with each
  * callback in the x-hub-signature field, located in the header.
  *
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
@@ -186,9 +168,9 @@ function receivedAuthentication (event) {
   var timeOfAuth = event.timestamp
 
   // The 'ref' field is set in the 'Send to Messenger' plugin, in the 'data-ref'
-  // The developer can set this to an arbitrary value to associate the 
+  // The developer can set this to an arbitrary value to associate the
   // authentication callback with the 'Send to Messenger' click event. This is
-  // a way to do account linking when the user clicks the 'Send to Messenger' 
+  // a way to do account linking when the user clicks the 'Send to Messenger'
   // plugin.
   var passThroughParam = event.optin.ref
 
@@ -239,12 +221,12 @@ function receivedMessage (event) {
     // Just logging message echoes to console
     console.log('Received echo for message %s and app %d with metadata %s',
       messageId, appId, metadata)
-    return;
+    return
   } else if (quickReply) {
     var quickReplyPayload = quickReply.payload
     console.log('Quick reply for message %s with payload %s',
       messageId, quickReplyPayload)
-    
+
     if (quickReplyPayload == 'PAYLOAD_FOR_NEED_TUTORIAL') {
       sendTextMessage(senderID, '好簡單，輸入關鍵字就可以訂閱指定新聞。')
     }
@@ -268,7 +250,7 @@ function receivedMessage (event) {
     switch (messageText) {
       case '/start':
         sendGreetingQuickReply(senderID)
-        break;
+        break
 
       default:
         sendTextMessage(senderID, '已訂閱 ' + messageText + '。')
@@ -316,23 +298,25 @@ function receivedPostback (event) {
   var timeOfPostback = event.timestamp
   var response_text = 'default response'
 
-  // The 'payload' param is a developer-defined field which is set in a postback 
-  // button for Structured Messages. 
+  // The 'payload' param is a developer-defined field which is set in a postback
+  // button for Structured Messages.
   var payload = event.postback.payload
-    
+
   if (payload == 'USER_DEFINED_PAYLOAD') {
     // get started
     // response_text = 'Hi，我係UNews\u270b\n我可以幫你留意指定主題嘅資訊同新聞，有新消息嗰陣就會通知你。';
     // sendTextMessage(senderID,response_text_1);
-    sendGreetingQuickReply(senderID)
+
+//    sendGreetingQuickReply(senderID)
+    customReply.getStartedBtnReply(senderID)
   }
 
   console.log("Received postback for user %d and page %d with payload '%s' " +
     'at %d', senderID, recipientID, payload, timeOfPostback)
 
-  // When a postback is called, we'll send a message back to the sender to 
+  // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
-  //sendTextMessage(senderID, response_text);
+  // sendTextMessage(senderID, response_text);
 }
 
 /*
@@ -460,7 +444,7 @@ function sendQuickReply (recipientId) {
   callSendAPI(messageData)
 }
 
-function sendGreetingQuickReply (recipientId) {
+function sendGreetingQuickReply(recipientId) {
   var msg1 = 'Hi，我係UNews\uD83D\uDC4B'
   var msg2 = '我可以幫你留意指定主題嘅資訊同新聞，有新消息嗰陣就會通知你。'
   sendTextMessageWithoutQuickReply(recipientId, msg1)
@@ -566,7 +550,7 @@ function sendAccountLinking (recipientId) {
         }
       }
     }
-  }  
+  }
 
   callSendAPI(messageData)
 }
@@ -598,7 +582,7 @@ function callSendAPI (messageData) {
     } else {
       console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error)
     }
-  })  
+  })
 }
 
 // Start server
