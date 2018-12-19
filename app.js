@@ -465,7 +465,7 @@ function sendAccountLinking(recipientId) {
   callSendAPI(messageData);
 }
 
-/*************** CUSTOM FUNCTION *****************/
+/*************** CUSTOM REPLY FUNCTION *****************/
 // GetStartedBtnDidClick
 function getStartedBtnReply(recipientId){
   logger.info('Custom Function GetStartedBtnDidClick');
@@ -510,11 +510,9 @@ logger.info('Custom Function AboutBtnDidClick');
   setTimeout(function() {
     sendTextMessage(recipientId,msg2);
   }, 1000)
-//  setTimeout(function() {
-//    sendTextMessage(recipientId,msg3);
-//  }, 2000)
 }
 
+/****************** START SERVER *********************/
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid
 // certificate authority.
