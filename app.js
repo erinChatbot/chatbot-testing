@@ -248,7 +248,7 @@ function receivedPostback(event) {
 
   var payload = event.postback.payload;
 
-  logger.info('receivedPostback Payload: ' + payload)
+  logger.info('receivedPostback Payload: ' + payload);
 
   // Custom Define Payload list
   if (payload == constants.GET_STARTED){
@@ -258,8 +258,7 @@ function receivedPostback(event) {
   } else if (payload == constants.ABOUT_LOYALTY_CHATBOT) {
     aboutLoyaltyChatbot(senderID);
   } else if (payload == constants.SHOW_TUTORIAL) {
-    console.log('showTutorial()')
-    // TODO
+    console.log('showTutorial()');
   }
   //sendTextMessage(senderID, response_text);
 }
