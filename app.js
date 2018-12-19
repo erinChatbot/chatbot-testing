@@ -468,6 +468,7 @@ function sendAccountLinking(recipientId) {
 /*************** CUSTOM FUNCTION *****************/
 // GetStartedBtnDidClick
 function getStartedBtnReply(recipientId){
+  logger.info('Custom Function GetStartedBtnDidClick');
   var msg1 = 'Hi，我係Loyalty Chatbot\uD83D\uDC4B';
   var msg2 = '我試緊堆APIsss';
   sendTextMessageWithoutQuickReply(recipientId, msg1);
@@ -502,11 +503,12 @@ function getStartedBtnReply(recipientId){
 
 // AboutBtnDidClick
 function aboutLoyaltyChatbot(recipientId){
+logger.info('Custom Function AboutBtnDidClick');
   var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
   var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
   sendTextMessageWithoutQuickReply(recipientId,msg1);
   setTimeout(function() {
-    sendTextMessageWithoutQuickReply(recipientId,msg2);
+    sendTextMessage(recipientId,msg2);
   }, 1000)
 //  setTimeout(function() {
 //    sendTextMessage(recipientId,msg3);
