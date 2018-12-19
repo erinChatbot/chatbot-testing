@@ -9,7 +9,7 @@ const
   request = require('request');
 
 var logger = require('./log');
-var constants = require('./constant');
+var constants = require('./constants');
 var customReply = require('./customReply');
 
 var app = express();
