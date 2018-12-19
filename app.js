@@ -286,9 +286,9 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
-  setTimeout(function() {
-    sendQuickReply(recipientId);
-  }, 2000)
+//  setTimeout(function() {
+//    sendQuickReply(recipientId);
+//  }, 2000)
 }
 
 // Send a message with Quick Reply buttons.

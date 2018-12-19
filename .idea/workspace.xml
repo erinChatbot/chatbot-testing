@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="480" column="6" lean-forward="true" selection-start-line="480" selection-start-column="6" selection-end-line="480" selection-end-column="6" />
+            <state relative-caret-position="351">
+              <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
             </state>
           </provider>
         </entry>
@@ -62,6 +62,8 @@
       <find>aboutUNews</find>
       <find>PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT</find>
       <find>PAYLOAD_FOR_NEED_TUTORIAL</find>
+      <find>sendTextMessage</find>
+      <find>sendQuickReply</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,7 +109,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545185572847" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545190683762" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -205,8 +207,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="480" column="6" lean-forward="true" selection-start-line="480" selection-start-column="6" selection-end-line="480" selection-end-column="6" />
+        <state relative-caret-position="351">
+          <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
         </state>
       </provider>
     </entry>
