@@ -10,7 +10,6 @@ const
 
 var logger = require('./log');
 var constants = require('./constants');
-var customReply = require('./customReply');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
