@@ -517,7 +517,7 @@ function showHomeIndex(recipientId) {
                 "type" : "template",
                 "payload" : {
                     "template_type":"generic",
-                    "element" : [
+                    "elements" : [
                         {
                             "title" : "無AC?",
                             "image_url" : "https://www.paidmembershipspro.com/wp-content/uploads/2016/06/signup-300x300.png",
