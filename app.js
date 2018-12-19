@@ -254,13 +254,12 @@ function receivedPostback(event) {
   if (payload == constants.GET_STARTED){
     getStartedBtnReply(senderID);
   } else if (payload == constants.SHOW_INDEX) {
-    console.log('showHomeIndex()')
-    // TODO
-    // show list view?
+    showHomeIndex(senderID);
   } else if (payload == constants.ABOUT_LOYALTY_CHATBOT) {
-    console.log('showAboutLoyalty()')
+    aboutLoyaltyChatbot(senderID);
+  } else if (payload == constants.SHOW_TUTORIAL) {
+    console.log('showTutorial()')
     // TODO
-    // about
   }
   //sendTextMessage(senderID, response_text);
 }
@@ -515,11 +514,15 @@ function showHomeIndex(recipientId) {
 function aboutLoyaltyChatbot(recipientId){
     logger.info('Custom Function AboutBtnDidClick');
     var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
-    var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
+    var msg2 = '你可以用Loyalty Chatbot黎signup，睇有幾多point，睇下有咩offer (好似係)。';
+    var msg3 = '玩完就裝番Loyalty隻App啦親\uD83D\uDE4C';
     sendTextMessageWithoutQuickReply(recipientId,msg1);
     setTimeout(function() {
-        sendTextMessage(recipientId,msg2);
+        sendTextMessageWithoutQuickReply(recipientId,msg2);
     }, 1000)
+    setTimeout(function() {
+        sendTextMessageWithoutQuickReply(recipientId,msg3);
+    }, 2000)
 }
 
 /****************** START SERVER *********************/
