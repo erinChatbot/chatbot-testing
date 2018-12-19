@@ -258,6 +258,8 @@ function receivedPostback(event) {
     aboutLoyaltyChatbot(senderID);
   } else if (payload == constants.SHOW_TUTORIAL) {
     console.log('showTutorial()');
+  } else {
+    sendTextMessage(senderID, "做緊，等下啦");
   }
   //sendTextMessage(senderID, response_text);
 }
@@ -506,6 +508,55 @@ function getStartedBtnReply(recipientId){
 // ShowIndexBtnDidClick
 function showHomeIndex(recipientId) {
     logger.info('Custom Function ShowIndexBtnDidClick');
+    var messageData = {
+        recipient: {
+              id: recipientId
+        },
+        message: {
+            "attachment" : {
+                "type" : "template",
+                "payload" : {
+                    "template_type":"generic",
+                    "element" : [
+                        {
+                            "title" : "無AC?",
+                            "image_url" : "https://www.paidmembershipspro.com/wp-content/uploads/2016/06/signup-300x300.png",
+                            "buttons":[
+                                {
+                                    "type" : "postback",
+                                    "title": "Sign up now!",
+                                    "payload": constants.SIGN_UP_FLOW
+                                }
+                            ]
+                        },
+                        {
+                            "title" : "我有幾多分",
+                            "image_url" : "https://www.choicehotels.com/cms/images/choice-hotels/choice-privileges/cp-points-for-stays-icon/cp-points-for-stays-icon.png",
+                            "buttons":[
+                                {
+                                    "type" : "postback",
+                                    "title": "Query point!",
+                                    "payload": constants.POINT_QUERY
+                                }
+                            ]
+                        },
+                        {
+                            "title" : "有咩offer?",
+                            "image_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHVwfgdMrZlhnp_2Z_Gvp9uG1z9bvC9VlO9dliGse1oWvx8gm",
+                            "buttons":[
+                                {
+                                    "type" : "postback",
+                                    "title": "Receive Offer!",
+                                    "payload": constants.RECEIVE_OFFER
+                                }
+                            ]
+                        },
+                    ]
+                }
+            }
+        }
+    };
+    callSendAPI(messageData);
 }
 
 // AboutBtnDidClick
