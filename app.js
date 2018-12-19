@@ -9,6 +9,7 @@ const
   request = require('request');
 
 var logger = require('./log');
+var constants = require('./constant');
 var customReply = require('./customReply');
 
 var app = express();
@@ -195,28 +196,28 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_NEED_TUTORIAL'){
+    if (quickReplyPayload == constants.NEED_TUTORIAL){
       sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_NO_TUTORIAL'){
+    if (quickReplyPayload == constants.SKIP_TUTORIAL){
       sendTextMessage(senderID,"好，再需要我就打 /start 搵我\uD83D\uDC4D")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_SIGN_UP_FLOW'){
-          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    if (quickReplyPayload == constants.SIGN_UP_FLOW){
+        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_POINT_QUERY'){
-          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    if (quickReplyPayload == constants.POINT_QUERY){
+        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_RECEIVE_OFFER'){
-          sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+    if (quickReplyPayload == constants.RECEIVE_OFFER){
+        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
     }
 
-    if (quickReplyPayload == 'PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT'){
-      aboutLoyaltyChatbot(senderID);
+    if (quickReplyPayload == constants.ABOUT_LOYALTY_CHATBOT){
+        aboutLoyaltyChatbot(senderID);
     }
 
     //sendTextMessage(senderID, "Quick reply tapped");
@@ -247,16 +248,20 @@ function receivedPostback(event) {
 
   var payload = event.postback.payload;
 
-  if (payload == 'USER_DEFINED_PAYLOAD'){
-    // get started
+  logger.info('receivedPostback Payload: ' + payload)
+
+  // Custom Define Payload list
+  if (payload == constants.GET_STARTED){
     getStartedBtnReply(senderID);
+  } else if (payload == constants.SHOW_INDEX) {
+    console.log('showHomeIndex()')
+    // TODO
+    // show list view?
+  } else if (payload == constants.ABOUT_LOYALTY_CHATBOT) {
+    console.log('showAboutLoyalty()')
+    // TODO
+    // about
   }
-
-  console.log("Received postback for user %d and page %d with payload '%s' " +
-    "at %d", senderID, recipientID, payload, timeOfPostback);
-
-  // When a postback is called, we'll send a message back to the sender to
-  // let them know it was successful
   //sendTextMessage(senderID, response_text);
 }
 
@@ -485,12 +490,12 @@ function getStartedBtnReply(recipientId){
         {
           "content_type":"text",
           "title":"好啊",
-          "payload":"PAYLOAD_FOR_NEED_TUTORIAL"
+          "payload":constants.NEED_TUTORIAL
         },
         {
           "content_type":"text",
           "title":"唔洗啦",
-          "payload":"PAYLOAD_FOR_NO_TUTORIAL"
+          "payload":constants.SKIP_TUTORIAL
         }
       ]
     }
@@ -501,15 +506,20 @@ function getStartedBtnReply(recipientId){
   //callSendAPI(messageData);
 }
 
+// ShowIndexBtnDidClick
+function showHomeIndex(recipientId) {
+    logger.info('Custom Function ShowIndexBtnDidClick');
+}
+
 // AboutBtnDidClick
 function aboutLoyaltyChatbot(recipientId){
-logger.info('Custom Function AboutBtnDidClick');
-  var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
-  var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
-  sendTextMessageWithoutQuickReply(recipientId,msg1);
-  setTimeout(function() {
-    sendTextMessage(recipientId,msg2);
-  }, 1000)
+    logger.info('Custom Function AboutBtnDidClick');
+    var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
+    var msg2 = '如果你覺得好用，歡迎分享 Loyalty Chatbot 俾親朋戚友\uD83D\uDE4C';
+    sendTextMessageWithoutQuickReply(recipientId,msg1);
+    setTimeout(function() {
+        sendTextMessage(recipientId,msg2);
+    }, 1000)
 }
 
 /****************** START SERVER *********************/
