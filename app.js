@@ -200,7 +200,7 @@ function receivedMessage(event) {
     }
 
     if (quickReplyPayload == constants.SKIP_TUTORIAL){
-      sendTextMessage(senderID,"好，再需要我就打 /start 搵我\uD83D\uDC4D")
+      sendTextMessage(senderID,"好，再需要我就打 /help 搵我\uD83D\uDC4D")
     }
 
     if (quickReplyPayload == constants.SIGN_UP_FLOW){
@@ -226,8 +226,8 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches any special
     switch (messageText) {
-      case '/start':
-        getStartedBtnReply(senderID);
+      case '/help':
+        showHelpMsg(senderID);
         break;
 
       default:
