@@ -258,6 +258,10 @@ function receivedPostback(event) {
     aboutLoyaltyChatbot(senderID);
   } else if (payload == constants.SHOW_TUTORIAL) {
     console.log('showTutorial()');
+  } else if (payload == constants.SIGN_UP_FLOW) {
+    signupFlow(senderID);
+  } else if (payload == constants.LOGIN) {
+    signinFlow(senderID);
   } else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
@@ -556,6 +560,17 @@ function showHomeIndex(recipientId) {
                             ]
                         },
                         {
+                            "title" : "我有AC!",
+                            "image_url" : "http://www.odoo.com/apps/icon_image?module_id=43237",
+                            "buttons":[
+                                {
+                                    "type" : "postback",
+                                    "title": "Login先!",
+                                    "payload": constants.LOGIN
+                                }
+                            ]
+                        },
+                        {
                             "title" : "我有幾多分",
                             "image_url" : "https://www.choicehotels.com/cms/images/choice-hotels/choice-privileges/cp-points-for-stays-icon/cp-points-for-stays-icon.png",
                             "buttons":[
@@ -583,6 +598,36 @@ function showHomeIndex(recipientId) {
         }
     };
     callSendAPI(messageData);
+}
+
+// SignupBtnDidClick
+function signupFlow(recipientId) {
+    logger.info('Custom Function signupBtnDidClick');
+    // aillia self_register api
+    //http://{{middleware_host}}/api/customer/self_register
+//    {
+//      "promotionCode": "123456" ,
+//      "customer": {
+//        "phone": "+85290000008",
+//        "address": {},
+//        "company": {},
+//        "birthDate": "1998-08-08",
+//        "agreement1": true,
+//        "agreement2": true,
+//        "firstName": "Sam",
+//        "lastName": "Eight",
+//        "gender": "male",
+//        "email": "sam+8@motherapp.com",
+//        "plainPassword": "Ma123456!",
+//        "invitationToken": "",
+//        "channel": "mobile"
+//      }
+//    }
+}
+
+// SigninBtnDidClick
+function signinFlow(recipientId) {
+    logger.info('Custom Function signinBtnDidClick');
 }
 
 // AboutBtnDidClick

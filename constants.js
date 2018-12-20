@@ -13,6 +13,8 @@ let constants = {
         SHOW_INDEX : 'PAYLOAD_FOR_SHOW_INDEX',
         // About Loyalty Chatbot
         ABOUT_LOYALTY_CHATBOT : 'PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT',
+        // Login
+        LOGIN : 'PAYLOAD_FOR_LOGIN',
         // Sign Up
         SIGN_UP_FLOW : 'PAYLOAD_FOR_SIGN_UP_FLOW',
         // Point Query
