@@ -505,6 +505,32 @@ function getStartedBtnReply(recipientId){
   //callSendAPI(messageData);
 }
 
+// ShowHelpMsg
+function showHelpMsg(recipientId) {
+    logger.info('Custom Function show helping msg')
+    var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: "親，有咩幫到你？",
+          quick_replies: [
+            {
+              "content_type":"text",
+              "title":"睇教學",
+              "payload":constants.NEED_TUTORIAL
+            },
+            {
+              "content_type":"text",
+              "title":"無野喇",
+              "payload":constants.SKIP_TUTORIAL
+            }
+          ]
+        }
+     };
+    callSendAPI(messageData);
+}
+
 // ShowIndexBtnDidClick
 function showHomeIndex(recipientId) {
     logger.info('Custom Function ShowIndexBtnDidClick');
