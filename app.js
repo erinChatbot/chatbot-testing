@@ -265,7 +265,9 @@ function receivedPostback(event) {
     signinFlow(senderID);
   } else if (payload == constants.POINT_QUERY) {
     pointQuery(senderID);
-  } else {
+  } else if (payload == constants.RECEIVE_OFFER) {
+    campaignOffer(senderID);
+  }else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
   //sendTextMessage(senderID, response_text);
