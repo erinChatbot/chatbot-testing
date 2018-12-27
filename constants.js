@@ -23,5 +23,4 @@ let constants = {
         RECEIVE_OFFER : 'PAYLOAD_FOR_RECEIVE_OFFER'
 }
 
-
 module.exports = Object.freeze(constants);
