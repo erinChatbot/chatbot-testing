@@ -11,8 +11,8 @@ module.exports = {
             console.log(JSON.parse(body));
             logger.info('response body: '+JSON.stringify(body));
 
-            var result = body.result;
-            console.log("BODY RESULT: " + result);
+            var apiResult = JSON.parse(body).result;
+            console.log("BODY RESULT: " + apiResult);
         });
     },
 };
