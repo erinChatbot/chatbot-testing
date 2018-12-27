@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="641" lean-forward="true" selection-start-line="641" selection-end-line="641" />
+            <state relative-caret-position="494">
+              <caret line="642" column="19" lean-forward="true" selection-start-line="642" selection-start-column="19" selection-end-line="642" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -76,6 +76,7 @@
       <find>PAYLOAD</find>
       <find>signup</find>
       <find>constants.SIGN_UP_FLOW</find>
+      <find>signupFlow</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,7 +131,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545878850324" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545879156551" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -252,8 +253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="641" lean-forward="true" selection-start-line="641" selection-end-line="641" />
+        <state relative-caret-position="494">
+          <caret line="642" column="19" lean-forward="true" selection-start-line="642" selection-start-column="19" selection-end-line="642" selection-end-column="19" />
         </state>
       </provider>
     </entry>
