@@ -14,7 +14,7 @@ module.exports = {
 //        console.log(body.url);
 //        console.log(body.explanation);
 //        });
-        Request.get("http://connector.uat.aillia.motherapp.com/api/customer/campaign/featured", (error, response, body) => {
+        request.get("http://connector.uat.aillia.motherapp.com/api/customer/campaign/featured", (error, response, body) => {
             if(error) {
                 logger.error(err);
                 return console.log(error);
