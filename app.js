@@ -10,7 +10,7 @@ const
 
 var logger = require('./log');
 var constants = require('./constants');
-//var apiService = require('./apiServices');
+var apiService = require('./apiServices');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
