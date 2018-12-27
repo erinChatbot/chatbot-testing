@@ -606,6 +606,9 @@ function showHomeIndex(recipientId) {
 // SignupBtnDidClick
 function signupFlow(recipientId) {
     logger.info('Custom Function signupBtnDidClick');
+    // FIXME
+    // need website doing signup function
+    sendTextMessage(senderID, "要有website先做到:(");
     // aillia self_register api
     //http://{{middleware_host}}/api/customer/self_register
 //    {
@@ -632,6 +635,9 @@ function signupFlow(recipientId) {
 function signinFlow(recipientId) {
     logger.info('Custom Function signinBtnDidClick');
     isSigninFlow = true
+    // FIXME
+    // need website doing signin flow
+    sendTextMessage(senderID, "要有website先做到:(");
 }
 
 // AboutBtnDidClick
