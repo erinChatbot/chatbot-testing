@@ -8,7 +8,7 @@ module.exports = {
                 logger.error(err);
                 return console.log(error);
             }
-            console.log(JSON.parse(body.result));
+            console.log(JSON.parse(body));
             logger.info('response body: '+JSON.stringify(body));
         });
     },
