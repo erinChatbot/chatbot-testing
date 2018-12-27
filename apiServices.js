@@ -8,7 +8,7 @@ module.exports = {
                 logger.error(err);
                 return console.log(error);
             }
-            console.log(JSON.parse(body.result.campaigns[0]));
+            console.log(JSON.parse(body.result));
             logger.info('response body: '+JSON.stringify(body));
         });
     },
