@@ -10,6 +10,7 @@ const
 
 var logger = require('./log');
 var constants = require('./constants');
+var apiService = require('./apiServices');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -265,6 +266,8 @@ function receivedPostback(event) {
     signupFlow(senderID);
   } else if (payload == constants.LOGIN) {
     signinFlow(senderID);
+  } else if (payload == constants.POINT_QUERY) {
+    pointQuery(senderID);
   } else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
@@ -609,26 +612,6 @@ function signupFlow(recipientId) {
     // FIXME
     // need website doing signup function
     sendTextMessage(recipientId, "要有website先做到:(");
-    // aillia self_register api
-    //http://{{middleware_host}}/api/customer/self_register
-//    {
-//      "promotionCode": "123456" ,
-//      "customer": {
-//        "phone": "+85290000008",
-//        "address": {},
-//        "company": {},
-//        "birthDate": "1998-08-08",
-//        "agreement1": true,
-//        "agreement2": true,
-//        "firstName": "Sam",
-//        "lastName": "Eight",
-//        "gender": "male",
-//        "email": "sam+8@motherapp.com",
-//        "plainPassword": "Ma123456!",
-//        "invitationToken": "",
-//        "channel": "mobile"
-//      }
-//    }
 }
 
 // SigninBtnDidClick
@@ -638,6 +621,20 @@ function signinFlow(recipientId) {
     // FIXME
     // need website doing signin flow
     sendTextMessage(recipientId, "要有website先做到:(");
+}
+
+// PointQueryBtnDidClick
+function pointQuery(recipientId) {
+    logger.info('Custom Function pointQueryBtnDidClick');
+    // FIXME
+    // need JWT token!
+    sendTextMessage(recipientId, "要login左有JWT token先得");
+}
+
+// Check offer
+function campaignOffer(recipientId) {
+    logger.info('custom Function campaignOffer');
+    apiService.getFeaturedCampaign();
 }
 
 // AboutBtnDidClick
