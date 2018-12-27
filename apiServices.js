@@ -11,7 +11,7 @@ module.exports = {
             console.log(JSON.parse(body));
             logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).result;
+            var apiResult = JSON.parse(body).result.campaigns;
             console.log("BODY RESULT: " + apiResult);
         });
     },
