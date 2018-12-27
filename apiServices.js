@@ -11,8 +11,18 @@ module.exports = {
             console.log(JSON.parse(body));
             logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).result.campaigns[1].name;
-            console.log("BODY RESULT: " + apiResult);
+            var apiResult = JSON.parse(body).result //  JSON.parse(body).result.campaigns[1].name
+//            console.log("BODY RESULT: " + apiResult);
+
+            for campaign in apiResult {
+                console.log('campaign title: ' + campaign.name)
+            }
+
+            // TODO
+            // array to store campaign:
+            // 1. name
+            // 2. shortDescription
+            // return array!!!!!!!!
         });
     },
 };
