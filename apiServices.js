@@ -14,9 +14,9 @@ module.exports = {
             var apiResult = JSON.parse(body).result //  JSON.parse(body).result.campaigns[1].name
 //            console.log("BODY RESULT: " + apiResult);
 
-            for campaign in apiResult {
-                console.log('campaign title: ' + campaign.name)
-            }
+//            for campaign in apiResult {
+//                console.log('campaign title: ' + campaign.name)
+//            }
 
             // TODO
             // array to store campaign:
