@@ -675,7 +675,7 @@ function campaignOffer(recipientId) {
               }
            }
         };
-        console.log(messageData);
+        console.log(JSON.stringify(messageData));
         callSendAPI(messageData);
     });
 }
