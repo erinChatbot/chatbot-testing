@@ -680,7 +680,8 @@ function campaignOffer(recipientId) {
         }, 1000)
         setTimeout(function() {
            sendTextMessage(recipientId, "想睇多d？用App睇啦親");
-        , 2000)
+
+        }, 2000)
     });
 }
 
