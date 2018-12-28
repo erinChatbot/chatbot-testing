@@ -12,6 +12,7 @@ module.exports = {
             logger.info('response body: '+JSON.stringify(body));
 
             var apiResult = JSON.parse(body).result //  JSON.parse(body).result.campaigns[1].name
+            console.log("campaign 0 title: " + JSON.parse(body).result.campaigns[1].name)
 //            console.log("BODY RESULT: " + apiResult);
 
 //            for campaign in apiResult {
