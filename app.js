@@ -649,8 +649,7 @@ function campaignOffer(recipientId) {
                 campaignDesc = apiResult[i].shortDescription
             }
             var campaignBtn = [];
-            var btnContent = new campaign.BtnContent('web_url','Redeem now!',imageUrl);
-            campaignBtn.push(new campaign.CampaignBtn(btnContent));
+            campaignBtn.push(new campaign.BtnContent('web_url','Redeem now!',imageUrl));
             campaignList.push(new campaign.Campaign(campaignTitle,imageUrl,campaignBtn));
         }
 
