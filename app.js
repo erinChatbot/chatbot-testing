@@ -12,6 +12,7 @@ const
 var logger = require('./log');
 var constants = require('./constants');
 var apiService = require('./apiServices');
+var campaign = require('./models/campaign');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -636,6 +637,7 @@ function pointQuery(recipientId) {
 function campaignOffer(recipientId) {
     logger.info('custom Function campaignOffer');
     apiService.getFeaturedCampaign(function(apiResult){
+        var campaignList = [];
         for(var i=0; i < apiResult.length; i++) {
             var campaignTitle = apiResult[i].name;
             var campaignDesc = "無";
@@ -646,12 +648,36 @@ function campaignOffer(recipientId) {
             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                 campaignDesc = apiResult[i].shortDescription
             }
-            sendTextMessage(recipientId, "第"+i+"個campaign title係：\n"+campaignTitle+"\n\nshort description:\n"+campaignDesc+"\n\nimage url:\n"+imageUrl);
+            var campaignBtn = [];
+            var btnContent = new campaign.BtnContent('web_url','Redeem now!',imageUrl);
+            campaignBtn.push(new campaign.CampaignBtn(btnContent));
+            campaignList.push(new campaign.Campaign(campaignTitle,imageUrl,campaignBtn));
+//            sendTextMessage(recipientId, "第"+i+"個campaign title係：\n"+campaignTitle+"\n\nshort description:\n"+campaignDesc+"\n\nimage url:\n"+imageUrl);
         }
-//https://connector.uat.aillia.motherapp.com/api/campaign/{campaign_id}/photo/{photo_id}
-//https://connector.uat.aillia.motherapp.com/api/campaign/e7575bf9-15ab-4d03-9b2d-e0a0a853a2a2/photo/41eaee67-bb8d-41c3-9019-9693388e98c7
-    });
 
+        // debug use
+//        for (var n=0; n < campaignList.length; n++) {
+//            sendTextMessage(recipientId, "第"+n+"個campaign title係：\n"+campaignList[n].title+"\n\nshort description:\n"+campaignList[n].desc+"\n\nimage url:\n"+icampaignList[n].image);
+//        }
+
+        // prepare msg
+        sendTextMessage(recipientId, "想睇多d？用App睇啦親");
+        var messageData = {
+                recipient: {
+                      id: recipientId
+                },
+                message: {
+                    "attachment" : {
+                        "type" : "template",
+                        "payload" : {
+                            "template_type":"generic",
+                            "elements" : campaignList
+                        }
+                    }
+                }
+            };
+            callSendAPI(messageData);
+    });
 }
 
 // AboutBtnDidClick
