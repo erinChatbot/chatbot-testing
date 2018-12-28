@@ -649,7 +649,7 @@ function campaignOffer(recipientId) {
                 campaignDesc = apiResult[i].shortDescription
             }
             var campaignBtn = [];
-            campaignBtn.push(new campaign.BtnContent('web_url','Redeem now!',imageUrl));
+            campaignBtn.push(new campaign.BtnContent('web_url','無野睇，唔好㩒',imageUrl));
             campaignList.push(new campaign.Campaign(campaignTitle,imageUrl,campaignBtn));
         }
 
