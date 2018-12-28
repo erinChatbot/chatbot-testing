@@ -652,7 +652,6 @@ function campaignOffer(recipientId) {
             var btnContent = new campaign.BtnContent('web_url','Redeem now!',imageUrl);
             campaignBtn.push(new campaign.CampaignBtn(btnContent));
             campaignList.push(new campaign.Campaign(campaignTitle,imageUrl,campaignBtn));
-//            sendTextMessage(recipientId, "第"+i+"個campaign title係：\n"+campaignTitle+"\n\nshort description:\n"+campaignDesc+"\n\nimage url:\n"+imageUrl);
         }
 
         // debug use
@@ -663,20 +662,20 @@ function campaignOffer(recipientId) {
         // prepare msg
         sendTextMessage(recipientId, "想睇多d？用App睇啦親");
         var messageData = {
-                recipient: {
-                      id: recipientId
-                },
-                message: {
-                    "attachment" : {
-                        "type" : "template",
-                        "payload" : {
-                            "template_type":"generic",
-                            "elements" : campaignList
-                        }
-                    }
-                }
-            };
-            callSendAPI(messageData);
+           recipient: {
+              id: recipientId
+           },
+           message: {
+              "attachment" : {
+                 "type" : "template",
+                 "payload" : {
+                    "template_type":"generic",
+                    "elements" : campaignList
+                 }
+              }
+           }
+        };
+        callSendAPI(messageData);
     });
 }
 
