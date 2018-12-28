@@ -618,7 +618,6 @@ function signupFlow(recipientId) {
 // SigninBtnDidClick
 function signinFlow(recipientId) {
     logger.info('Custom Function signinBtnDidClick');
-    isSigninFlow = true
     // FIXME
     // need website doing signin flow
     sendTextMessage(recipientId, "要有website先做到:(");
