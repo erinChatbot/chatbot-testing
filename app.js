@@ -646,7 +646,7 @@ function campaignOffer(recipientId) {
             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                 campaignDesc = apiResult[i].shortDescription
             }
-            sendTextMessage(recipientId, "第"+i+"個campaign title係："+campaignTitle+"\n\nshort description: "+campaignDesc+"\n\nimage url: "+imageUrl);
+            sendTextMessage(recipientId, "第"+i+"個campaign title係：\n"+campaignTitle+"\n\nshort description:\n"+campaignDesc+"\n\nimage url:\n"+imageUrl);
         }
 //https://connector.uat.aillia.motherapp.com/api/campaign/{campaign_id}/photo/{photo_id}
 //https://connector.uat.aillia.motherapp.com/api/campaign/e7575bf9-15ab-4d03-9b2d-e0a0a853a2a2/photo/41eaee67-bb8d-41c3-9019-9693388e98c7
