@@ -659,7 +659,6 @@ function campaignOffer(recipientId) {
 //        }
 
         // prepare msg
-        sendTextMessage(recipientId, "想睇多d？用App睇啦親");
         var messageData = {
            recipient: {
               id: recipientId
@@ -676,6 +675,9 @@ function campaignOffer(recipientId) {
         };
         console.log(JSON.stringify(messageData));
         callSendAPI(messageData);
+        setTimeout(function() {
+           sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。\n想睇多d？用App睇啦親");
+        }, 2000)
     });
 }
 
