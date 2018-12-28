@@ -9,11 +9,10 @@ module.exports = {
                 return console.log(error);
             }
             console.log(JSON.parse(body));
-            logger.info('response body: '+JSON.stringify(body));
+//            logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).result //  JSON.parse(body).result.campaigns[1].name
-            console.log("campaign 0 title: " + JSON.parse(body).result.campaigns[1].name)
-            callback(JSON.parse(body).result.campaigns[1].name)
+            var apiResult = JSON.parse(body).result.campaigns //  JSON.parse(body).result.campaigns[1].name
+            callback(apiResult)
         });
     },
 };

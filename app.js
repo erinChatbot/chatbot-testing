@@ -634,11 +634,12 @@ function pointQuery(recipientId) {
 // Check offer
 function campaignOffer(recipientId) {
     logger.info('custom Function campaignOffer');
-//    var campaignTitle = apiService.getFeaturedCampaign();
-    apiService.getFeaturedCampaign(function(campaignTitle){
-        sendTextMessage(recipientId, "第一個campaign title係："+campaignTitle);
+    apiService.getFeaturedCampaign(function(apiResult){
+        for(var i=0; i < apiResult.length; i++) {
+            sendTextMessage(recipientId, "第"+i+"個campaign title係："+apiResult[i].name);
+        }
+//        sendTextMessage(recipientId, "第一個campaign title係："+campaignTitle);
     });
-//    sendTextMessage(recipientId, "第一個campaign title係："+campaignTitle);
 
 }
 
@@ -648,6 +649,7 @@ function aboutLoyaltyChatbot(recipientId){
     var msg1 = 'Loyalty Chatbot 係由 Erin  開發及設計。如有任何意見，請電郵至 erinfan@motherapp.com 。';
     var msg2 = '你可以用Loyalty Chatbot黎signup，睇有幾多point，睇下有咩offer (好似係)。';
     var msg3 = '玩完就裝番Loyalty隻App啦親\uD83D\uDE4C';
+    var msg4 = 'https://hk-issue-manager.motherapp.com/project_ota_links/?project_tag=loyalty';
     sendTextMessageWithoutQuickReply(recipientId,msg1);
     setTimeout(function() {
         sendTextMessageWithoutQuickReply(recipientId,msg2);
@@ -655,6 +657,9 @@ function aboutLoyaltyChatbot(recipientId){
     setTimeout(function() {
         sendTextMessageWithoutQuickReply(recipientId,msg3);
     }, 2000)
+    setTimeout(function() {
+        sendTextMessageWithoutQuickReply(recipientId,msg4);
+    }, 3000)
 }
 
 /****************** START SERVER *********************/
