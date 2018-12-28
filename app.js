@@ -637,8 +637,8 @@ function campaignOffer(recipientId) {
     logger.info('custom Function campaignOffer');
     apiService.getFeaturedCampaign(function(apiResult){
         for(var i=0; i < apiResult.length; i++) {
-            var imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s',apiResult[i].campaignId,apiResult[i].photo.photoId.id);
-            sendTextMessage(recipientId, "第"+i+"個campaign title係："+apiResult[i].name+"\nshort description: "+apiResult[i].shortDescription+"\nimage url: "+imageUrl);
+//            var imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s',apiResult[i].campaignId,apiResult[i].photo.photoId.id);
+            sendTextMessage(recipientId, "第"+i+"個campaign title係："+apiResult[i].name+"\nshort description: "+apiResult[i].shortDescription);
         }
 //https://connector.uat.aillia.motherapp.com/api/campaign/{campaign_id}/photo/{photo_id}
 //https://connector.uat.aillia.motherapp.com/api/campaign/e7575bf9-15ab-4d03-9b2d-e0a0a853a2a2/photo/41eaee67-bb8d-41c3-9019-9693388e98c7
