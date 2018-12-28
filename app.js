@@ -634,7 +634,9 @@ function pointQuery(recipientId) {
 // Check offer
 function campaignOffer(recipientId) {
     logger.info('custom Function campaignOffer');
-    apiService.getFeaturedCampaign();
+    var campaignTitle = apiService.getFeaturedCampaign();
+    sendTextMessage(recipientId, "第一個campaign title係："+campaignTitle);
+
 }
 
 // AboutBtnDidClick
