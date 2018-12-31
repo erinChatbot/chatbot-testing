@@ -633,6 +633,14 @@ function pointQuery(recipientId) {
     sendTextMessage(recipientId, "要login左有JWT token先得");
 }
 
+// Get Campaign Category
+function getCampaignCategory(recipientId) {
+    logger.info('custom Function getCampaignCategory');
+    apiService.getCampaignCategory(function(apiResult) {
+        console.log('getCampaignCategory SUCCESS!!');
+    });
+}
+
 // Check offer
 function campaignOffer(recipientId) {
     logger.info('custom Function campaignOffer');
@@ -674,8 +682,8 @@ function campaignOffer(recipientId) {
            sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
         }, 1000)
         setTimeout(function() {
-           sendTextMessage(recipientId, "想睇多d？用App睇啦親");
-
+//           sendTextMessage(recipientId, "想睇多d？用App睇啦親");
+            getCampaignCategory(recipientId);
         }, 2000)
     });
 }
