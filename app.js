@@ -11,7 +11,7 @@ const
 
 var logger = require('./log');
 var constants = require('./constants');
-var apiService = require('./apiServices');
+var apiService = require('./api/apiServices');
 var campaign = require('./models/campaign');
 
 var app = express();

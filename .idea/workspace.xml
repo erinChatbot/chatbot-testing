@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b303f8b-7e97-44b0-8626-fd009f733f1d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/apiServices.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="651" column="71" selection-start-line="651" selection-start-column="71" selection-end-line="651" selection-end-column="71" />
+            <state relative-caret-position="210">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -24,17 +26,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/campaign.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="1" column="33" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="33" />
+            <state relative-caret-position="182">
+              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apiServices.js">
+        <entry file="file://$PROJECT_DIR$/api/apiServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="12" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="12" />
+            <state relative-caret-position="238">
+              <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -60,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state relative-caret-position="308">
+              <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -90,8 +92,9 @@
       <find>campaignOffer</find>
       <find>logger</find>
       <find>LOGIN</find>
-      <find>PAYLOAD_FOR_LOGIN</find>
       <find>signinFlow</find>
+      <find>PAYLOAD_FOR_LOGIN</find>
+      <find>showHomeIndex</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,11 +138,6 @@
               <item name="chatbot-testing" type="b2602c69:ProjectViewProjectNode" />
               <item name="chatbot-testing" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="chatbot-testing" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chatbot-testing" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -148,10 +146,15 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545991737339" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546224945348" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -182,7 +185,7 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.104898825" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14110756" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -254,13 +257,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/log.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -268,24 +264,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apiServices.js">
+    <entry file="file://$PROJECT_DIR$/constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="12" />
+        <state relative-caret-position="308">
+          <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/apiServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/campaign.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="33" />
+        <state relative-caret-position="182">
+          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="651" column="71" selection-start-line="651" selection-start-column="71" selection-end-line="651" selection-end-column="71" />
+        <state relative-caret-position="210">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
