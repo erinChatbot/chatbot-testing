@@ -12,7 +12,7 @@ const
 var logger = require('./log');
 var constants = require('./constants');
 var apiService = require('./api/apiServices');
-var campaign = require('./models/campaign');
+var genericTemplate = require('./models/genericTemplate');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -649,14 +649,9 @@ function campaignOffer(recipientId) {
                 campaignDesc = apiResult[i].shortDescription
             }
             var campaignBtn = [];
-            campaignBtn.push(new campaign.BtnContent('web_url','無野睇，唔好㩒',imageUrl));
-            campaignList.push(new campaign.Campaign(campaignTitle,imageUrl,campaignBtn));
+            campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+            campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
         }
-
-        // debug use
-//        for (var n=0; n < campaignList.length; n++) {
-//            sendTextMessage(recipientId, "第"+n+"個campaign title係：\n"+campaignList[n].title+"\n\nshort description:\n"+campaignList[n].desc+"\n\nimage url:\n"+icampaignList[n].image);
-//        }
 
         // prepare msg
         var messageData = {
