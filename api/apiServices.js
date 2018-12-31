@@ -1,5 +1,5 @@
 const request = require('request');
-var logger = require('./log');
+var logger = require('../log');
 
 module.exports = {
     getFeaturedCampaign: function(callback) {
