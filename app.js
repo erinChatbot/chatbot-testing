@@ -302,61 +302,7 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
-//  setTimeout(function() {
-//    sendQuickReply(recipientId);
-//  }, 2000)
 }
-
-// Send a message with Quick Reply buttons.
-function sendQuickReply(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "請選擇以下服務：",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"試SignUp flow",
-          "payload":"PAYLOAD_FOR_SIGN_UP_FLOW"
-        },
-        {
-          "content_type":"text",
-          "title":"睇下有幾多point",
-          "payload":"PAYLOAD_FOR_POINT_QUERY"
-        },
-        {
-          "content_type":"text",
-          "title":"睇有咩offer",
-          "payload":"PAYLOAD_FOR_RECEIVE_OFFER"
-        },
-        {
-          "content_type":"text",
-          "title":"關於Loyalty Chatbot",
-          "payload":"PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT"
-        }
-      ]
-    }
-  };
-
-  callSendAPI(messageData);
-}
-
-// sendTextMessageWithoutQuickReply
-function sendTextMessageWithoutQuickReply(recipientId, messageText) {
-      var messageData = {
-        recipient: {
-          id: recipientId
-        },
-        message: {
-          text: messageText,
-          metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-      };
-
-      callSendAPI(messageData);
-    }
 
 // Call the Send API
 function callSendAPI(messageData) {
@@ -487,9 +433,9 @@ function getStartedBtnReply(recipientId){
   logger.info('Custom Function GetStartedBtnDidClick');
   var msg1 = 'Hi，我係Loyalty Chatbot\uD83D\uDC4B';
   var msg2 = '我試緊堆APIsss';
-  sendTextMessageWithoutQuickReply(recipientId, msg1);
+  sendTextMessage(recipientId, msg1);
   setTimeout(function() {
-    sendTextMessageWithoutQuickReply(recipientId, msg2);
+    sendTextMessage(recipientId, msg2);
   }, 1000)
   var messageData = {
     recipient: {
@@ -696,15 +642,15 @@ function aboutLoyaltyChatbot(recipientId){
     var msg2 = '你可以用Loyalty Chatbot黎signup，睇有幾多point，睇下有咩offer (好似係)。';
     var msg3 = '玩完就裝番Loyalty隻App啦親\uD83D\uDE4C';
     var msg4 = 'https://hk-issue-manager.motherapp.com/project_ota_links/?project_tag=loyalty';
-    sendTextMessageWithoutQuickReply(recipientId,msg1);
+    sendTextMessage(recipientId,msg1);
     setTimeout(function() {
-        sendTextMessageWithoutQuickReply(recipientId,msg2);
+        sendTextMessage(recipientId,msg2);
     }, 1000)
     setTimeout(function() {
-        sendTextMessageWithoutQuickReply(recipientId,msg3);
+        sendTextMessage(recipientId,msg3);
     }, 2000)
     setTimeout(function() {
-        sendTextMessageWithoutQuickReply(recipientId,msg4);
+        sendTextMessage(recipientId,msg4);
     }, 3000)
 }
 
