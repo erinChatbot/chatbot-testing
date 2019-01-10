@@ -585,6 +585,13 @@ function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
+        for(var i=0; i < apiResult.length; i++) {
+            var campaignTranslation = apiResult[i].translations;
+            for(var x=0; x<campaignTranslation.length; x++) {
+                var categoryTitle = campaignTranslation[x].name;
+                console.log("[DEBUG] category name:" + categoryTitle);
+            }
+        }
     });
 }
 
