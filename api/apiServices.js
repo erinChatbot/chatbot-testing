@@ -1,9 +1,11 @@
 const request = require('request');
 var logger = require('../log');
 
+var apiHost = "https://backend.sit.aillia.motherapp.com";
+
 module.exports = {
     getFeaturedCampaign: function(callback) {
-        request.get("http://connector.uat.aillia.motherapp.com/api/customer/campaign/featured", (error, response, body) => {
+        request.get(apiHost+"/api/campaign/public/available?isFeatured=true", (error, response, body) => {
             if(error) {
                 logger.error(err);
                 return console.log(error);
@@ -17,7 +19,7 @@ module.exports = {
     },
 
     getCampaignCategory: function(callback) {
-        request.get("http://connector.uat.aillia.motherapp.com/api/campaign_category", (error, response, body) => {
+        request.get(apiHost+"/api/public/campaignCategory", (error, response, body) => {
             if(error) {
                logger.error(err);
                 return console.log(error);
