@@ -13,6 +13,7 @@ var logger = require('./log');
 var constants = require('./constants');
 var apiService = require('./api/apiServices');
 var genericTemplate = require('./models/genericTemplate');
+var quickReply = require('./models/quickReplies');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
