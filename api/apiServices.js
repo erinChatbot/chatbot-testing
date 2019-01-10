@@ -13,7 +13,7 @@ module.exports = {
             console.log(JSON.parse(body));
 //            logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).result.campaigns //  JSON.parse(body).result.campaigns[1].name
+            var apiResult = JSON.parse(body).campaigns //  JSON.parse(body).result.campaigns[1].name
             callback(apiResult)
         });
     },
@@ -27,7 +27,7 @@ module.exports = {
             console.log(JSON.parse(body));
     //            logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).result.categories;
+            var apiResult = JSON.parse(body).categories;
             callback(apiResult)
          });
      },
