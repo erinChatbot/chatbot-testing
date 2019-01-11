@@ -7,7 +7,10 @@ var log = {
     },
     error: function(error) {
         console.log('[ERROR] ' + error);
-    }
+    },
+    debug: function(debug) {
+            console.log('[DEBUG] ' + debug);
+        },
 };
 
 module.exports = log

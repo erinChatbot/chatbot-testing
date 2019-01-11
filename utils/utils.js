@@ -16,10 +16,10 @@ module.exports = {
                 return console.log(error);
             }
             console.log(JSON.parse(body));
-            logger.info('response body: '+JSON.stringify(body));
+            logger.debug('|utils: getUserLocale|: '+JSON.stringify(body));
 
-//            var apiResult = JSON.parse(body).campaigns
-//            callback(apiResult)
+            var apiResult = JSON.parse(body).locale
+            callback(apiResult)
         });
     }
 }
