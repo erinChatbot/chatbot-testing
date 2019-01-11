@@ -274,7 +274,7 @@ function receivedPostback(event) {
   } else if (payload == constants.POINT_QUERY) {
     pointQuery(senderID);
   } else if (payload == constants.RECEIVE_OFFER) {
-    campaignOffer(senderID);
+    showCampaignCategory(senderID);
   }else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
@@ -441,7 +441,8 @@ function getStartedBtnReply(recipientId){
 
   // get user info
   utils.getUserInfo(recipientId, function(apiResult) {
-    recipientName = apiResult.first_name
+    recipientName = apiResult.first_name;
+    userLocale = apiResult.locale;
     var msg1 = 'Hi '+ recipientName +'，我係Loyalty Chatbot\uD83D\uDC4B';
     var msg2 = '依加趕緊demo用';
     sendTextMessage(recipientId, msg1);
@@ -530,9 +531,11 @@ function showCampaignCategory(recipientId) {
     apiService.getCampaignCategory(userLocale,function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
         var categoryList = [];
+        // add latest to category list
+        categoryList.push(new quickReply.quickReplies('text','最新',constants.GET_CAMPAIGN_BY_CATEGORY));
         for(var i=0; i < apiResult.length; i++) {
             var categoryTitle = apiResult[i].name;
-            categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.SUBSCRIBE_CATEGORY));
+            categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
         }
 
         // prepare msg
@@ -541,7 +544,7 @@ function showCampaignCategory(recipientId) {
                 id: recipientId
             },
             message: {
-                text: "有呢d category",
+                text: "想睇咩類型？",
                 quick_replies: categoryList
             }
          };
@@ -589,9 +592,9 @@ function campaignOffer(recipientId) {
         setTimeout(function() {
            sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
         }, 1000)
-        setTimeout(function() {
-            showCampaignCategory(recipientId);
-        }, 2000)
+//        setTimeout(function() {
+//            showCampaignCategory(recipientId);
+//        }, 2000)
     });
 }
 

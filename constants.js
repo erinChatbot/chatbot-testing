@@ -21,8 +21,14 @@ let constants = {
         POINT_QUERY : 'PAYLOAD_FOR_POINT_QUERY',
         // Recieve Offer
         RECEIVE_OFFER : 'PAYLOAD_FOR_RECEIVE_OFFER',
+        // Get Campaign by category
+        GET_CAMPAIGN_BY_CATEGORY : 'PAYLOAD_FOR_GET_CAMPAIGN_BY_CATEGORY',
         // Subscribe Category
         SUBSCRIBE_CATEGORY : 'PAYLOAD_FOR_SUBSCRIBE_CATEGORY',
+        // Language setting
+        LANGUAGE_SETTING : 'PAYLOAD_FOR_LANGUAGE_SETTING',
+        // Cancel Subscription
+        EDIT_SUBSCRIPTION : 'PAYLOAD_FOR_EDIT_SUBSCRIPTION',
 }
 
 module.exports = Object.freeze(constants);
