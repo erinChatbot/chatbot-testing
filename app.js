@@ -436,36 +436,42 @@ function sendAccountLinking(recipientId) {
 // GetStartedBtnDidClick
 function getStartedBtnReply(recipientId){
   logger.info('Custom Function GetStartedBtnDidClick');
-  var msg1 = 'Hi，我係Loyalty Chatbot\uD83D\uDC4B';
-  var msg2 = '我試緊堆APIsss';
-  sendTextMessage(recipientId, msg1);
-  setTimeout(function() {
-    sendTextMessage(recipientId, msg2);
-  }, 1000)
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "第一次用？需唔需要教學示範？",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"好啊",
-          "payload":constants.NEED_TUTORIAL
-        },
-        {
-          "content_type":"text",
-          "title":"唔洗啦",
-          "payload":constants.SKIP_TUTORIAL
-        }
-      ]
-    }
-  };
-  setTimeout(function() {
-    callSendAPI(messageData);
-  }, 2000)
-  //callSendAPI(messageData);
+
+  var recipientName = ""
+
+  // get user info
+  utils.getUserInfo(recipientId, function(apiResult) {
+    recipientName = apiResult.first_name
+    var msg1 = 'Hi '+ recipientName +'，我係Loyalty Chatbot\uD83D\uDC4B';
+    var msg2 = '依加趕緊demo用';
+    sendTextMessage(recipientId, msg1);
+    setTimeout(function() {
+      sendTextMessage(recipientId, msg2);
+    }, 1000)
+    var messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: "第一次用？需唔需要教學示範？",
+        quick_replies: [
+          {
+            "content_type":"text",
+            "title":"好啊",
+            "payload":constants.NEED_TUTORIAL
+          },
+          {
+            "content_type":"text",
+            "title":"唔洗啦",
+            "payload":constants.SKIP_TUTORIAL
+          }
+        ]
+      }
+    };
+    setTimeout(function() {
+      callSendAPI(messageData);
+    }, 2000)
+  });
 }
 
 // ShowHelpMsg
@@ -519,7 +525,7 @@ function pointQuery(recipientId) {
 }
 
 // Get Campaign Category
-function getCampaignCategory(recipientId) {
+function showCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(userLocale,function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
@@ -535,7 +541,7 @@ function getCampaignCategory(recipientId) {
                 id: recipientId
             },
             message: {
-                text: "拎到category list喇",
+                text: "有呢d category",
                 quick_replies: categoryList
             }
          };
@@ -584,8 +590,7 @@ function campaignOffer(recipientId) {
            sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
         }, 1000)
         setTimeout(function() {
-//           sendTextMessage(recipientId, "想睇多d？用App睇啦親");
-            getCampaignCategory(recipientId);
+            showCampaignCategory(recipientId);
         }, 2000)
     });
 }

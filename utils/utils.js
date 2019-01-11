@@ -9,8 +9,8 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 var facebookApi = "https://graph.facebook.com/v2.6/";
 
 module.exports = {
-    getUserLocale: function(userId, callback) {
-        request.get(facebookApi+userId+"?fields=locale&access_token="+PAGE_ACCESS_TOKEN, (error, response, body) => {
+    getUserInfo: function(userId, callback) {
+        request.get(facebookApi+userId+"?fields=locale,first_name,last_name&access_token="+PAGE_ACCESS_TOKEN, (error, response, body) => {
             if(error) {
                 logger.error(err);
                 return console.log(error);
@@ -18,7 +18,7 @@ module.exports = {
             console.log(JSON.parse(body));
             logger.debug('|utils: getUserLocale|: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).locale
+            var apiResult = JSON.parse(body)
             callback(apiResult)
         });
     }
