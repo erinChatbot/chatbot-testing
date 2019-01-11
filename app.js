@@ -22,6 +22,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
+var userLocale = "zh_HK";
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -517,6 +519,11 @@ function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
+        // check user locale
+        utils.getUserLocale(recipientId, function(apiResult) {
+            userLocale = apiResult;
+            logger.debug("|app: getCampaignCategory|: update user locale: " + userLocale);
+        });
 
         for(var i=0; i < apiResult.length; i++) {
             var campaignTranslation = apiResult[i].translations;
