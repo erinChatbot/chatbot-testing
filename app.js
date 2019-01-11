@@ -519,16 +519,23 @@ function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(userLocale,function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
-//        for(var i=0; i < apiResult.length; i++) {
-//            var campaignTranslation = apiResult[i].translations;
-//            for(var x=0; x<campaignTranslation.length; x++) {
-//                // get corresponding category title
-//                if (userLocale == campaignTranslation[x].locale) {
-//                    var categoryTitle = campaignTranslation[x].name;
-//                    console.log("[DEBUG] category name:" + categoryTitle);
-//                }
-//            }
-//        }
+        var categoryList = [];
+        for(var i=0; i < apiResult.length; i++) {
+            var categoryTitle = apiResult[i].name;
+            categoryList.push(new quickReply.quickReplies('text',categoryTitle,'TODO'));
+        }
+
+        // prepare msg
+        var messageData = {
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                text: "拎到category list喇",
+                quick_replies: categoryList
+            }
+         };
+         callSendAPI(messageData);
     });
 }
 
