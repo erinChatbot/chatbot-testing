@@ -23,6 +23,7 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
 var userLocale = "zh_HK"; //tmp, should be store in mongo
+var categoryIdMap = [];
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -230,6 +231,10 @@ function receivedMessage(event) {
         sendTextMessage(senderID,"subscribe左"+messageText);
     }
 
+    if (quickReplyPayload == constants.GET_CAMPAIGN_BY_CATEGORY) {
+        showCampaign(senderID, categoryIdMap[messageText]);
+     }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -275,7 +280,7 @@ function receivedPostback(event) {
     pointQuery(senderID);
   } else if (payload == constants.RECEIVE_OFFER) {
     showCampaignCategory(senderID);
-  }else {
+  } else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
   //sendTextMessage(senderID, response_text);
@@ -530,11 +535,14 @@ function showCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(userLocale,function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
+        categoryIdMap = [];
         var categoryList = [];
         // add latest to category list
         categoryList.push(new quickReply.quickReplies('text','最新',constants.GET_CAMPAIGN_BY_CATEGORY));
+        categoryIdMap['LATEST'] = '0';
         for(var i=0; i < apiResult.length; i++) {
             var categoryTitle = apiResult[i].name;
+            categoryIdMap[categoryTitle] = apiResult[i].campaignCategoryId;
             categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
         }
 
@@ -553,49 +561,93 @@ function showCampaignCategory(recipientId) {
 }
 
 // Check offer
-function campaignOffer(recipientId) {
+function showCampaign(recipientId, categoryId) {
     logger.info('custom Function campaignOffer');
-    apiService.getFeaturedCampaign(function(apiResult){
-        var campaignList = [];
-        for(var i=0; i < apiResult.length; i++) {
-            var campaignTitle = apiResult[i].name;
-            var campaignDesc = "無";
-            var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
-            if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-                imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+    // featured
+    if (categoryId == '0') {
+        apiService.getFeaturedCampaign(userLocale,function(apiResult){
+            var campaignList = [];
+            for(var i=0; i < apiResult.length; i++) {
+                var campaignTitle = apiResult[i].name;
+                var campaignDesc = "無";
+                var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+                    imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+                }
+                if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                    campaignDesc = apiResult[i].shortDescription
+                }
+                var campaignBtn = [];
+                campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
             }
-            if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
-                campaignDesc = apiResult[i].shortDescription
-            }
-            var campaignBtn = [];
-            campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
-            campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
-        }
 
-        // prepare msg
-        var messageData = {
-           recipient: {
-              id: recipientId
-           },
-           message: {
-              "attachment" : {
-                 "type" : "template",
-                 "payload" : {
-                    "template_type":"generic",
-                    "elements" : campaignList
-                 }
-              }
-           }
-        };
-        console.log(JSON.stringify(messageData));
-        callSendAPI(messageData);
-        setTimeout(function() {
-           sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
-        }, 1000)
-//        setTimeout(function() {
-//            showCampaignCategory(recipientId);
-//        }, 2000)
-    });
+            // prepare msg
+            var messageData = {
+               recipient: {
+                  id: recipientId
+               },
+               message: {
+                  "attachment" : {
+                     "type" : "template",
+                     "payload" : {
+                        "template_type":"generic",
+                        "elements" : campaignList
+                     }
+                  }
+               }
+            };
+            console.log(JSON.stringify(messageData));
+            callSendAPI(messageData);
+            setTimeout(function() {
+               sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
+            }, 1000)
+        });
+    }
+    // By category
+    else {
+        apiService.getCampaignByCategory(userLocale,categoryId,function(apiResult){
+            var campaignList = [];
+            for(var i=0; i < apiResult.length; i++) {
+                var campaignTitle = apiResult[i].name;
+                var campaignDesc = "無";
+                var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+                    imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+                }
+                if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                    campaignDesc = apiResult[i].shortDescription
+                }
+                var campaignBtn = [];
+                campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
+            }
+
+            // prepare msg
+            var messageData = {
+               recipient: {
+                  id: recipientId
+               },
+               message: {
+                  "attachment" : {
+                     "type" : "template",
+                     "payload" : {
+                        "template_type":"generic",
+                        "elements" : campaignList
+                     }
+                  }
+               }
+            };
+            console.log(JSON.stringify(messageData));
+            callSendAPI(messageData);
+            setTimeout(function() {
+               sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
+            }, 1000)
+        });
+    }
+
+
+
 }
 
 // AboutBtnDidClick
