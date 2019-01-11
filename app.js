@@ -517,7 +517,7 @@ function pointQuery(recipientId) {
 // Get Campaign Category
 function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
-    apiService.getCampaignCategory(function(userLocale,apiResult) {
+    apiService.getCampaignCategory(userLocale,function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
 //        for(var i=0; i < apiResult.length; i++) {
 //            var campaignTranslation = apiResult[i].translations;
