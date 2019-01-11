@@ -42,7 +42,7 @@ module.exports = {
             console.log(JSON.parse(body));
     //            logger.info('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).categories;
+            var apiResult = JSON.parse(body).campaigns;
             var total = JSON.parse(body).total
             callback(apiResult, total)
          });
