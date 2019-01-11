@@ -226,6 +226,10 @@ function receivedMessage(event) {
         aboutLoyaltyChatbot(senderID);
     }
 
+    if (quickReplyPayload == constants.SUBSCRIBE_CATEGORY) {
+        sendTextMessage(senderID,"subscribe左"+messageText);
+    }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -522,7 +526,7 @@ function getCampaignCategory(recipientId) {
         var categoryList = [];
         for(var i=0; i < apiResult.length; i++) {
             var categoryTitle = apiResult[i].name;
-            categoryList.push(new quickReply.quickReplies('text',categoryTitle,'TODO'));
+            categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.SUBSCRIBE_CATEGORY));
         }
 
         // prepare msg

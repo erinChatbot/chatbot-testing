@@ -20,7 +20,9 @@ let constants = {
         // Point Query
         POINT_QUERY : 'PAYLOAD_FOR_POINT_QUERY',
         // Recieve Offer
-        RECEIVE_OFFER : 'PAYLOAD_FOR_RECEIVE_OFFER'
+        RECEIVE_OFFER : 'PAYLOAD_FOR_RECEIVE_OFFER',
+        // Subscribe Category
+        SUBSCRIBE_CATEGORY : 'PAYLOAD_FOR_SUBSCRIBE_CATEGORY',
 }
 
 module.exports = Object.freeze(constants);
