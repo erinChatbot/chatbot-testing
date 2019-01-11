@@ -601,7 +601,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
+                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親:)');
                 }, 1000)
             }
             else {
