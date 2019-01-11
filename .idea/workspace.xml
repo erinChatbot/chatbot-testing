@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7b303f8b-7e97-44b0-8626-fd009f733f1d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/api/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/apiServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +18,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="725">
-                  <caret line="618" column="43" lean-forward="true" selection-start-line="618" selection-start-column="43" selection-end-line="618" selection-end-column="43" />
+                <state relative-caret-position="473">
+                  <caret line="625" column="21" lean-forward="true" selection-start-line="625" selection-start-column="21" selection-end-line="625" selection-end-column="21" />
                 </state>
               </provider>
             </entry>
@@ -84,8 +85,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/apiServices.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="672">
-                  <caret line="47" column="12" lean-forward="true" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+                <state relative-caret-position="504">
+                  <caret line="35" column="38" lean-forward="true" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
                 </state>
               </provider>
             </entry>
@@ -159,8 +160,8 @@
         <option value="$PROJECT_DIR$/log.js" />
         <option value="$PROJECT_DIR$/utils/utils.js" />
         <option value="$PROJECT_DIR$/constants.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/api/apiServices.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -197,7 +198,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547199318056" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547200980054" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -359,17 +360,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/api/apiServices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="618" column="43" lean-forward="true" selection-start-line="618" selection-start-column="43" selection-end-line="618" selection-end-column="43" />
+        <state relative-caret-position="504">
+          <caret line="35" column="38" lean-forward="true" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/apiServices.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="47" column="12" lean-forward="true" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+        <state relative-caret-position="473">
+          <caret line="625" column="21" lean-forward="true" selection-start-line="625" selection-start-column="21" selection-end-line="625" selection-end-column="21" />
         </state>
       </provider>
     </entry>
