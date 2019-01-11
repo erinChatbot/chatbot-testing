@@ -538,7 +538,7 @@ function showCampaignCategory(recipientId) {
         categoryIdMap = [];
         var categoryList = [];
         // add latest to category list
-        categoryList.push(new quickReply.quickReplies('text','最新',constants.GET_CAMPAIGN_BY_CATEGORY));
+        categoryList.push(new quickReply.quickReplies('text','LATEST',constants.GET_CAMPAIGN_BY_CATEGORY));
         categoryIdMap['LATEST'] = '0';
         for(var i=0; i < apiResult.length; i++) {
             var categoryTitle = apiResult[i].name;
@@ -562,87 +562,97 @@ function showCampaignCategory(recipientId) {
 
 // Check offer
 function showCampaign(recipientId, categoryId) {
-    logger.info('custom Function campaignOffer');
+    logger.debug('|app: showCampaign| categoryId: '+categoryId);
     // featured
     if (categoryId == '0') {
-        apiService.getFeaturedCampaign(userLocale,function(apiResult){
-            var campaignList = [];
-            for(var i=0; i < apiResult.length; i++) {
-                var campaignTitle = apiResult[i].name;
-                var campaignDesc = "無";
-                var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
-                if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-                    imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+        apiService.getFeaturedCampaign(userLocale,function(apiResult, totalCampaign){
+            if (totalCampaign != 0) {
+                var campaignList = [];
+                for(var i=0; i < apiResult.length; i++) {
+                    var campaignTitle = apiResult[i].name;
+                    var campaignDesc = "無";
+                    var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                    if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+                        imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+                    }
+                    if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                        campaignDesc = apiResult[i].shortDescription
+                    }
+                    var campaignBtn = [];
+                    campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                    campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
-                if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
-                    campaignDesc = apiResult[i].shortDescription
-                }
-                var campaignBtn = [];
-                campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
-                campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
-            }
 
-            // prepare msg
-            var messageData = {
-               recipient: {
-                  id: recipientId
-               },
-               message: {
-                  "attachment" : {
-                     "type" : "template",
-                     "payload" : {
-                        "template_type":"generic",
-                        "elements" : campaignList
-                     }
-                  }
-               }
-            };
-            console.log(JSON.stringify(messageData));
-            callSendAPI(messageData);
-            setTimeout(function() {
-               sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
-            }, 1000)
+                // prepare msg
+                var messageData = {
+                   recipient: {
+                      id: recipientId
+                   },
+                   message: {
+                      "attachment" : {
+                         "type" : "template",
+                         "payload" : {
+                            "template_type":"generic",
+                            "elements" : campaignList
+                         }
+                      }
+                   }
+                };
+                console.log(JSON.stringify(messageData));
+                callSendAPI(messageData);
+                setTimeout(function() {
+                   sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
+                }, 1000)
+            }
+            else {
+                sendTextMessage(recipientId, "無campaign :(");
+            }
         });
     }
     // By category
     else {
-        apiService.getCampaignByCategory(userLocale,categoryId,function(apiResult){
-            var campaignList = [];
-            for(var i=0; i < apiResult.length; i++) {
-                var campaignTitle = apiResult[i].name;
-                var campaignDesc = "無";
-                var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
-                if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-                    imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+        apiService.getCampaignByCategory(userLocale,categoryId,function(apiResult, totalCampaign){
+            if (totalCampaign != 0) {
+                var campaignList = [];
+                for(var i=0; i < apiResult.length; i++) {
+                    var campaignTitle = apiResult[i].name;
+                    var campaignDesc = "無";
+                    var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                    if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+                        imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+                    }
+                    if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                        campaignDesc = apiResult[i].shortDescription
+                    }
+                    var campaignBtn = [];
+                    campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                    campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
-                if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
-                    campaignDesc = apiResult[i].shortDescription
-                }
-                var campaignBtn = [];
-                campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
-                campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
-            }
 
-            // prepare msg
-            var messageData = {
-               recipient: {
-                  id: recipientId
-               },
-               message: {
-                  "attachment" : {
-                     "type" : "template",
-                     "payload" : {
-                        "template_type":"generic",
-                        "elements" : campaignList
-                     }
-                  }
-               }
-            };
-            console.log(JSON.stringify(messageData));
-            callSendAPI(messageData);
-            setTimeout(function() {
-               sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
-            }, 1000)
+                // prepare msg
+                var messageData = {
+                   recipient: {
+                      id: recipientId
+                   },
+                   message: {
+                      "attachment" : {
+                         "type" : "template",
+                         "payload" : {
+                            "template_type":"generic",
+                            "elements" : campaignList
+                         }
+                      }
+                   }
+                };
+                console.log(JSON.stringify(messageData));
+                callSendAPI(messageData);
+                setTimeout(function() {
+                   sendTextMessage(recipientId, "Facebook最多show到10個post(好似係)。");
+                }, 1000)
+            }
+            else {
+                sendTextMessage(recipientId, "無campaign :(");
+            }
         });
     }
 

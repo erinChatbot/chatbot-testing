@@ -14,7 +14,8 @@ module.exports = {
 //            logger.info('response body: '+JSON.stringify(body));
 
             var apiResult = JSON.parse(body).campaigns
-            callback(apiResult)
+            var total = JSON.parse(body).total
+            callback(apiResult, total)
         });
     },
 
@@ -42,7 +43,8 @@ module.exports = {
     //            logger.info('response body: '+JSON.stringify(body));
 
             var apiResult = JSON.parse(body).categories;
-            callback(apiResult)
+            var total = JSON.parse(body).total
+            callback(apiResult, total)
          });
      },
 };

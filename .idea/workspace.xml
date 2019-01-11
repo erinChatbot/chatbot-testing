@@ -18,8 +18,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="620">
-                  <caret line="234" column="57" selection-start-line="234" selection-start-column="57" selection-end-line="234" selection-end-column="57" />
+                <state relative-caret-position="395">
+                  <caret line="545" column="69" lean-forward="true" selection-start-line="545" selection-start-column="69" selection-end-line="545" selection-end-column="69" />
                 </state>
               </provider>
             </entry>
@@ -85,8 +85,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/apiServices.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="490">
-                  <caret line="34" column="26" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="26" />
+                <state relative-caret-position="672">
+                  <caret line="47" selection-start-line="47" selection-end-line="47" />
                 </state>
               </provider>
             </entry>
@@ -198,7 +198,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547196722058" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547197568116" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -362,15 +362,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/apiServices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="34" column="26" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="26" />
+        <state relative-caret-position="672">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="234" column="57" selection-start-line="234" selection-start-column="57" selection-end-line="234" selection-end-column="57" />
+        <state relative-caret-position="395">
+          <caret line="545" column="69" lean-forward="true" selection-start-line="545" selection-start-column="69" selection-end-line="545" selection-end-column="69" />
         </state>
       </provider>
     </entry>
