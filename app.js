@@ -11,6 +11,7 @@ const
 
 var logger = require('./log');
 var constants = require('./constants');
+var utils = require('./utils/utils');
 var apiService = require('./api/apiServices');
 var genericTemplate = require('./models/genericTemplate');
 var quickReply = require('./models/quickReplies');
@@ -256,8 +257,6 @@ function receivedPostback(event) {
   // Custom Define Payload list
   if (payload == constants.GET_STARTED){
     getStartedBtnReply(senderID);
-  } else if (payload == constants.SHOW_INDEX) {
-    showHomeIndex(senderID);
   } else if (payload == constants.ABOUT_LOYALTY_CHATBOT) {
     aboutLoyaltyChatbot(senderID);
   } else if (payload == constants.SHOW_TUTORIAL) {
@@ -489,73 +488,6 @@ function showHelpMsg(recipientId) {
     callSendAPI(messageData);
 }
 
-// ShowIndexBtnDidClick
-function showHomeIndex(recipientId) {
-    logger.info('Custom Function ShowIndexBtnDidClick');
-    var messageData = {
-        recipient: {
-              id: recipientId
-        },
-        message: {
-            "attachment" : {
-                "type" : "template",
-                "payload" : {
-                    "template_type":"generic",
-                    "elements" : [
-                        {
-                            "title" : "無AC?",
-                            "image_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV_R-tRYomkbTxY1APlniAfChGVHLy8O6mwUlPE3hTcfTAS2nNvA",
-                            //https://www.paidmembershipspro.com/wp-content/uploads/2016/06/signup-300x300.png
-                            "buttons":[
-                                {
-                                    "type" : "postback",
-                                    "title": "Sign up now!",
-                                    "payload": constants.SIGN_UP_FLOW
-                                }
-                            ]
-                        },
-                        {
-                            "title" : "我有AC!",
-                            "image_url" : "http://www.odoo.com/apps/icon_image?module_id=43237",
-                            "buttons":[
-                                {
-                                    "type" : "postback",
-                                    "title": "Login先!",
-                                    "payload": constants.LOGIN
-                                }
-                            ]
-                        },
-                        {
-                            "title" : "我有幾多分",
-                            "image_url" : "https://marketplace.magento.com/media/catalog/product/cache/0f831c1845fc143d00d6d1ebc49f446a/r/e/reward-points_1.png",
-                            "buttons":[
-                                {
-                                    "type" : "postback",
-                                    "title": "Query point!",
-                                    "payload": constants.POINT_QUERY
-                                }
-                            ]
-                        },
-                        {
-                            "title" : "有咩offer?",
-                            "image_url" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfKbNv7zt0d6K9rNP_aiP8adunzmeAE6jg1Knr_4iHKbAYj1WKXg",
-                            // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHVwfgdMrZlhnp_2Z_Gvp9uG1z9bvC9VlO9dliGse1oWvx8gm
-                            "buttons":[
-                                {
-                                    "type" : "postback",
-                                    "title": "Receive Offer!",
-                                    "payload": constants.RECEIVE_OFFER
-                                }
-                            ]
-                        },
-                    ]
-                }
-            }
-        }
-    };
-    callSendAPI(messageData);
-}
-
 // SignupBtnDidClick
 function signupFlow(recipientId) {
     logger.info('Custom Function signupBtnDidClick');
@@ -585,6 +517,7 @@ function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
     apiService.getCampaignCategory(function(apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
+
         for(var i=0; i < apiResult.length; i++) {
             var campaignTranslation = apiResult[i].translations;
             for(var x=0; x<campaignTranslation.length; x++) {
