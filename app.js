@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
-var userLocale = "zh_HK";
+var userLocale = "zh_HK"; //tmp, should be store in mongo
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -517,21 +517,18 @@ function pointQuery(recipientId) {
 // Get Campaign Category
 function getCampaignCategory(recipientId) {
     logger.info('custom Function getCampaignCategory');
-    apiService.getCampaignCategory(function(apiResult) {
+    apiService.getCampaignCategory(function(userLocale,apiResult) {
         console.log('getCampaignCategory SUCCESS!!');
-        // check user locale
-        utils.getUserLocale(recipientId, function(apiResult) {
-            userLocale = apiResult;
-            logger.debug("|app: getCampaignCategory|: update user locale: " + userLocale);
-        });
-
-        for(var i=0; i < apiResult.length; i++) {
-            var campaignTranslation = apiResult[i].translations;
-            for(var x=0; x<campaignTranslation.length; x++) {
-                var categoryTitle = campaignTranslation[x].name;
-                console.log("[DEBUG] category name:" + categoryTitle);
-            }
-        }
+//        for(var i=0; i < apiResult.length; i++) {
+//            var campaignTranslation = apiResult[i].translations;
+//            for(var x=0; x<campaignTranslation.length; x++) {
+//                // get corresponding category title
+//                if (userLocale == campaignTranslation[x].locale) {
+//                    var categoryTitle = campaignTranslation[x].name;
+//                    console.log("[DEBUG] category name:" + categoryTitle);
+//                }
+//            }
+//        }
     });
 }
 

@@ -18,8 +18,8 @@ module.exports = {
         });
     },
 
-    getCampaignCategory: function(callback) {
-        request.get(apiHost+"/api/public/campaignCategory", (error, response, body) => {
+    getCampaignCategory: function(userLocale,callback) {
+        request.get(apiHost+"/api/public/campaignCategory?_locale="+userLocale, (error, response, body) => {
             if(error) {
                logger.error(err);
                 return console.log(error);
