@@ -601,7 +601,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\u0055\u002b\u0031\u0046\u0036\u0030\u0039');
+                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
                 }, 1000)
             }
             else {
@@ -647,7 +647,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\u0055\u002b\u0031\u0046\u0036\u0030\u0039');
+                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
                 }, 1000)
             }
             else {
