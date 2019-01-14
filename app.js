@@ -531,7 +531,7 @@ function pointQuery(recipientId) {
     logger.info('Custom Function pointQueryBtnDidClick');
     // FIXME: Hardcoded user account
     apiService.authenticate(loginName,loginPwd,function(apiResult){
-        console.debug('|app: pointQuery| login SUCCESS');
+        logger.debug('|app: pointQuery| login SUCCESS');
         var jwtToken = apiResult;
         sendTextMessage(recipientId, "login success: "+apiResult);
     });
