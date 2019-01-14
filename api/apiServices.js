@@ -2,12 +2,13 @@ const querystring = require('querystring');
 const request = require('request');
 var logger = require('../log');
 
-var apiHost = "https://connector.sit.aillia.motherapp.com";
+var appBackendHost = "https://backend.sit.aillia.motherapp.com";
+var connectorHost = "https://connector.sit.aillia.motherapp.com";
 var ssoHost = "https://sso.sit.aillia.motherapp.com";
 
 module.exports = {
     getCampaignCategory: function(userLocale,callback) {
-        request.get(apiHost+"/api/public/campaignCategory?_locale="+userLocale, (error, response, body) => {
+        request.get(appBackendHost+"/api/public/campaignCategory?_locale="+userLocale, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
@@ -21,7 +22,7 @@ module.exports = {
      },
 
     getFeaturedCampaign: function(userLocale,callback) {
-        request.get(apiHost+"/api/campaign/public/available?isFeatured=true&_locale="+userLocale, (error, response, body) => {
+        request.get(appBackendHost+"/api/campaign/public/available?isFeatured=true&_locale="+userLocale, (error, response, body) => {
             if(error) {
                 logger.error(error);
                 return console.log(error);
@@ -35,7 +36,7 @@ module.exports = {
     },
 
      getCampaignByCategory: function(userLocale,categoryId, callback) {
-        request.get(apiHost+"/api/campaign/public/available?categoryId[]="+categoryId, (error, response, body) => {
+        request.get(appBackendHost+"/api/campaign/public/available?categoryId[]="+categoryId, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
@@ -84,7 +85,7 @@ module.exports = {
                 'Content-type': 'application/json',
                 'Authorization': 'JWT '+jwtToken
             },
-            uri: apiHost+'/api/customer/status?_locale='+userLocale,
+            uri: connectorHost+'/api/customer/status?_locale='+userLocale,
             method: 'GET'
         }, function(error,response,body) {
             if (error) {
