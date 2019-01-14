@@ -2,7 +2,7 @@ const querystring = require('querystring');
 const request = require('request');
 var logger = require('../log');
 
-var apiHost = "https://backend.sit.aillia.motherapp.com";
+var apiHost = "https://connector.sit.aillia.motherapp.com";
 var ssoHost = "https://sso.sit.aillia.motherapp.com";
 
 module.exports = {
