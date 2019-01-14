@@ -1,5 +1,5 @@
 const querystring = require('querystring');
-const request = require('request');
+const request = require('request').debug = true;
 var logger = require('../log');
 
 var apiHost = "https://backend.sit.aillia.motherapp.com";
@@ -94,8 +94,10 @@ module.exports = {
 
             console.log(JSON.parse(body));
 
-            var apiResult = JSON.parse(body).result;
-            callback(apiResult)
+            if (response.statusCode == 200) {
+                var apiResult = JSON.parse(body).result;
+                callback(apiResult)
+            }
         });
      },
 

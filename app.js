@@ -537,7 +537,7 @@ function pointQuery(recipientId) {
         // Get Customer Status
         apiService.getCustomerStatus(userLocale,jwtToken,function(apiResult){
             logger.info('|app: pointQuery| getCustomerStatus SUCCESS');
-            sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
+//            sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
         });
     });
 }
