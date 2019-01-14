@@ -92,6 +92,7 @@ module.exports = {
             }
 
             console.log(JSON.parse(body));
+            console.log('response: '+response);
 
             var apiResult = JSON.parse(body).result;
             callback(apiResult)
