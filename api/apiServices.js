@@ -68,6 +68,8 @@ module.exports = {
                 logger.error(error);
                 return console.log(error);
             }
+
+            console.log('response body: ' + body);
             console.log(JSON.parse(body));
 
             var apiResult = JSON.parse(body).token;
