@@ -533,11 +533,12 @@ function pointQuery(recipientId) {
     apiService.authenticate(loginName,loginPwd,function(apiResult){
         logger.debug('|app: pointQuery| login SUCCESS');
         var jwtToken = apiResult;
-//        sendTextMessage(recipientId, "login success: "+apiResult);
         // Get Customer Status
-        apiService.getCustomerStatus(userLocale,jwtToken,function(apiResult){
+        apiService.getCustomerStatus(userLocale,jwtToken,function(respCode,apiResult){
             logger.info('|app: pointQuery| getCustomerStatus SUCCESS');
-//            sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
+            if (respCode == 200) {
+                sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
+            }
         });
     });
 }
