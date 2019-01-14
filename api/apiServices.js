@@ -84,9 +84,9 @@ module.exports = {
                 'Authorization': 'JWT '+jwtToken
             },
             uri: apiHost+'/api/customer/status?_locale='+userLocale,
+            body: '',
             method: 'GET'
         }, function(error,response,body) {
-            console.log('request: '+request);
             if (error) {
                 logger.error(error);
                 return console.log(error);
