@@ -1,5 +1,5 @@
 const querystring = require('querystring');
-const request = require('request').debug = true;
+const request = require('request');
 var logger = require('../log');
 
 var apiHost = "https://backend.sit.aillia.motherapp.com";
