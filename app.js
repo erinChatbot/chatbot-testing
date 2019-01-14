@@ -533,6 +533,7 @@ function pointQuery(recipientId) {
     apiService.authenticate(loginName,loginPwd,function(apiResult){
         logger.debug('|app: pointQuery| login SUCCESS');
         var jwtToken = apiResult;
+        console.log('jwt token: '+jwtToken);
         // Get Customer Status
         apiService.getCustomerStatus(userLocale,jwtToken,function(respCode,apiResult){
             logger.info('|app: pointQuery| getCustomerStatus SUCCESS');

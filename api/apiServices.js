@@ -82,8 +82,7 @@ module.exports = {
         request({
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'JWT '+jwtToken,
-                'Profile-Token': ''
+                'Authorization': 'JWT '+jwtToken
             },
             uri: apiHost+'/api/customer/status?_locale='+userLocale,
             method: 'GET'
