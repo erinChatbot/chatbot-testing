@@ -560,7 +560,7 @@ function showCampaignCategory(recipientId) {
     });
 }
 
-// Check offer
+// Get Campaign
 function showCampaign(recipientId, categoryId) {
     logger.debug('|app: showCampaign| categoryId: '+categoryId);
     // featured
