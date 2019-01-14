@@ -81,10 +81,11 @@ module.exports = {
      getCustomerStatus: function(userLocale, jwtToken, callback) {
         request({
             headers: {
-                'Authorization': 'JWT '+jwtToken
+                'Content-type': 'application/json',
+                'Authorization': 'JWT '+jwtToken,
+                'Profile-Token': ''
             },
             uri: apiHost+'/api/customer/status?_locale='+userLocale,
-            body: '',
             method: 'GET'
         }, function(error,response,body) {
             if (error) {
@@ -96,7 +97,7 @@ module.exports = {
 
             if (response.statusCode == 200) {
                 var apiResult = JSON.parse(body).result;
-                callback(apiResult)
+                callback(response.statusCode,apiResult)
             }
         });
      },
