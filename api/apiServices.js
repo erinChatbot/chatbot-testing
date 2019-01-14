@@ -78,4 +78,24 @@ module.exports = {
         });
      },
 
+     getCustomerStatus: function(userLocale, jwtToken, callback) {
+        request({
+            headers: {
+                'Authorization': 'JWT '+jwtToken
+            },
+            uri: apiHost+'/api/customer/status?_locale='+userLocale,
+            method: 'GET'
+        }, function(error,response,body) {
+            if (error) {
+                logger.error(error);
+                return console.log(error);
+            }
+
+            console.log(JSON.parse(body));
+
+            var apiResult = JSON.parse(body).result;
+            callback(apiResult)
+        });
+     },
+
 };
