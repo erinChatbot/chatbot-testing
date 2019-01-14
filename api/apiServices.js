@@ -50,18 +50,19 @@ module.exports = {
 
      authenticate: function(userName, password, callback) {
         var requestBody = {
-            username: userName,
-            password: password
+            'username': userName,
+            'password': password
         };
 
-        var requestBodyString = querystring.stringify(requestBody);
+        var requestBodyData = JSON.stringify(requestBody);
 
         request({
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Content-Length':requestBodyData.length
             },
             uri: ssoHost+'/api/token/authenticate',
-            body: requestBodyString,
+            body: requestBodyData,
             method: 'POST'
         }, function(error,response,body){
             if (error) {
@@ -69,7 +70,7 @@ module.exports = {
                 return console.log(error);
             }
 
-            console.log('response body: ' + body);
+//            console.log('response body: ' + body);
             console.log(JSON.parse(body));
 
             var apiResult = JSON.parse(body).token;
