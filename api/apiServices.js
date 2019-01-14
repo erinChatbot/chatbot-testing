@@ -1,14 +1,14 @@
-const querystring = require('querystring');
 const request = require('request');
 var logger = require('../log');
 
-var appBackendHost = "https://backend.sit.aillia.motherapp.com";
-var connectorHost = "https://connector.sit.aillia.motherapp.com";
-var ssoHost = "https://sso.sit.aillia.motherapp.com";
+const openLoyaltyHost = "https://backend.sit.aillia.motherapp.com";
+const appBackendHost = "https://app-backend.sit.aillia.motherapp.com";
+const connectorHost = "https://connector.sit.aillia.motherapp.com";
+const ssoHost = "https://sso.sit.aillia.motherapp.com";
 
 module.exports = {
     getCampaignCategory: function(userLocale,callback) {
-        request.get(appBackendHost+"/api/public/campaignCategory?_locale="+userLocale, (error, response, body) => {
+        request.get(openLoyaltyHost+"/api/public/campaignCategory?_locale="+userLocale, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
@@ -22,7 +22,7 @@ module.exports = {
      },
 
     getFeaturedCampaign: function(userLocale,callback) {
-        request.get(appBackendHost+"/api/campaign/public/available?isFeatured=true&_locale="+userLocale, (error, response, body) => {
+        request.get(openLoyaltyHost+"/api/campaign/public/available?isFeatured=true&_locale="+userLocale, (error, response, body) => {
             if(error) {
                 logger.error(error);
                 return console.log(error);
@@ -36,7 +36,7 @@ module.exports = {
     },
 
      getCampaignByCategory: function(userLocale,categoryId, callback) {
-        request.get(appBackendHost+"/api/campaign/public/available?categoryId[]="+categoryId, (error, response, body) => {
+        request.get(openLoyaltyHost+"/api/campaign/public/available?categoryId[]="+categoryId, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
