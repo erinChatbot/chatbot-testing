@@ -510,6 +510,11 @@ function showHelpMsg(recipientId) {
     callSendAPI(messageData);
 }
 
+// Tutorial flow
+function showTutorial(recipientId) {
+    logger.info('|app: showTutorial| showTutorial');
+}
+
 // SignupBtnDidClick
 function signupFlow(recipientId) {
     logger.info('Custom Function signupBtnDidClick');
@@ -616,10 +621,16 @@ function showCampaign(recipientId, categoryId) {
                 callSendAPI(messageData);
                 setTimeout(function() {
                    sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
-                }, 1000)
+                }, 1000);
+                setTimeout(function() {
+                    showCampaignCategory(recipientId);
+                }, 2000);
             }
             else {
                 sendTextMessage(recipientId, "無campaign :(");
+                setTimeout(function() {
+                    showCampaignCategory(recipientId);
+                },1000);
             }
         });
     }
@@ -663,9 +674,15 @@ function showCampaign(recipientId, categoryId) {
                 setTimeout(function() {
                    sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
                 }, 1000)
+                setTimeout(function() {
+                    showCampaignCategory(recipientId);
+                }, 2000);
             }
             else {
                 sendTextMessage(recipientId, "無campaign :(");
+                setTimeout(function() {
+                    showCampaignCategory(recipientId);
+                },1000);
             }
         });
     }
