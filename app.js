@@ -22,8 +22,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
-var userLocale = "zh_HK"; //tmp, should be store in mongo
+var userLocale = 'zh_HK'; //tmp, should be store in mongodb
 var categoryIdMap = [];
+
+// FIXME, hardcoded parameter
+var loginName = '+85264334904';
+var loginPwd = 'Ma123456!';
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -525,9 +529,12 @@ function signinFlow(recipientId) {
 // PointQueryBtnDidClick
 function pointQuery(recipientId) {
     logger.info('Custom Function pointQueryBtnDidClick');
-    // FIXME
-    // need JWT token!
-    sendTextMessage(recipientId, "要login左有JWT token先得");
+    // FIXME: Hardcoded user account
+    apiService.authenticate(loginName,loginPwd,function(apiResult){
+        console.debug('|app: pointQuery| login SUCCESS');
+        var jwtToken = apiResult;
+        sendTextMessage(recipientId, "login success: "+apiResult);
+    });
 }
 
 // Get Campaign Category
