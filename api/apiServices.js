@@ -86,13 +86,13 @@ module.exports = {
             uri: apiHost+'/api/customer/status?_locale='+userLocale,
             method: 'GET'
         }, function(error,response,body) {
+            console.log('request: '+request);
             if (error) {
                 logger.error(error);
                 return console.log(error);
             }
 
             console.log(JSON.parse(body));
-            console.log('response: '+response);
 
             var apiResult = JSON.parse(body).result;
             callback(apiResult)
