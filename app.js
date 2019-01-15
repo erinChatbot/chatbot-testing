@@ -286,8 +286,8 @@ function receivedPostback(event) {
     getStartedBtnReply(senderID);
   } else if (payload == constants.ABOUT_LOYALTY_CHATBOT) {
     aboutLoyaltyChatbot(senderID);
-  } else if (payload == constants.SHOW_TUTORIAL) {
-    console.log('showTutorial()');
+  } else if (payload == constants.NEED_TUTORIAL) {
+    showTutorial(senderID);
   } else if (payload == constants.SIGN_UP_FLOW) {
     signupFlow(senderID);
   } else if (payload == constants.LOGIN) {

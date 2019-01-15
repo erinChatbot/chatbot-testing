@@ -6,7 +6,7 @@ let constants = {
         // Show Tutorial
         SHOW_TUTORIAL : 'PAYLOAD_FOR_SHOW_TUTORIAL',
         // Need Tutorial
-        NEED_TUTORIAL : 'PAYLOAD_FOR_NEED_TUTORIAL',
+        NEED_TUTORIAL : 'PAYLOAD_FOR_TUTORIAL',
         // Skip Tutorial
         SKIP_TUTORIAL : 'PAYLOAD_FOR_SKIP_TUTORIAL',
         // Home
