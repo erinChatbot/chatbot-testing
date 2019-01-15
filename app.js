@@ -239,6 +239,16 @@ function receivedMessage(event) {
         showCampaign(senderID, categoryIdMap[messageText]);
      }
 
+     if (quickReplyPayload == constants.LANGUAGE_ZH_HK) {
+        userLocale = 'zh_HK';
+        sendTextMessage(senderID,'好的親');
+     }
+
+     if (quickReplyPayload == constants.LANGUAGE_EN) {
+        userLocale = 'en';
+        sendTextMessage(senderID,'OK');
+     }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -284,6 +294,8 @@ function receivedPostback(event) {
     pointQuery(senderID);
   } else if (payload == constants.RECEIVE_OFFER) {
     showCampaignCategory(senderID);
+  } else if (payload == constants.LANGUAGE_SETTING) {
+    languageSetting(senderID);
   } else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
@@ -513,6 +525,7 @@ function showHelpMsg(recipientId) {
 // Tutorial flow
 function showTutorial(recipientId) {
     logger.info('|app: showTutorial| showTutorial');
+    // TODO
 }
 
 // SignupBtnDidClick
@@ -686,9 +699,38 @@ function showCampaign(recipientId, categoryId) {
             }
         });
     }
+}
 
+// Subscribe Category
+function subscribeCategory(recipientId) {
+    logger.info('|app: subscribeCategory| custom function subscribeCategory');
+    // TODO
+}
 
-
+// Language Setting
+function languageSetting(recipientId) {
+    logger.info('|app: languageSetting| custom function languageSetting');
+    var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: "請選擇語言:",
+          quick_replies: [
+            {
+              "content_type":"text",
+              "title":"繁體中文",
+              "payload":constants.LANGUAGE_ZH_HK
+            },
+            {
+              "content_type":"text",
+              "title":"English",
+              "payload":constants.LANGUAGE_EN
+            }
+          ]
+        }
+     };
+    callSendAPI(messageData);
 }
 
 // AboutBtnDidClick

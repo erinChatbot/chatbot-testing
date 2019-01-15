@@ -27,6 +27,10 @@ let constants = {
         SUBSCRIBE_CATEGORY : 'PAYLOAD_FOR_SUBSCRIBE_CATEGORY',
         // Language setting
         LANGUAGE_SETTING : 'PAYLOAD_FOR_LANGUAGE_SETTING',
+        // set zh_HK
+        LANGUAGE_ZH_HK : 'PAYLOAD_FOR_SET_LANGUAGE_ZH_HK',
+        // set en
+        LANGUAGE_EN : 'PAYLOAD_FOR_SET_LANGUAGE_EN',
         // Cancel Subscription
         EDIT_SUBSCRIPTION : 'PAYLOAD_FOR_EDIT_SUBSCRIPTION',
 }
