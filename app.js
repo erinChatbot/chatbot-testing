@@ -24,6 +24,8 @@ app.use(express.static('public'));
 
 var userLocale = 'zh_HK'; //tmp, should be store in mongodb
 var categoryIdMap = [];
+var isTutorial = false;
+var tutorialStage = 0;
 
 // FIXME, hardcoded parameter
 var loginName = '+85264334904';
@@ -208,7 +210,7 @@ function receivedMessage(event) {
       messageId, quickReplyPayload);
 
     if (quickReplyPayload == constants.NEED_TUTORIAL){
-      sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+      showTutorial(senderID);
     }
 
     if (quickReplyPayload == constants.SKIP_TUTORIAL){
@@ -525,7 +527,51 @@ function showHelpMsg(recipientId) {
 // Tutorial flow
 function showTutorial(recipientId) {
     logger.info('|app: showTutorial| showTutorial');
-    // TODO
+    isTutorial = true;
+    // msg list
+    // stage 0
+    var msg1 = 'Aillia chatbot可以比你好快咁睇到Aillia有咩campaign同check下account information，好似話比你聽你依加有幾多分咁。';
+    var msg2 = '用法好簡單，你可以係下面個menu度揀番想睇既野。';
+    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩post呢"，試下㩒呀親:)';
+    // stage 1
+    var msg4 = '你可以㩒番你想睇既類型，冇話特別想睇邊一類既可以揀LATEST呀';
+    // stage 2
+    var msg5 = '就係咁喇！見到有興趣既campaign仲可以㩒入去詳細睇。';
+    var msg6 = '跟住我地試下睇帳戶資訊呀！我可以話你聽依加有幾多分。';
+    var msg7 = '去menu度揀番"我有幾多分呢?"';
+    // stage 3
+    var msg8 = '係咪好簡單呢親\u263a\ufe0f';
+    var msg9 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
+
+    if (tutorialStage == 0) {
+        sendTextMessage(recipientId, msg1);
+        setTimeout(function() {
+           sendTextMessage(recipientId, msg2);
+        }, 1000);
+        setTimeout(function() {
+           sendTextMessage(recipientId, msg3);
+           tutorialStage = 1;
+        }, 2000);
+    } else if (tutorialStage == 1) {
+        sendTextMessage(recipientId, msg4);
+        tutorialStage = 2;
+    } else if (tutorialStage == 2) {
+        sendTextMessage(recipientId, msg5);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg6);
+        }, 1000);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg7);
+            tutorialStage = 3;
+        }, 2000);
+    } else if (tutorialStage == 3) {
+        sendTextMessage(recipientId, msg8);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg9);
+            isTutorial = false;
+            tutorialStage = 0;
+        }, 1000);
+    }
 }
 
 // SignupBtnDidClick
@@ -557,6 +603,11 @@ function pointQuery(recipientId) {
             logger.info('|app: pointQuery| getCustomerStatus SUCCESS');
             if (respCode == 200) {
                 sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
+                if (isTutorial) {
+                    setTimeout(function() {
+                        showTutorial(recipientId);
+                    }, 1000);
+                }
             }
         });
     });
@@ -589,6 +640,10 @@ function showCampaignCategory(recipientId) {
             }
          };
          callSendAPI(messageData);
+
+         if (isTutorial) {
+            showTutorial(recipientId);
+         }
     });
 }
 
@@ -636,13 +691,21 @@ function showCampaign(recipientId, categoryId) {
                    sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
                 }, 1000);
                 setTimeout(function() {
-                    showCampaignCategory(recipientId);
+                    if (isTutorial) {
+                        showTutorial(recipientId);
+                    } else {
+                        showCampaignCategory(recipientId);
+                    }
                 }, 2000);
             }
             else {
                 sendTextMessage(recipientId, "無campaign :(");
                 setTimeout(function() {
-                    showCampaignCategory(recipientId);
+                    if (isTutorial) {
+                        showTutorial(recipientId);
+                    } else {
+                        showCampaignCategory(recipientId);
+                    }
                 },1000);
             }
         });
