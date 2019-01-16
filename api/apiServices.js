@@ -55,7 +55,7 @@ module.exports = {
                 'Content-type':'application/json',
                 'Authorization': 'JWT '+jwtToken
             },
-            uri: openLoyaltyHost+'/api/customer/campaign/available?hasSegment=true';
+            uri: openLoyaltyHost+'/api/customer/campaign/available?hasSegment=true',
             method: 'GET'
          }, function(error, response, body) {
             if (error) {
