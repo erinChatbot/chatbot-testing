@@ -49,6 +49,22 @@ module.exports = {
          });
      },
 
+     getExclusiveCampaign: function(userLocale, jwtToken, callback) {
+        request({
+            headers: {
+                'Content-type':'application/json',
+                'Authorization': 'JWT '+jwtToken
+            },
+            uri: openLoyaltyHost+'/api/customer/campaign/available?hasSegment=true';
+            method: 'GET'
+         }, function(error, response, body) {
+            if (error) {
+                logger.error(error);
+                return console.log(error);
+            }
+         });
+     },
+
      authenticate: function(userName, password, callback) {
         var requestBody = {
             'username': userName,

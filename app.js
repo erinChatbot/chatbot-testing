@@ -526,6 +526,8 @@ function showHelpMsg(recipientId) {
 
 // Tutorial flow
 function showTutorial(recipientId) {
+    // FIXME
+    // handle if user not follow the step
     logger.info('|app: showTutorial| showTutorial');
     isTutorial = true;
     // msg list
@@ -764,9 +766,9 @@ function showCampaign(recipientId, categoryId) {
     }
 }
 
-// Subscribe Category
-function subscribeCategory(recipientId) {
-    logger.info('|app: subscribeCategory| custom function subscribeCategory');
+// Register only for you push
+function pushRegister(recipientId) {
+    logger.info('|app: pushRegister| custom function pushRegister');
     // TODO
 }
 

@@ -33,6 +33,8 @@ let constants = {
         LANGUAGE_EN : 'PAYLOAD_FOR_SET_LANGUAGE_EN',
         // Cancel Subscription
         EDIT_SUBSCRIPTION : 'PAYLOAD_FOR_EDIT_SUBSCRIPTION',
+        // Register receive only for you push
+        REGISTER_PUSH : 'PAYLOAD_FOR_REGISTER_PUSH',
 }
 
 module.exports = Object.freeze(constants);
