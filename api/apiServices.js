@@ -78,7 +78,7 @@ module.exports = {
                 'Content-Type':'application/json',
                 'Content-Length':requestBodyData.length
             },
-            uri: ssoHost+'/api/token/authenticate',
+            uri: connectorHost+'/api/customer/login',
             body: requestBodyData,
             method: 'POST'
         }, function(error,response,body){
