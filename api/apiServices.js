@@ -44,7 +44,7 @@ module.exports = {
             console.log(JSON.parse(body));
 
             var apiResult = JSON.parse(body).campaigns;
-            var total = JSON.parse(body).total
+            var total = JSON.parse(body).total;
             callback(apiResult, total)
          });
      },
@@ -62,6 +62,13 @@ module.exports = {
                 logger.error(error);
                 return console.log(error);
             }
+
+            console.log(JSON.parse(body));
+
+            var apiResult = JSON.parse(body).campaigns;
+            var total = JSON.parse(body).total;
+
+            callback(response.statusCode,apiResult,total);
          });
      },
 

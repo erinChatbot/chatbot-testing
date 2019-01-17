@@ -303,6 +303,8 @@ function receivedPostback(event) {
     showCampaignCategory(senderID);
   } else if (payload == constants.LANGUAGE_SETTING) {
     languageSetting(senderID);
+  } else if (payload == constants.SHOW_EXCLUSIVE_CAMPAIGN) {
+    pushRegister(senderID);
   } else {
     sendTextMessage(senderID, "做緊，等下啦");
   }
@@ -783,7 +785,63 @@ function showCampaign(recipientId, categoryId) {
 // Register only for you push
 function pushRegister(recipientId) {
     logger.info('|app: pushRegister| custom function pushRegister');
-    // TODO
+    // FIXME
+    // no "push" api in loyalty backend
+    apiService.authenticate(loginName,loginPwd,function(respCode,apiResult){
+        if (respCode==200){
+            logger.debug('|app: pushRegister| login SUCCESS');
+
+            sso_jwt = apiResult.sso_jwt;
+            ol_jwt = apiResult.ol_jwt;
+            ol_refresh_token = apiResult.ol_refresh_token;
+
+            console.log('OL jwt token: '+ol_jwt);
+
+            // Get Exclusive campaign
+            apiService.getExclusiveCampaign(userLocale, ol_jwt,function(respCode,apiResult,totalCampaign){
+                if(respCode==200) {
+                    logger.debug('|app: pushRegister| getExclusiveCampaign SUCCESS');
+
+                    if (totalCampaign>0){
+                        var campaignList = [];
+                        for(var i=0; i<apiResult.length; i++) {
+                            var campaignTitle = apiResult[i].name;
+                            var campaignDesc = "無";
+                            var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                            if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+                               imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+                            }
+                            if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                               campaignDesc = apiResult[i].shortDescription
+                            }
+                            var campaignBtn = [];
+                            campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                            campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
+                        }
+                        // prepare msg
+                        var messageData = {
+                           recipient: {
+                              id: recipientId
+                           },
+                           message: {
+                              "attachment" : {
+                                 "type" : "template",
+                                 "payload" : {
+                                    "template_type":"generic",
+                                    "elements" : campaignList
+                                 }
+                              }
+                           }
+                        };
+                        console.log(JSON.stringify(messageData));
+                        callSendAPI(messageData);
+                    } else {
+                        sendTextMessage(recipientId, "無campaign :(");
+                    }
+                }
+            });
+        }
+    });
 }
 
 // Language Setting

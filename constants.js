@@ -35,6 +35,8 @@ let constants = {
         EDIT_SUBSCRIPTION : 'PAYLOAD_FOR_EDIT_SUBSCRIPTION',
         // Register receive only for you push
         REGISTER_PUSH : 'PAYLOAD_FOR_REGISTER_PUSH',
+        // Show only for you campaign
+        SHOW_EXCLUSIVE_CAMPAIGN : 'PAYLOAD_FOR_EXCLUSIVE_CAMPAIGN',
 }
 
 module.exports = Object.freeze(constants);
