@@ -53,7 +53,7 @@ module.exports = {
         request({
             headers: {
                 'Content-type':'application/json',
-                'Authorization': 'JWT '+jwtToken
+                'Authorization': 'Bearer '+jwtToken
             },
             uri: openLoyaltyHost+'/api/customer/campaign/available?hasSegment=true',
             method: 'GET'
@@ -87,11 +87,10 @@ module.exports = {
                 return console.log(error);
             }
 
-//            console.log('response body: ' + body);
             console.log(JSON.parse(body));
 
-            var apiResult = JSON.parse(body).token;
-            callback(apiResult)
+            var apiResult = JSON.parse(body).result;
+            callback(response.statusCode,apiResult)
         });
      },
 

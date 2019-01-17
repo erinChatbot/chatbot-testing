@@ -31,6 +31,11 @@ var tutorialStage = 0;
 var loginName = '+85264334904';
 var loginPwd = 'Ma123456!';
 
+// store in mongodb
+var sso_jwt = "";
+var ol_jwt = "";
+var ol_refresh_token = "";
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -596,22 +601,31 @@ function signinFlow(recipientId) {
 function pointQuery(recipientId) {
     logger.info('Custom Function pointQueryBtnDidClick');
     // FIXME: Hardcoded user account
-    apiService.authenticate(loginName,loginPwd,function(apiResult){
-        logger.debug('|app: pointQuery| login SUCCESS');
-        var jwtToken = apiResult;
-        console.log('jwt token: '+jwtToken);
-        // Get Customer Status
-        apiService.getCustomerStatus(userLocale,jwtToken,function(respCode,apiResult){
-            logger.info('|app: pointQuery| getCustomerStatus SUCCESS');
-            if (respCode == 200) {
-                sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
-                if (isTutorial) {
-                    setTimeout(function() {
-                        showTutorial(recipientId);
-                    }, 1000);
+    apiService.authenticate(loginName,loginPwd,function(respCode,apiResult){
+        if (respCode == 200) {
+            logger.debug('|app: pointQuery| login SUCCESS');
+
+            sso_jwt = apiResult.sso_jwt;
+            ol_jwt = apiResult.ol_jwt;
+            ol_refresh_token = apiResult.ol_refresh_token;
+
+            console.log('jwt token: '+sso_jwt);
+
+            // Get Customer Status
+            apiService.getCustomerStatus(userLocale,sso_jwt,function(respCode,apiResult){
+                logger.info('|app: pointQuery| getCustomerStatus SUCCESS');
+                if (respCode == 200) {
+                    sendTextMessage(recipientId, "你有 "+apiResult.points+" 分");
+                    if (isTutorial) {
+                        setTimeout(function() {
+                            showTutorial(recipientId);
+                        }, 1000);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            sendTextMessage(recipientId, "login fail");
+        }
     });
 }
 
