@@ -289,6 +289,9 @@ function receivedMessage(event) {
         sendTextMessage(senderID,'好啦\ud83d\ude41，有需要再搵我');
         isTutorial = false;
         tutorialStage = 0;
+        setTimeout(function() {
+            sendUserMenu(senderID);
+        },1000);
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
