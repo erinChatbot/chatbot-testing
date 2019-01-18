@@ -277,7 +277,11 @@ function receivedMessage(event) {
 
      // tutorial mode
      if (quickReplyPayload == constants.IS_TUTORIAL_MODE) {
-        return;
+        sendTextMessage(senderID,'唔係呢個掣啊親\ud83d\ude41');
+        setTimeout(function(){
+            tutorialStage-=1;
+            showTutorial(senderID);
+         },1000);
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
@@ -657,7 +661,7 @@ function showTutorial(recipientId) {
                         {
                             "content_type":"text",
                             "title":"有咩post呢",
-                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
                             "payload":constants.RECEIVE_OFFER
                         },
                         {
@@ -709,7 +713,7 @@ function showTutorial(recipientId) {
                         {
                             "content_type":"text",
                             "title":"我有幾多分?",
-                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
                             "payload":constants.POINT_QUERY
                         },
                         {
@@ -770,7 +774,7 @@ function showTutorial(recipientId) {
                         {
                             "content_type":"text",
                             "title":"Only For You",
-                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
                             "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
                         },
                         {
