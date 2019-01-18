@@ -292,7 +292,17 @@ function receivedMessage(event) {
     // If we receive a text message, check to see if it matches any special
     switch (messageText) {
       case '/help':
-        showHelpMsg(senderID);
+        if (isTutorial) {
+            sendTextMessage(senderID,'咪幫緊你囉\ud83d\ude1f');
+            setTimeout(function(){
+                if (tutorialStage!=0) {
+                    tutorialStage-=1;
+                }
+                showTutorial(senderID);
+             },1000);
+        } else {
+            showHelpMsg(senderID);
+        }
         break;
 
       default:
