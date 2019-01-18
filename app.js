@@ -15,6 +15,7 @@ var utils = require('./utils/utils');
 var apiService = require('./api/apiServices');
 var genericTemplate = require('./models/genericTemplate');
 var quickReply = require('./models/quickReplies');
+var replyButton = require('./models/replyButton');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -214,6 +215,7 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
+    // GetStarted
     if (quickReplyPayload == constants.NEED_TUTORIAL){
       showTutorial(senderID);
     }
@@ -222,38 +224,47 @@ function receivedMessage(event) {
       sendTextMessage(senderID,"好，再需要我就打 /help 搵我\uD83D\uDC4D")
     }
 
-    if (quickReplyPayload == constants.SIGN_UP_FLOW){
-        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
-    }
-
+    // Menu
     if (quickReplyPayload == constants.POINT_QUERY){
-        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+        pointQuery(senderID);
     }
 
     if (quickReplyPayload == constants.RECEIVE_OFFER){
-        sendTextMessage(senderID,"未做好，你遲d再㩒過啦")
+        showCampaignCategory(senderID);
+    }
+
+    if (quickReplyPayload == constants.SHOW_EXCLUSIVE_CAMPAIGN) {
+        pushRegister(senderID);
     }
 
     if (quickReplyPayload == constants.ABOUT_LOYALTY_CHATBOT){
         aboutLoyaltyChatbot(senderID);
     }
 
-    if (quickReplyPayload == constants.SUBSCRIBE_CATEGORY) {
-        sendTextMessage(senderID,"subscribe左"+messageText);
+    if (quickReplyPayload == constants.LANGUAGE_SETTING) {
+        languageSetting(senderID);
     }
 
+    // Campaign Category response
     if (quickReplyPayload == constants.GET_CAMPAIGN_BY_CATEGORY) {
         showCampaign(senderID, categoryIdMap[messageText]);
      }
 
+    // Language Setting
      if (quickReplyPayload == constants.LANGUAGE_ZH_HK) {
         userLocale = 'zh_HK';
         sendTextMessage(senderID,'好的親');
+        setTimeout(function(){
+            sendUserMenu(recipientId);
+         },1000);
      }
 
      if (quickReplyPayload == constants.LANGUAGE_EN) {
         userLocale = 'en';
         sendTextMessage(senderID,'OK');
+        setTimeout(function(){
+            sendUserMenu(recipientId);
+        },1000);
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
@@ -307,6 +318,9 @@ function receivedPostback(event) {
     pushRegister(senderID);
   } else {
     sendTextMessage(senderID, "做緊，等下啦");
+    setTimeout(function(){
+       sendUserMenu(recipientId);
+    },1000);
   }
   //sendTextMessage(senderID, response_text);
 }
@@ -337,6 +351,51 @@ function sendTextMessage(recipientId, messageText) {
   };
 
   callSendAPI(messageData);
+}
+
+// Send text message with user menu
+function sendUserMenu(recipientId) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: "請選擇以下服務:",
+            quick_replies : [
+                {
+                    "content_type":"text",
+                    "title":"我有幾多分?",
+                    "payload":constants.POINT_QUERY
+                },
+                {
+                    "content_type":"text",
+                    "title":"有咩post呢",
+                    "payload":constant.RECEIVE_OFFER
+                },
+                {
+                    "content_type":"text",
+                    "title":"Only For You",
+                    "payload":constant.SHOW_EXCLUSIVE_CAMPAIGN
+                },
+                {
+                    "content_type":"text",
+                    "title":"使用教學",
+                    "payload":constant.NEED_TUTORIAL
+                },
+                {
+                    "content_type":"text",
+                    "title":"語言",
+                    "payload":constant.LANGUAGE_SETTING
+                },
+                {
+                    "content_type":"text",
+                    "title":"關於Loylaty Chatbot",
+                    "payload":constant.ABOUT_LOYALTY_CHATBOT
+                }
+             ]
+        }
+    };
+    callSendAPI(messageData);
 }
 
 // Call the Send API
@@ -580,6 +639,9 @@ function showTutorial(recipientId) {
             isTutorial = false;
             tutorialStage = 0;
         }, 1000);
+        setTimeout(function() {
+            sendUserMenu(recipientId);
+        },2000);
     }
 }
 
@@ -589,6 +651,9 @@ function signupFlow(recipientId) {
     // FIXME
     // need website doing signup function
     sendTextMessage(recipientId, "要有website先做到:(");
+    setTimeout(function(){
+        sendUserMenu(recipientId);
+    },1000);
 }
 
 // SigninBtnDidClick
@@ -597,6 +662,9 @@ function signinFlow(recipientId) {
     // FIXME
     // need website doing signin flow
     sendTextMessage(recipientId, "要有website先做到:(");
+    setTimeout(function(){
+        sendUserMenu(recipientId);
+    },1000);
 }
 
 // PointQueryBtnDidClick
@@ -622,11 +690,18 @@ function pointQuery(recipientId) {
                         setTimeout(function() {
                             showTutorial(recipientId);
                         }, 1000);
+                    } else {
+                        setTimeout(function(){
+                           sendUserMenu(recipientId);
+                        ,1000);
                     }
                 }
             });
         } else {
             sendTextMessage(recipientId, "login fail");
+            setTimeout(function(){
+                sendUserMenu(recipientId);
+            },1000);
         }
     });
 }
@@ -639,6 +714,7 @@ function showCampaignCategory(recipientId) {
         categoryIdMap = [];
         var categoryList = [];
         // add latest to category list
+        // Quick reply version
         categoryList.push(new quickReply.quickReplies('text','LATEST',constants.GET_CAMPAIGN_BY_CATEGORY));
         categoryIdMap['LATEST'] = '0';
         for(var i=0; i < apiResult.length; i++) {
@@ -657,6 +733,7 @@ function showCampaignCategory(recipientId) {
                 quick_replies: categoryList
             }
          };
+
          callSendAPI(messageData);
 
          if (isTutorial) {
@@ -839,6 +916,9 @@ function pushRegister(recipientId) {
                         sendTextMessage(recipientId, "無campaign :(");
                     }
                 }
+                setTimeout(function(){
+                    sendUserMenu(recipientId);
+                },1000);
             });
         }
     });
