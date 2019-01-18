@@ -275,6 +275,11 @@ function receivedMessage(event) {
         sendUserMenu(senderID);
      }
 
+     // tutorial mode
+     if (quickReplyPayload == constants.IS_TUTORIAL_MODE) {
+        return;
+     }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -608,16 +613,19 @@ function showTutorial(recipientId) {
     // stage 0
     var msg1 = 'Aillia chatbot可以比你好快咁睇到Aillia有咩campaign同check下account information，好似話比你聽你依加有幾多分咁。';
     var msg2 = '用法好簡單，你可以係下面個menu度揀番想睇既野。';
-    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩post呢"，試下㩒呀親:)';
-    // stage 1
-    var msg4 = '你可以㩒番你想睇既類型，冇話特別想睇邊一類既可以揀LATEST呀';
-    // stage 2
+    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩post呢"';
+    var msg4 = '你可以㩒番你想睇既類型，冇話特別想睇邊一類既可以揀LATEST呀，試下㩒呀親:)';
+    // stage 1 (logged in)
     var msg5 = '就係咁喇！見到有興趣既campaign仲可以㩒入去詳細睇。';
-    var msg6 = '跟住我地試下睇帳戶資訊呀！我可以話你聽依加有幾多分。';
-    var msg7 = '去menu度揀番"我有幾多分呢?"';
+    var msg6 = '等我睇下先，你已經login左我地Aillia既account。';
+    var msg7 = '跟住我地可以試下睇帳戶資訊呀！我可以話你聽依加有幾多分。';
+    var msg8 = '去menu度揀番"我有幾多分呢?"';
+    // stage 2 (logged in)
+    var msg9 = '除左分數，我地仲有專為你推介既campaign\u263a\ufe0f';
+    var msg10 = '㩒一下"Only For You"呀親';
     // stage 3
-    var msg8 = '係咪好簡單呢親\u263a\ufe0f';
-    var msg9 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
+    var msg11 = '係咪好簡單呢親\u263a\ufe0f';
+    var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
 
     if (tutorialStage == 0) {
         sendTextMessage(recipientId, msg1);
@@ -626,24 +634,169 @@ function showTutorial(recipientId) {
         }, 1000);
         setTimeout(function() {
            sendTextMessage(recipientId, msg3);
-           tutorialStage = 1;
         }, 2000);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg4);
+        }, 3000);
+        setTimeout(function(){
+            tutorialStage = 1;
+//            sendUserMenu(recipientId);
+            // quick reply with highlighted view campaign
+            var messageData = {
+                recipient: {
+                    id: recipientId
+                },
+                message: {
+                    text: "請選擇以下服務:",
+                    quick_replies : [
+                        {
+                            "content_type":"text",
+                            "title":"我有幾多分?",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"有咩post呢",
+                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "payload":constants.RECEIVE_OFFER
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"Only For You",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"使用教學",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"語言",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"關於Loyalty Chatbot",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        }
+                     ]
+                }
+            };
+            callSendAPI(messageData);
+        },4000);
     } else if (tutorialStage == 1) {
-        sendTextMessage(recipientId, msg4);
-        tutorialStage = 2;
-    } else if (tutorialStage == 2) {
         sendTextMessage(recipientId, msg5);
         setTimeout(function() {
             sendTextMessage(recipientId, msg6);
         }, 1000);
         setTimeout(function() {
             sendTextMessage(recipientId, msg7);
-            tutorialStage = 3;
         }, 2000);
-    } else if (tutorialStage == 3) {
-        sendTextMessage(recipientId, msg8);
         setTimeout(function() {
-            sendTextMessage(recipientId, msg9);
+            sendTextMessage(recipientId, msg8);
+        }, 3000);
+        setTimeout(function() {
+            tutorialStage = 2;
+            // quick reply with highlighted point
+            var messageData = {
+                recipient: {
+                    id: recipientId
+                },
+                message: {
+                    text: "請選擇以下服務:",
+                    quick_replies : [
+                        {
+                            "content_type":"text",
+                            "title":"我有幾多分?",
+                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "payload":constants.POINT_QUERY
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"有咩post呢",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"Only For You",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"使用教學",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"語言",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"關於Loyalty Chatbot",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        }
+                     ]
+                }
+            };
+            callSendAPI(messageData);
+        }, 4000);
+    } else if (tutorialStage == 2) {
+        sendTextMessage(recipientId, msg9);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg10);
+        }, 1000);
+        setTimeout(function() {
+            tutorialStage = 3;
+            // quick reply with highlighted only for you
+            var messageData = {
+                recipient: {
+                    id: recipientId
+                },
+                message: {
+                    text: "請選擇以下服務:",
+                    quick_replies : [
+                        {
+                            "content_type":"text",
+                            "title":"我有幾多分?",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"有咩post呢",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"Only For You",
+                            "image_url":"http://static.iconarchive.com/download/i96285/iconsmind/outline/Hand-Touch-2.ico",
+                            "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"使用教學",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"語言",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"關於Loyalty Chatbot",
+                            "payload":constants.IS_TUTORIAL_MODE
+                        }
+                     ]
+                }
+            };
+            callSendAPI(messageData);
+        },2000);
+    } else if (tutorialStage == 3) {
+        sendTextMessage(recipientId, msg11);
+        setTimeout(function() {
+            sendTextMessage(recipientId, msg12);
             isTutorial = false;
             tutorialStage = 0;
         }, 1000);
@@ -723,7 +876,6 @@ function showCampaignCategory(recipientId) {
         categoryIdMap = [];
         var categoryList = [];
         // add latest to category list
-        // Quick reply version
         categoryList.push(new quickReply.quickReplies('text','LATEST',constants.GET_CAMPAIGN_BY_CATEGORY));
         categoryIdMap['LATEST'] = '0';
         for(var i=0; i < apiResult.length; i++) {
@@ -732,7 +884,9 @@ function showCampaignCategory(recipientId) {
             categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
         }
         // Added close btn at the end
-        categoryList.push(new quickReply.quickReplies('text','X 取消',constants.SHOW_USER_MENU));
+        if (!isTutorial) {
+            categoryList.push(new quickReply.quickReplies('text','X 取消',constants.SHOW_USER_MENU));
+        }
 
         // prepare msg
         var messageData = {
@@ -746,10 +900,6 @@ function showCampaignCategory(recipientId) {
          };
 
          callSendAPI(messageData);
-
-         if (isTutorial) {
-            showTutorial(recipientId);
-         }
     });
 }
 
@@ -928,7 +1078,11 @@ function pushRegister(recipientId) {
                     }
                 }
                 setTimeout(function(){
-                    sendUserMenu(recipientId);
+                    if (isTutorial){
+                        showTutorial(recipientId);
+                    } else {
+                        sendUserMenu(recipientId);
+                    }
                 },1000);
             });
         }

@@ -39,6 +39,8 @@ let constants = {
         SHOW_EXCLUSIVE_CAMPAIGN : 'PAYLOAD_FOR_EXCLUSIVE_CAMPAIGN',
         // Show user menu
         SHOW_USER_MENU : 'PAYLOAD_FOR_SHOW_USER_MENU',
+        // Tutorial mode
+        IS_TUTORIAL_MODE : 'PAYLOAD_FOR_IS_TUTORIAL_MODE',
 }
 
 module.exports = Object.freeze(constants);
