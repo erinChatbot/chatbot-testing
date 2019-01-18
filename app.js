@@ -693,7 +693,8 @@ function pointQuery(recipientId) {
                     } else {
                         setTimeout(function(){
                            sendUserMenu(recipientId);
-                        ,1000);
+
+                        },1000);
                     }
                 }
             });
