@@ -309,7 +309,17 @@ function receivedMessage(event) {
         }
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "\ud83d\ude48我咩都睇唔到");
+        if(isTutorial) {
+            sendTextMessage(senderID,'睇埋個tutorial先啦親\ud83d\ude1f');
+            setTimeout(function(){
+                if (tutorialStage!=0) {
+                    tutorialStage-=1;
+                }
+                showTutorial(senderID);
+             },1000);
+        } else {
+            sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+        }
   }
 }
 
