@@ -17,8 +17,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="705">
-                  <caret line="399" column="14" lean-forward="true" selection-start-line="399" selection-start-column="14" selection-end-line="399" selection-end-column="14" />
+                <state relative-caret-position="351">
+                  <caret line="225" column="30" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -90,7 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aboutUNews</find>
       <find>PAYLOAD_FOR_ABOUT_LOYALTY_CHATBOT</find>
       <find>PAYLOAD_FOR_NEED_TUTORIAL</find>
       <find>PAYLOAD</find>
@@ -120,6 +119,7 @@
       <find>sendTextMessage</find>
       <find>sendText</find>
       <find>menu</find>
+      <find>SKIP_TUTORIAL</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -185,7 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547795737919" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547797431304" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -363,8 +363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="399" column="14" lean-forward="true" selection-start-line="399" selection-start-column="14" selection-end-line="399" selection-end-column="14" />
+        <state relative-caret-position="351">
+          <caret line="225" column="30" selection-start-line="225" selection-start-column="30" selection-end-line="225" selection-end-column="30" />
         </state>
       </provider>
     </entry>

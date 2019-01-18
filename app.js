@@ -222,6 +222,9 @@ function receivedMessage(event) {
 
     if (quickReplyPayload == constants.SKIP_TUTORIAL){
       sendTextMessage(senderID,"好，再需要我就打 /help 搵我\uD83D\uDC4D")
+      setTimeout(function() {
+        sendUserMenu(senderID);
+      },1000);
     }
 
     // Menu
