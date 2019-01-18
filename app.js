@@ -1041,13 +1041,21 @@ function showCampaign(recipientId, categoryId) {
                    sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
                 }, 1000)
                 setTimeout(function() {
-                    showCampaignCategory(recipientId);
+                    if (isTutorial) {
+                        showTutorial(recipientId);
+                    } else {
+                        showCampaignCategory(recipientId);
+                    }
                 }, 2000);
             }
             else {
                 sendTextMessage(recipientId, "無campaign :(");
                 setTimeout(function() {
-                    showCampaignCategory(recipientId);
+                    if (isTutorial) {
+                        showTutorial(recipientId);
+                    } else {
+                        showCampaignCategory(recipientId);
+                    }
                 },1000);
             }
         });
