@@ -975,6 +975,9 @@ function aboutLoyaltyChatbot(recipientId){
     setTimeout(function() {
         sendTextMessage(recipientId,msg4);
     }, 3000)
+    setTimeout(function() {
+        sendUserMenu(recipientId);
+    }, 4000);
 }
 
 /****************** START SERVER *********************/
