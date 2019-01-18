@@ -41,6 +41,8 @@ let constants = {
         SHOW_USER_MENU : 'PAYLOAD_FOR_SHOW_USER_MENU',
         // Tutorial mode
         IS_TUTORIAL_MODE : 'PAYLOAD_FOR_IS_TUTORIAL_MODE',
+        // End Tutorial
+        STOP_TUTORIAL_MODE : 'PAYLOAD_FOR_STOP_TUTORIAL_MODE',
 }
 
 module.exports = Object.freeze(constants);

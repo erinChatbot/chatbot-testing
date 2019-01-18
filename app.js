@@ -284,6 +284,13 @@ function receivedMessage(event) {
          },1000);
      }
 
+     // stop tutorial
+     if (quickReplyPayload == constants.STOP_TUTORIAL_MODE) {
+        sendTextMessage(senderID,'好啦\ud83d\ude41，有需要再搵我');
+        isTutorial = false;
+        tutorialStage = 0;
+     }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -648,7 +655,6 @@ function showTutorial(recipientId) {
     var msg1 = 'Aillia chatbot可以比你好快咁睇到Aillia有咩campaign同check下account information，好似話比你聽你依加有幾多分咁。';
     var msg2 = '用法好簡單，你可以係下面個menu度揀番想睇既野。';
     var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩post呢"';
-    var msg4 = '你可以㩒番你想睇既類型，冇話特別想睇邊一類既可以揀LATEST呀，試下㩒呀親:)';
     // stage 1 (logged in)
     var msg5 = '就係咁喇！見到有興趣既campaign仲可以㩒入去詳細睇。';
     var msg6 = '等我睇下先，你已經login左我地Aillia既account。';
@@ -669,9 +675,6 @@ function showTutorial(recipientId) {
         setTimeout(function() {
            sendTextMessage(recipientId, msg3);
         }, 2000);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg4);
-        }, 3000);
         setTimeout(function(){
             tutorialStage = 1;
 //            sendUserMenu(recipientId);
@@ -685,14 +688,19 @@ function showTutorial(recipientId) {
                     quick_replies : [
                         {
                             "content_type":"text",
-                            "title":"我有幾多分?",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
                             "title":"有咩post呢",
                             "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
                             "payload":constants.RECEIVE_OFFER
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"識用喇唔睇喇",
+                            "payload":constants.STOP_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"我有幾多分?",
+                            "payload":constants.IS_TUTORIAL_MODE
                         },
                         {
                             "content_type":"text",
@@ -718,7 +726,7 @@ function showTutorial(recipientId) {
                 }
             };
             callSendAPI(messageData);
-        },4000);
+        },3000);
     } else if (tutorialStage == 1) {
         sendTextMessage(recipientId, msg5);
         setTimeout(function() {
@@ -745,6 +753,11 @@ function showTutorial(recipientId) {
                             "title":"我有幾多分?",
                             "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
                             "payload":constants.POINT_QUERY
+                        },
+                        {
+                             "content_type":"text",
+                             "title":"識用喇唔睇喇",
+                             "payload":constants.STOP_TUTORIAL_MODE
                         },
                         {
                             "content_type":"text",
@@ -793,6 +806,17 @@ function showTutorial(recipientId) {
                     quick_replies : [
                         {
                             "content_type":"text",
+                            "title":"Only For You",
+                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
+                            "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
+                        },
+                        {
+                             "content_type":"text",
+                             "title":"識用喇唔睇喇",
+                             "payload":constants.STOP_TUTORIAL_MODE
+                        },
+                        {
+                            "content_type":"text",
                             "title":"我有幾多分?",
                             "payload":constants.IS_TUTORIAL_MODE
                         },
@@ -800,12 +824,6 @@ function showTutorial(recipientId) {
                             "content_type":"text",
                             "title":"有咩post呢",
                             "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"Only For You",
-                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
-                            "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
                         },
                         {
                             "content_type":"text",
