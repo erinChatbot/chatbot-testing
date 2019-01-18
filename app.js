@@ -296,10 +296,20 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID,'已訂閱 '+messageText+'。');
+        if(isTutorial) {
+            sendTextMessage(senderID,'睇埋個tutorial先啦親\ud83d\ude1f');
+            setTimeout(function(){
+                if (tutorialStage!=0) {
+                    tutorialStage-=1;
+                }
+                showTutorial(senderID);
+             },1000);
+        } else {
+            sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+        }
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
+    sendTextMessage(senderID, "\ud83d\ude48我咩都睇唔到");
   }
 }
 
