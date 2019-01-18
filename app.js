@@ -370,27 +370,27 @@ function sendUserMenu(recipientId) {
                 {
                     "content_type":"text",
                     "title":"有咩post呢",
-                    "payload":constant.RECEIVE_OFFER
+                    "payload":constants.RECEIVE_OFFER
                 },
                 {
                     "content_type":"text",
                     "title":"Only For You",
-                    "payload":constant.SHOW_EXCLUSIVE_CAMPAIGN
+                    "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
                 },
                 {
                     "content_type":"text",
                     "title":"使用教學",
-                    "payload":constant.NEED_TUTORIAL
+                    "payload":constants.NEED_TUTORIAL
                 },
                 {
                     "content_type":"text",
                     "title":"語言",
-                    "payload":constant.LANGUAGE_SETTING
+                    "payload":constants.LANGUAGE_SETTING
                 },
                 {
                     "content_type":"text",
                     "title":"關於Loylaty Chatbot",
-                    "payload":constant.ABOUT_LOYALTY_CHATBOT
+                    "payload":constants.ABOUT_LOYALTY_CHATBOT
                 }
              ]
         }
