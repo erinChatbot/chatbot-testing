@@ -37,6 +37,8 @@ let constants = {
         REGISTER_PUSH : 'PAYLOAD_FOR_REGISTER_PUSH',
         // Show only for you campaign
         SHOW_EXCLUSIVE_CAMPAIGN : 'PAYLOAD_FOR_EXCLUSIVE_CAMPAIGN',
+        // Show user menu
+        SHOW_USER_MENU : 'PAYLOAD_FOR_SHOW_USER_MENU',
 }
 
 module.exports = Object.freeze(constants);

@@ -267,6 +267,11 @@ function receivedMessage(event) {
         },1000);
      }
 
+     // close campaign category
+     if (quickReplyPayload == constants.SHOW_USER_MENU) {
+        sendUserMenu(recipientId);
+     }
+
     //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -723,6 +728,8 @@ function showCampaignCategory(recipientId) {
             categoryIdMap[categoryTitle] = apiResult[i].campaignCategoryId;
             categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
         }
+        // Added close btn at the end
+        categoryList.push(new quickReply.quickReplies('text','X',constants.SHOW_USER_MENU));
 
         // prepare msg
         var messageData = {
