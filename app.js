@@ -255,7 +255,7 @@ function receivedMessage(event) {
         userLocale = 'zh_HK';
         sendTextMessage(senderID,'好的親');
         setTimeout(function(){
-            sendUserMenu(recipientId);
+            sendUserMenu(senderID);
          },1000);
      }
 
@@ -263,13 +263,13 @@ function receivedMessage(event) {
         userLocale = 'en';
         sendTextMessage(senderID,'OK');
         setTimeout(function(){
-            sendUserMenu(recipientId);
+            sendUserMenu(senderID);
         },1000);
      }
 
      // close campaign category
      if (quickReplyPayload == constants.SHOW_USER_MENU) {
-        sendUserMenu(recipientId);
+        sendUserMenu(senderID);
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
