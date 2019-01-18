@@ -394,7 +394,7 @@ function sendUserMenu(recipientId) {
                 },
                 {
                     "content_type":"text",
-                    "title":"關於Loylaty Chatbot",
+                    "title":"關於Loyalty Chatbot",
                     "payload":constants.ABOUT_LOYALTY_CHATBOT
                 }
              ]
@@ -729,7 +729,7 @@ function showCampaignCategory(recipientId) {
             categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
         }
         // Added close btn at the end
-        categoryList.push(new quickReply.quickReplies('text','X',constants.SHOW_USER_MENU));
+        categoryList.push(new quickReply.quickReplies('text','X 取消',constants.SHOW_USER_MENU));
 
         // prepare msg
         var messageData = {
