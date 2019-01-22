@@ -328,6 +328,9 @@ function receivedMessage(event) {
              },1000);
         } else {
             sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+            setTimeout(function() {
+                sendUserMenu(senderID);
+            }, 1000);
         }
     }
   } else if (messageAttachments) {
@@ -341,6 +344,9 @@ function receivedMessage(event) {
              },1000);
         } else {
             sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+            setTimeout(function() {
+                sendUserMenu(senderID);
+            },1000);
         }
   }
 }
