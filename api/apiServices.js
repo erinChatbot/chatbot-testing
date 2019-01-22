@@ -43,7 +43,8 @@ module.exports = {
             }
             console.log(JSON.parse(body));
 
-            var apiResult = JSON.parse(body).campaigns
+//            var apiResult = JSON.parse(body).campaigns //SIT
+            var apiResult = JSON.parse(body).result.campaigns; //PROD
             var total = JSON.parse(body).total
             callback(apiResult, total)
         });
