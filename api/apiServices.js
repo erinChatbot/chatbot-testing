@@ -9,8 +9,8 @@ var logger = require('../log');
 
 // PROD
 const openLoyaltyHost = "https://middleware.prod.loyalty.motherapp.com";
-const appBackendHost = "https://app-backend.sit.aillia.motherapp.com";
-const connectorHost = "https://connector.sit.aillia.motherapp.com";
+const appBackendHost = "https://sso.prod.loyalty.aillia.motherapp.com";
+const connectorHost = "https://sso.prod.loyalty.motherapp.com";
 const ssoHost = "https://sso.prod.loyalty.motherapp.com";
 
 module.exports = {
