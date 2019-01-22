@@ -899,9 +899,9 @@ function pointQuery(recipientId) {
 //            ol_refresh_token = apiResult.ol_refresh_token;
 
             //PROD
-            sso_jwt = apiResult.token;
-            ol_jwt = apiResult.token;
-            ol_refresh_token = apiResult.token;
+            sso_jwt = apiResult;
+            ol_jwt = apiResult;
+            ol_refresh_token = apiResult;
 
             console.log('jwt token: '+sso_jwt);
 
@@ -1107,9 +1107,9 @@ function pushRegister(recipientId) {
 
 
             //PROD
-            sso_jwt = apiResult.token;
-            ol_jwt = apiResult.token;
-            ol_refresh_token = apiResult.token;
+            sso_jwt = apiResult;
+            ol_jwt = apiResult;
+            ol_refresh_token = apiResult;
 
             console.log('OL jwt token: '+ol_jwt);
 
