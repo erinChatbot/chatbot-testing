@@ -66,8 +66,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/apiServices.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="602">
-                  <caret line="95" selection-start-line="95" selection-end-line="95" />
+                <state relative-caret-position="488">
+                  <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
                 </state>
               </provider>
             </entry>
@@ -185,7 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548137290516" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548137873822" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -363,8 +363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/apiServices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        <state relative-caret-position="488">
+          <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
         </state>
       </provider>
     </entry>

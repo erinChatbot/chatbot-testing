@@ -75,7 +75,8 @@ module.exports = {
         request({
             headers: {
                 'Content-type':'application/json',
-                'Authorization': 'Bearer '+jwtToken
+//                'Authorization': 'Bearer '+jwtToken //SIT
+                'Authorization': 'JWT '+jwtToken
             },
             uri: openLoyaltyHost+apiPath,
             method: 'GET'
