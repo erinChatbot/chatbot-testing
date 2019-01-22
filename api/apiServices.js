@@ -133,7 +133,8 @@ module.exports = {
                 'Content-type': 'application/json',
                 'Authorization': 'JWT '+jwtToken
             },
-            uri: connectorHost+apiPath,
+//            uri: connectorHost+apiPath, //SIT
+            uri: openLoyaltyHost+apiPath, //PROD
             method: 'GET'
         }, function(error,response,body) {
             if (error) {
