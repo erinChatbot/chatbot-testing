@@ -26,7 +26,8 @@ module.exports = {
             console.log(JSON.parse(body));
     //            logger.debug('response body: '+JSON.stringify(body));
 
-            var apiResult = JSON.parse(body).categories;
+//            var apiResult = JSON.parse(body).categories; //SIT
+            var apiResult = JSON.parse(body).result.categories;
             callback(apiResult)
          });
      },
