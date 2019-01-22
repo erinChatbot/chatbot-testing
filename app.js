@@ -29,8 +29,10 @@ var isTutorial = false;
 var tutorialStage = 0;
 
 // FIXME, hardcoded parameter
-var loginName = '+85264334904';
-var loginPwd = 'Ma123456!';
+//SIT: +85264334904 / Ma123456!
+//PROD: cheukyyuen+susan@motherapp.com / Ma12345678!
+var loginName = 'cheukyyuen+susan@motherapp.com';
+var loginPwd = 'Ma12345678!';
 
 // store in mongodb
 var sso_jwt = "";
@@ -426,7 +428,7 @@ function sendUserMenu(recipientId) {
                 },
                 {
                     "content_type":"text",
-                    "title":"有咩post呢",
+                    "title":"有咩campaign",
                     "payload":constants.RECEIVE_OFFER
                 },
                 {
@@ -657,7 +659,7 @@ function showTutorial(recipientId) {
     // stage 0
     var msg1 = 'Aillia chatbot可以比你好快咁睇到Aillia有咩campaign同check下account information，好似話比你聽你依加有幾多分咁。';
     var msg2 = '用法好簡單，你可以係下面個menu度揀番想睇既野。';
-    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩post呢"';
+    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩campaign"';
     // stage 1 (logged in)
     var msg5 = '就係咁喇！見到有興趣既campaign仲可以㩒入去詳細睇。';
     var msg6 = '等我睇下先，你已經login左我地Aillia既account。';
@@ -891,9 +893,15 @@ function pointQuery(recipientId) {
         if (respCode == 200) {
             logger.debug('|app: pointQuery| login SUCCESS');
 
-            sso_jwt = apiResult.sso_jwt;
-            ol_jwt = apiResult.ol_jwt;
-            ol_refresh_token = apiResult.ol_refresh_token;
+            //SIT
+//            sso_jwt = apiResult.sso_jwt;
+//            ol_jwt = apiResult.ol_jwt;
+//            ol_refresh_token = apiResult.ol_refresh_token;
+
+            //PROD
+            sso_jwt = apiResult.token;
+            ol_jwt = apiResult.token;
+            ol_refresh_token = apiResult.token;
 
             console.log('jwt token: '+sso_jwt);
 
@@ -1092,9 +1100,16 @@ function pushRegister(recipientId) {
         if (respCode==200){
             logger.debug('|app: pushRegister| login SUCCESS');
 
-            sso_jwt = apiResult.sso_jwt;
-            ol_jwt = apiResult.ol_jwt;
-            ol_refresh_token = apiResult.ol_refresh_token;
+             //SIT
+//            sso_jwt = apiResult.sso_jwt;
+//            ol_jwt = apiResult.ol_jwt;
+//            ol_refresh_token = apiResult.ol_refresh_token;
+
+
+            //PROD
+            sso_jwt = apiResult.token;
+            ol_jwt = apiResult.token;
+            ol_refresh_token = apiResult.token;
 
             console.log('OL jwt token: '+ol_jwt);
 
