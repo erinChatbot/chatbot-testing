@@ -941,7 +941,10 @@ function showCampaignCategory(recipientId) {
         // add latest to category list
         categoryList.push(new quickReply.quickReplies('text','LATEST',constants.GET_CAMPAIGN_BY_CATEGORY));
         categoryIdMap['LATEST'] = '0';
-        for(var i=0; i < apiResult.length; i++) {
+        // quick replies max: 11
+        var resultLength = 11;
+        (apiResult.length > 11 ) ? (resultLength=11) : (resultLength=apiResult.length);
+        for(var i=0; i < resultLength; i++) {
             var categoryTitle = apiResult[i].name;
             categoryIdMap[categoryTitle] = apiResult[i].campaignCategoryId;
             categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
