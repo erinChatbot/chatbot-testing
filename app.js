@@ -857,7 +857,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -918,7 +918,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1005,7 +1005,7 @@ function pushRegister(recipientId) {
                                campaignDesc = apiResult[i].shortDescription
                             }
                             var campaignBtn = [];
-                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
                             campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                         }
                         // prepare msg
