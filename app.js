@@ -279,16 +279,15 @@ function receivedMessage(event) {
 
      // tutorial mode
      if (quickReplyPayload == constants.IS_TUTORIAL_MODE) {
-        sendTextMessage(senderID,'唔係呢個掣啊親\ud83d\ude41');
+        sendTextMessage(senderID,'我們還在教學當中呢');
         setTimeout(function(){
-            tutorialStage-=1;
             showTutorial(senderID);
          },1000);
      }
 
      // stop tutorial
      if (quickReplyPayload == constants.STOP_TUTORIAL_MODE) {
-        sendTextMessage(senderID,'好啦\ud83d\ude41，有需要再搵我');
+        sendTextMessage(senderID,'好的，己離開教學');
         isTutorial = false;
         tutorialStage = 0;
         setTimeout(function() {
@@ -305,7 +304,7 @@ function receivedMessage(event) {
     switch (messageText) {
       case '/help':
         if (isTutorial) {
-            sendTextMessage(senderID,'咪幫緊你囉\ud83d\ude1f');
+            sendTextMessage(senderID,'我們還在教學當中呢\ud83d\ude1f');
             setTimeout(function(){
                 if (tutorialStage!=0) {
                     tutorialStage-=1;
@@ -319,15 +318,12 @@ function receivedMessage(event) {
 
       default:
         if(isTutorial) {
-            sendTextMessage(senderID,'睇埋個tutorial先啦親\ud83d\ude1f');
+            sendTextMessage(senderID,'我們還在教學當中呢\ud83d\ude1f');
             setTimeout(function(){
-                if (tutorialStage!=0) {
-                    tutorialStage-=1;
-                }
                 showTutorial(senderID);
              },1000);
         } else {
-            sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+            sendTextMessage(senderID,'\ud83d\ude48');
             setTimeout(function() {
                 sendUserMenu(senderID);
             }, 1000);
@@ -335,15 +331,12 @@ function receivedMessage(event) {
     }
   } else if (messageAttachments) {
         if(isTutorial) {
-            sendTextMessage(senderID,'睇埋個tutorial先啦親\ud83d\ude1f');
+            sendTextMessage(senderID,'我們還在教學當中呢\ud83d\ude1f');
             setTimeout(function(){
-                if (tutorialStage!=0) {
-                    tutorialStage-=1;
-                }
                 showTutorial(senderID);
              },1000);
         } else {
-            sendTextMessage(senderID,'\ud83d\ude48我咩都睇唔到');
+            sendTextMessage(senderID,'\ud83d\ude48');
             setTimeout(function() {
                 sendUserMenu(senderID);
             },1000);
@@ -429,34 +422,19 @@ function sendUserMenu(recipientId) {
             quick_replies : [
                 {
                     "content_type":"text",
-                    "title":"我有幾多分?",
-                    "payload":constants.POINT_QUERY
-                },
-                {
-                    "content_type":"text",
-                    "title":"有咩campaign",
-                    "payload":constants.RECEIVE_OFFER
-                },
-                {
-                    "content_type":"text",
                     "title":"Only For You",
                     "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
                 },
                 {
                     "content_type":"text",
-                    "title":"使用教學",
-                    "payload":constants.NEED_TUTORIAL
+                    "title":"查詢積分",
+                    "payload":constants.POINT_QUERY
                 },
                 {
                     "content_type":"text",
-                    "title":"語言",
-                    "payload":constants.LANGUAGE_SETTING
+                    "title":"活動推廣",
+                    "payload":constants.RECEIVE_OFFER
                 },
-                {
-                    "content_type":"text",
-                    "title":"關於Loyalty Chatbot",
-                    "payload":constants.ABOUT_LOYALTY_CHATBOT
-                }
              ]
         }
     };
@@ -597,12 +575,8 @@ function getStartedBtnReply(recipientId){
   utils.getUserInfo(recipientId, function(apiResult) {
     recipientName = apiResult.first_name;
     userLocale = apiResult.locale;
-    var msg1 = 'Hi '+ recipientName +'，我係Loyalty Chatbot\uD83D\uDC4B';
-    var msg2 = '依加趕緊demo用';
+    var msg1 = recipientName +'你好，需要教學示範嗎？';
     sendTextMessage(recipientId, msg1);
-    setTimeout(function() {
-      sendTextMessage(recipientId, msg2);
-    }, 1000)
     var messageData = {
       recipient: {
         id: recipientId
@@ -612,12 +586,12 @@ function getStartedBtnReply(recipientId){
         quick_replies: [
           {
             "content_type":"text",
-            "title":"好啊",
+            "title":"需要",
             "payload":constants.NEED_TUTORIAL
           },
           {
             "content_type":"text",
-            "title":"唔洗啦",
+            "title":"不需要",
             "payload":constants.SKIP_TUTORIAL
           }
         ]
@@ -662,19 +636,11 @@ function showTutorial(recipientId) {
     logger.info('|app: showTutorial| showTutorial');
     isTutorial = true;
     // msg list
-    // stage 0
-    var msg1 = 'Aillia chatbot可以比你好快咁睇到Aillia有咩campaign同check下account information，好似話比你聽你依加有幾多分咁。';
-    var msg2 = '用法好簡單，你可以係下面個menu度揀番想睇既野。';
-    var msg3 = '例如我想睇下有咩新既campaign睇，可以㩒一下"有咩campaign"';
-    // stage 1 (logged in)
-    var msg5 = '就係咁喇！見到有興趣既campaign仲可以㩒入去詳細睇。';
-    var msg6 = '等我睇下先，你已經login左我地Aillia既account。';
-    var msg7 = '跟住我地可以試下睇帳戶資訊呀！我可以話你聽依加有幾多分。';
-    var msg8 = '去menu度揀番"我有幾多分呢?"';
-    // stage 2 (logged in)
-    var msg9 = '除左分數，我地仲有專為你推介既campaign\u263a\ufe0f';
-    var msg10 = '㩒一下"Only For You"呀親';
-    // stage 3
+    // stage 0 //only for you
+    var msg1 = 'Loyalty chatbot可以讓你方便地查閱會員資訊及推廣優惠。用法非常簡單，你可以透過下面的按鍵選擇不同服務，例如你想查看專屬你的獨家優惠，可以按 “Only For You”';
+    // stage 1
+    var msg2 = '現在請試按 “Only For You”，如果你想退出教學，可以按 “離開教學”';
+    // stage 2
     var msg11 = '係咪好簡單呢親\u263a\ufe0f';
     var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
 
@@ -682,9 +648,6 @@ function showTutorial(recipientId) {
         sendTextMessage(recipientId, msg1);
         setTimeout(function() {
            sendTextMessage(recipientId, msg2);
-        }, 1000);
-        setTimeout(function() {
-           sendTextMessage(recipientId, msg3);
         }, 2000);
         setTimeout(function(){
             tutorialStage = 1;
@@ -699,38 +662,23 @@ function showTutorial(recipientId) {
                     quick_replies : [
                         {
                             "content_type":"text",
-                            "title":"有咩post呢",
-                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
-                            "payload":constants.RECEIVE_OFFER
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"識用喇唔睇喇",
+                            "title":"離開教學",
                             "payload":constants.STOP_TUTORIAL_MODE
                         },
                         {
                             "content_type":"text",
-                            "title":"我有幾多分?",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
                             "title":"Only For You",
+                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
+                            "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"查詢積分",
                             "payload":constants.IS_TUTORIAL_MODE
                         },
                         {
                             "content_type":"text",
-                            "title":"使用教學",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"語言",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"關於Loyalty Chatbot",
+                            "title":"活動推廣",
                             "payload":constants.IS_TUTORIAL_MODE
                         }
                      ]
@@ -739,19 +687,8 @@ function showTutorial(recipientId) {
             callSendAPI(messageData);
         },3000);
     } else if (tutorialStage == 1) {
-        sendTextMessage(recipientId, msg5);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg6);
-        }, 1000);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg7);
-        }, 2000);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg8);
-        }, 3000);
-        setTimeout(function() {
-            tutorialStage = 2;
-            // quick reply with highlighted point
+        sendTextMessage(recipientId, msg2);
+        setTimeout(function(){
             var messageData = {
                 recipient: {
                     id: recipientId
@@ -761,60 +698,9 @@ function showTutorial(recipientId) {
                     quick_replies : [
                         {
                             "content_type":"text",
-                            "title":"我有幾多分?",
-                            "image_url":"http://freeportbiblechurch.org/hp_wordpress/wp-content/uploads/2016/11/Click-Here-Icon.png",
-                            "payload":constants.POINT_QUERY
+                            "title":"離開教學",
+                            "payload":constants.STOP_TUTORIAL_MODE
                         },
-                        {
-                             "content_type":"text",
-                             "title":"識用喇唔睇喇",
-                             "payload":constants.STOP_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"有咩post呢",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"Only For You",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"使用教學",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"語言",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"關於Loyalty Chatbot",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        }
-                     ]
-                }
-            };
-            callSendAPI(messageData);
-        }, 4000);
-    } else if (tutorialStage == 2) {
-        sendTextMessage(recipientId, msg9);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg10);
-        }, 1000);
-        setTimeout(function() {
-            tutorialStage = 3;
-            // quick reply with highlighted only for you
-            var messageData = {
-                recipient: {
-                    id: recipientId
-                },
-                message: {
-                    text: "請選擇以下服務:",
-                    quick_replies : [
                         {
                             "content_type":"text",
                             "title":"Only For You",
@@ -822,41 +708,21 @@ function showTutorial(recipientId) {
                             "payload":constants.SHOW_EXCLUSIVE_CAMPAIGN
                         },
                         {
-                             "content_type":"text",
-                             "title":"識用喇唔睇喇",
-                             "payload":constants.STOP_TUTORIAL_MODE
-                        },
-                        {
                             "content_type":"text",
-                            "title":"我有幾多分?",
+                            "title":"查詢積分",
                             "payload":constants.IS_TUTORIAL_MODE
                         },
                         {
                             "content_type":"text",
-                            "title":"有咩post呢",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"使用教學",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"語言",
-                            "payload":constants.IS_TUTORIAL_MODE
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"關於Loyalty Chatbot",
+                            "title":"活動推廣",
                             "payload":constants.IS_TUTORIAL_MODE
                         }
                      ]
                 }
             };
             callSendAPI(messageData);
-        },2000);
-    } else if (tutorialStage == 3) {
+        }, 1000);
+    }  else if (tutorialStage == 2) {
         sendTextMessage(recipientId, msg11);
         setTimeout(function() {
             sendTextMessage(recipientId, msg12);
@@ -957,7 +823,7 @@ function showCampaignCategory(recipientId) {
         }
         // Added close btn at the end
         if (!isTutorial) {
-            categoryList.push(new quickReply.quickReplies('text','X 取消',constants.SHOW_USER_MENU));
+            categoryList.push(new quickReply.quickReplies('text','返回主目錄',constants.SHOW_USER_MENU));
         }
 
         // prepare msg
@@ -995,7 +861,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1017,7 +883,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
+                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的的APP喔。');
                 }, 1000);
                 setTimeout(function() {
                     if (isTutorial) {
@@ -1056,7 +922,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1078,7 +944,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, 'Facebook最多show到10個post，想睇更多就裝番隻app啦親\ud83d\ude09');
+                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的的APP喔。');
                 }, 1000)
                 setTimeout(function() {
                     if (isTutorial) {
@@ -1089,7 +955,7 @@ function showCampaign(recipientId, categoryId) {
                 }, 2000);
             }
             else {
-                sendTextMessage(recipientId, "無campaign :(");
+                sendTextMessage(recipientId, "暫時未有優惠 :(");
                 setTimeout(function() {
                     if (isTutorial) {
                         showTutorial(recipientId);
@@ -1143,7 +1009,7 @@ function pushRegister(recipientId) {
                                campaignDesc = apiResult[i].shortDescription
                             }
                             var campaignBtn = [];
-                            campaignBtn.push(new genericTemplate.buttons('web_url','無野睇，唔好㩒',imageUrl));
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                             campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                         }
                         // prepare msg
@@ -1169,6 +1035,7 @@ function pushRegister(recipientId) {
                 }
                 setTimeout(function(){
                     if (isTutorial){
+                        tutorialStage = 2;
                         showTutorial(recipientId);
                     } else {
                         sendUserMenu(recipientId);
