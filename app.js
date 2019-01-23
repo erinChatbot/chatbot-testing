@@ -857,7 +857,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -918,7 +918,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1005,7 +1005,7 @@ function pushRegister(recipientId) {
                                campaignDesc = apiResult[i].shortDescription
                             }
                             var campaignBtn = [];
-                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://i.imgur.com/X350z0E.jpg'));
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
                             campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                         }
                         // prepare msg
