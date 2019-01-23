@@ -828,7 +828,7 @@ function showCampaignCategory(recipientId) {
                 id: recipientId
             },
             message: {
-                text: "想睇咩類型？",
+                text: "請選擇活動類別 ：",
                 quick_replies: categoryList
             }
          };
@@ -857,7 +857,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -918,7 +918,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1005,7 +1005,7 @@ function pushRegister(recipientId) {
                                campaignDesc = apiResult[i].shortDescription
                             }
                             var campaignBtn = [];
-                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
                             campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                         }
                         // prepare msg

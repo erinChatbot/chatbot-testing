@@ -17,8 +17,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="687">
-                  <caret line="594" column="9" lean-forward="true" selection-start-line="594" selection-start-column="9" selection-end-line="594" selection-end-column="9" />
+                <state relative-caret-position="267">
+                  <caret line="1004" column="69" selection-start-line="1004" selection-start-column="69" selection-end-line="1004" selection-end-column="69" />
                 </state>
               </provider>
             </entry>
@@ -90,7 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logger</find>
       <find>LOGIN</find>
       <find>signinFlow</find>
       <find>PAYLOAD_FOR_LOGIN</find>
@@ -120,6 +119,7 @@
       <find>STOP_TUTORIAL_MODE</find>
       <find>無野睇</find>
       <find>Facebook最多</find>
+      <find>了解更多</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -185,7 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548222978541" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548223361392" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -363,8 +363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="687">
-          <caret line="594" column="9" lean-forward="true" selection-start-line="594" selection-start-column="9" selection-end-line="594" selection-end-column="9" />
+        <state relative-caret-position="267">
+          <caret line="1004" column="69" selection-start-line="1004" selection-start-column="69" selection-end-line="1004" selection-end-column="69" />
         </state>
       </provider>
     </entry>
