@@ -856,7 +856,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -917,7 +917,7 @@ function showCampaign(recipientId, categoryId) {
                         campaignDesc = apiResult[i].shortDescription
                     }
                     var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
+                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                     campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                 }
 
@@ -1004,7 +1004,7 @@ function pushRegister(recipientId) {
                                campaignDesc = apiResult[i].shortDescription
                             }
                             var campaignBtn = [];
-                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://www.dropbox.com/home/-ConsultingProjects/Loyalty%201.0?preview=demo_campaign_detail.JPG'));
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多',imageUrl));
                             campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
                         }
                         // prepare msg
