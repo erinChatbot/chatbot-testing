@@ -637,8 +637,8 @@ function showTutorial(recipientId) {
     // stage 1
     var msg2 = '現在請試按 “Only For You”，如果你想退出教學，可以按 “離開教學”';
     // stage 2
-    var msg11 = '係咪好簡單呢親\u263a\ufe0f';
-    var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
+    var msg11 = '此教學完成';
+//    var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
 
     if (tutorialStage == 0) {
         sendTextMessage(recipientId, msg1);
@@ -720,11 +720,8 @@ function showTutorial(recipientId) {
         }, 1000);
     }  else if (tutorialStage == 2) {
         sendTextMessage(recipientId, msg11);
-        setTimeout(function() {
-            sendTextMessage(recipientId, msg12);
-            isTutorial = false;
-            tutorialStage = 0;
-        }, 1000);
+        isTutorial = false;
+        tutorialStage = 0;
         setTimeout(function() {
             sendUserMenu(recipientId);
         },2000);
