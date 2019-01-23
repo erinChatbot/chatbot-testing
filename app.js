@@ -1129,14 +1129,15 @@ function pushRegister(recipientId) {
                 if(respCode==200) {
                     logger.debug('|app: pushRegister| getExclusiveCampaign SUCCESS');
 
-                    if (totalCampaign>0){
+                    if (totalCampaign != 0){
                         var campaignList = [];
                         for(var i=0; i<apiResult.length; i++) {
                             var campaignTitle = apiResult[i].name;
                             var campaignDesc = "無";
                             var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
                             if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-                               imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
+//                               imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
+                               imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
                             }
                             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                                campaignDesc = apiResult[i].shortDescription
