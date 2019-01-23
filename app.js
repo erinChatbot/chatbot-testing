@@ -575,14 +575,12 @@ function getStartedBtnReply(recipientId){
   utils.getUserInfo(recipientId, function(apiResult) {
     recipientName = apiResult.first_name;
     userLocale = apiResult.locale;
-    var msg1 = recipientName +'你好，需要教學示範嗎？';
-    sendTextMessage(recipientId, msg1);
     var messageData = {
       recipient: {
         id: recipientId
       },
       message: {
-        text: "第一次用？需唔需要教學示範？",
+        text: recipientName +'你好，需要教學示範嗎？',
         quick_replies: [
           {
             "content_type":"text",
@@ -597,9 +595,7 @@ function getStartedBtnReply(recipientId){
         ]
       }
     };
-    setTimeout(function() {
-      callSendAPI(messageData);
-    }, 2000)
+    callSendAPI(messageData);
   });
 }
 
