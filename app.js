@@ -637,7 +637,7 @@ function showTutorial(recipientId) {
     // stage 1
     var msg2 = '現在請試按 “Only For You”，如果你想退出教學，可以按 “離開教學”';
     // stage 2
-    var msg11 = '此教學完成';
+    var msg11 = '此教學已經完成';
 //    var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
 
     if (tutorialStage == 0) {
@@ -810,9 +810,11 @@ function showCampaignCategory(recipientId) {
         var resultLength = 9; // counted LATEST, Cancel
         (apiResult.length > 9 ) ? (resultLength=9) : (resultLength=apiResult.length);
         for(var i=0; i < resultLength; i++) {
-            var categoryTitle = apiResult[i].name;
-            categoryIdMap[categoryTitle] = apiResult[i].campaignCategoryId;
-            categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
+            if (apiResult[i].active) {
+                var categoryTitle = apiResult[i].name;
+                categoryIdMap[categoryTitle] = apiResult[i].campaignCategoryId;
+                categoryList.push(new quickReply.quickReplies('text',categoryTitle,constants.GET_CAMPAIGN_BY_CATEGORY));
+            }
         }
         // Added close btn at the end
         if (!isTutorial) {
