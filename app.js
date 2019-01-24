@@ -583,7 +583,7 @@ function getStartedBtnReply(recipientId){
         id: recipientId
       },
       message: {
-        text: recipientName +'需要教學示範嗎？',
+        text: '需要教學示範嗎？',
         quick_replies: [
           {
             "content_type":"text",
@@ -616,16 +616,16 @@ function showHelpMsg(recipientId) {
           id: recipientId
         },
         message: {
-          text: "親，有咩幫到你？",
+          text: "需要幫助嗎？",
           quick_replies: [
             {
               "content_type":"text",
-              "title":"睇教學",
+              "title":"教學示範",
               "payload":constants.NEED_TUTORIAL
             },
             {
               "content_type":"text",
-              "title":"無野喇",
+              "title":"返回主目錄",
               "payload":constants.SKIP_TUTORIAL
             }
           ]
