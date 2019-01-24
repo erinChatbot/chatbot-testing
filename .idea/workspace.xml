@@ -11,14 +11,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.76038337">
+    <splitter split-orientation="horizontal" split-proportion="0.485623">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="553">
-                  <caret line="987" lean-forward="true" selection-start-line="987" selection-end-line="987" />
+                <state relative-caret-position="-1534">
+                  <caret line="582" column="23" lean-forward="true" selection-start-line="582" selection-start-column="23" selection-end-line="582" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
@@ -66,7 +66,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/apiServices.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="587">
+                <state relative-caret-position="728">
                   <caret line="52" column="26" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="26" />
                 </state>
               </provider>
@@ -185,7 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548227182194" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548296646953" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -356,15 +356,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/apiServices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
+        <state relative-caret-position="728">
           <caret line="52" column="26" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="987" lean-forward="true" selection-start-line="987" selection-end-line="987" />
+        <state relative-caret-position="-1534">
+          <caret line="582" column="23" lean-forward="true" selection-start-line="582" selection-start-column="23" selection-end-line="582" selection-end-column="23" />
         </state>
       </provider>
     </entry>

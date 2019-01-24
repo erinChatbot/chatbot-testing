@@ -576,12 +576,14 @@ function getStartedBtnReply(recipientId){
   utils.getUserInfo(recipientId, function(apiResult) {
     recipientName = apiResult.first_name;
     userLocale = apiResult.locale;
+    var msg1 = recipientName + ' 你好';
+    var msg2 = 'Loyalty chatbot可以讓你方便地查閱會員資訊及推廣優惠。用法非常簡單，你可以透過下面的按鍵選擇不同服務，例如你想查看專屬你的獨家優惠，可以按 “Only For You”';
     var messageData = {
       recipient: {
         id: recipientId
       },
       message: {
-        text: recipientName +'你好，需要教學示範嗎？',
+        text: recipientName +'需要教學示範嗎？',
         quick_replies: [
           {
             "content_type":"text",
@@ -596,7 +598,13 @@ function getStartedBtnReply(recipientId){
         ]
       }
     };
-    callSendAPI(messageData);
+    sendTextMessage(recipientId,msg1);
+    setTimeout(function() {
+        sendTextMessage(recipientId,msg2);
+    },1000);
+    setTimeout(function() {
+        callSendAPI(messageData);
+    },2000);
   });
 }
 
@@ -634,7 +642,7 @@ function showTutorial(recipientId) {
     isTutorial = true;
     // msg list
     // stage 0 //only for you
-    var msg1 = 'Loyalty chatbot可以讓你方便地查閱會員資訊及推廣優惠。用法非常簡單，你可以透過下面的按鍵選擇不同服務，例如你想查看專屬你的獨家優惠，可以按 “Only For You”';
+//    var msg1 = 'Loyalty chatbot可以讓你方便地查閱會員資訊及推廣優惠。用法非常簡單，你可以透過下面的按鍵選擇不同服務，例如你想查看專屬你的獨家優惠，可以按 “Only For You”';
     // stage 1
     var msg2 = '現在請試按 “Only For You”，如果你想退出教學，可以按 “離開教學”';
     // stage 2
@@ -642,12 +650,12 @@ function showTutorial(recipientId) {
 //    var msg12 = '有咩唔明可以隨時打 /help 搵我呀\ud83d\ude03';
 
     if (tutorialStage == 0) {
-        sendTextMessage(recipientId, msg1);
-        setTimeout(function() {
-           sendTextMessage(recipientId, msg2);
-        }, 2000);
+        sendTextMessage(recipientId, msg2);
+//        setTimeout(function() {
+//           sendTextMessage(recipientId, msg2);
+//        }, 2000);
         setTimeout(function(){
-            tutorialStage = 1;
+//            tutorialStage = 1;
 //            sendUserMenu(recipientId);
             // quick reply with highlighted view campaign
             var messageData = {
@@ -682,7 +690,7 @@ function showTutorial(recipientId) {
                 }
             };
             callSendAPI(messageData);
-        },3000);
+        },1000);
     } else if (tutorialStage == 1) {
         sendTextMessage(recipientId, msg2);
         setTimeout(function(){
@@ -722,7 +730,7 @@ function showTutorial(recipientId) {
     }  else if (tutorialStage == 2) {
         sendTextMessage(recipientId, msg11);
         isTutorial = false;
-        tutorialStage = 0;
+        tutorialStage = 1;
         setTimeout(function() {
             sendUserMenu(recipientId);
         },2000);
@@ -879,7 +887,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的的APP喔。');
+                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
                 }, 1000);
                 setTimeout(function() {
                     if (isTutorial) {
@@ -940,7 +948,7 @@ function showCampaign(recipientId, categoryId) {
                 console.log(JSON.stringify(messageData));
                 callSendAPI(messageData);
                 setTimeout(function() {
-                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的的APP喔。');
+                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
                 }, 1000)
                 setTimeout(function() {
                     if (isTutorial) {
@@ -1031,7 +1039,7 @@ function pushRegister(recipientId) {
                 }
                 setTimeout(function(){
                     if (isTutorial){
-                        tutorialStage = 2;
+                        tutorialStage = 1;
                         showTutorial(recipientId);
                     } else {
                         sendUserMenu(recipientId);
