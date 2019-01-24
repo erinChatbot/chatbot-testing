@@ -1039,7 +1039,7 @@ function pushRegister(recipientId) {
                 }
                 setTimeout(function(){
                     if (isTutorial){
-                        tutorialStage = 1;
+                        tutorialStage = 2;
                         showTutorial(recipientId);
                     } else {
                         sendUserMenu(recipientId);
