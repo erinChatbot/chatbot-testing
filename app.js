@@ -31,8 +31,9 @@ var tutorialStage = 0;
 // FIXME, hardcoded parameter
 //SIT: +85264334904 / Ma123456!
 //PROD: cheukyyuen+susan@motherapp.com / Ma12345678!
-var loginName = 'cheukyyuen+susan@motherapp.com';
-var loginPwd = 'Ma12345678!';
+//Updatd PROD: +85291850281/ Ma!12345678
+var loginName = '+85291850281';
+var loginPwd = 'Ma!12345678';
 
 // store in mongodb
 var sso_jwt = "";
