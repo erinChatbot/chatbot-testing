@@ -1,24 +1,28 @@
 const request = require('request');
 var logger = require('../log');
 
-// SIT
-//const openLoyaltyHost = "https://backend.sit.aillia.motherapp.com";
-//const appBackendHost = "https://app-backend.sit.aillia.motherapp.com";
-//const connectorHost = "https://connector.sit.aillia.motherapp.com";
-//const ssoHost = "https://sso.sit.aillia.motherapp.com";
-
 // PROD
-const openLoyaltyHost = "https://middleware.prod.loyalty.motherapp.com";
-const appBackendHost = "https://sso.prod.loyalty.aillia.motherapp.com";
-const connectorHost = "https://sso.prod.loyalty.motherapp.com";
-const ssoHost = "https://sso.prod.loyalty.motherapp.com";
+const appBackendHost = "https://backend.prod.aillia.motherapp.com";
+const connectorHost = "https://connector.prod.aillia.motherapp.com";
+
+// sso jwt
+// op jwt > backend.
+
+// getCampaignCategory: https://connector.prod.aillia.motherapp.com/api/campaignCategory
+// getFeaturedCampaign: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?isFeatured=true&perPage=5&page=1
+// getCampaignByCategory: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?perPage=5&page=1&categoryId[]=’+categoryId
+// getExclusiveCampaign: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?hasSegment=true&perPage=5&page=1
+// authenticate: https://connector.prod.aillia.motherapp.com/api/customer/login
+// getCustomerStatus: https://connector.prod.aillia.motherapp.com/api/customer/status?_locale=+userLocale
+
+// featured = exclusive ?
 
 module.exports = {
     getCampaignCategory: function(userLocale,callback) {
 //        var apiPath = '/api/public/campaignCategory?_locale='+userLocale; //SIT
         var apiPath = '/api/campaign_category'; //PROD
 
-        request.get(openLoyaltyHost+apiPath, (error, response, body) => {
+        request.get(connectorHost+apiPath, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
@@ -34,9 +38,9 @@ module.exports = {
 
     getFeaturedCampaign: function(userLocale,callback) {
 //        var apiPath = '/api/campaign/public/available?isFeatured=true&_locale='+userLocale; //SIT
-        var apiPath = '/api/customer/campaign/featured'; //PROD
+        var apiPath = '/api/customer/campaign/available?isFeatured=true&perPage=5&page=1'; //PROD
 
-        request.get(openLoyaltyHost+apiPath, (error, response, body) => {
+        request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
                 logger.error(error);
                 return console.log(error);
@@ -54,7 +58,7 @@ module.exports = {
 //        var apiPath = '/api/campaign/public/available?categoryId[]='+categoryId; //SIT
         var apiPath = '/api/customer/campaign/available?perPage=5&page=1&categoryId[]='+categoryId; //PROD
 
-        request.get(openLoyaltyHost+apiPath, (error, response, body) => {
+        request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
                logger.error(error);
                 return console.log(error);
@@ -70,7 +74,7 @@ module.exports = {
 
      getExclusiveCampaign: function(userLocale, jwtToken, callback) {
 //        var apiPath = '/api/customer/campaign/available?hasSegment=true'; //SIT
-        var apiPath = '/api/customer/campaign/exclusive?perPage=5&page=1'; //PROD
+        var apiPath = '/api/customer/campaign/available?hasSegment=true&perPage=5&page=1'; //PROD
 
         request({
             headers: {
@@ -78,7 +82,7 @@ module.exports = {
 //                'Authorization': 'Bearer '+jwtToken //SIT
                 'Authorization': 'JWT '+jwtToken
             },
-            uri: openLoyaltyHost+apiPath,
+            uri: appBackendHost+apiPath,
             method: 'GET'
          }, function(error, response, body) {
             if (error) {
@@ -98,7 +102,7 @@ module.exports = {
 
      authenticate: function(userName, password, callback) {
 //        var apiPath = '/api/customer/login'; //SIT
-        var apiPath = '/api/token/authenticate'; //PROD
+        var apiPath = '/api/customer/login'; //PROD
 
         var requestBody = {
             'username': userName,
@@ -139,7 +143,7 @@ module.exports = {
                 'Authorization': 'JWT '+jwtToken
             },
 //            uri: connectorHost+apiPath, //SIT
-            uri: openLoyaltyHost+apiPath, //PROD
+            uri: connectorHost+apiPath, //PROD
             method: 'GET'
         }, function(error,response,body) {
             if (error) {
