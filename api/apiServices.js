@@ -128,7 +128,7 @@ module.exports = {
             console.log(JSON.parse(body));
 
 //            var apiResult = JSON.parse(body).result; //SIT
-            var apiResult = JSON.parse(body).token;
+            var apiResult = JSON.parse(body).result;
             callback(response.statusCode,apiResult)
         });
      },
