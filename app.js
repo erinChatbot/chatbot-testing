@@ -852,128 +852,142 @@ function showCampaignCategory(recipientId) {
 // Get Campaign
 function showCampaign(recipientId, categoryId) {
     logger.debug('|app: showCampaign| categoryId: '+categoryId);
-    // featured
-    if (categoryId == '0') {
-        apiService.getFeaturedCampaign(userLocale,function(apiResult, totalCampaign){
-            if (totalCampaign != 0) {
-                var campaignList = [];
-                for(var i=0; i < apiResult.length; i++) {
-                    var campaignTitle = apiResult[i].name;
-                    var campaignDesc = "無";
-                    var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
-                    if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-//                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                        imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
-                    }
-                    if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
-                        campaignDesc = apiResult[i].shortDescription
-                    }
-                    var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
-                    campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
-                }
 
-                // prepare msg
-                var messageData = {
-                   recipient: {
-                      id: recipientId
-                   },
-                   message: {
-                      "attachment" : {
-                         "type" : "template",
-                         "payload" : {
-                            "template_type":"generic",
-                            "elements" : campaignList
-                         }
-                      }
-                   }
-                };
-                console.log(JSON.stringify(messageData));
-                callSendAPI(messageData);
-                setTimeout(function() {
-                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
-                }, 1000);
-                setTimeout(function() {
-                    if (isTutorial) {
-                        showTutorial(recipientId);
-                    } else {
-                        showCampaignCategory(recipientId);
-                    }
-                }, 2000);
-            }
-            else {
-                sendTextMessage(recipientId, "無campaign :(");
-                setTimeout(function() {
-                    if (isTutorial) {
-                        showTutorial(recipientId);
-                    } else {
-                        showCampaignCategory(recipientId);
-                    }
-                },1000);
-            }
-        });
-    }
-    // By category
-    else {
-        apiService.getCampaignByCategory(userLocale,categoryId,function(apiResult, totalCampaign){
-            if (totalCampaign != 0) {
-                var campaignList = [];
-                for(var i=0; i < apiResult.length; i++) {
-                    var campaignTitle = apiResult[i].name;
-                    var campaignDesc = "無";
-                    var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
-                    if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-//                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                        imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
-                    }
-                    if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
-                        campaignDesc = apiResult[i].shortDescription
-                    }
-                    var campaignBtn = [];
-                    campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
-                    campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
-                }
+    // get jwt token
+    apiService.authenticate(loginName,loginPwd,function(respCode,apiResult){
+        if (respCode==200) {
+            logger.debug('|app: pushRegister| login SUCCESS');
 
-                // prepare msg
-                var messageData = {
-                   recipient: {
-                      id: recipientId
-                   },
-                   message: {
-                      "attachment" : {
-                         "type" : "template",
-                         "payload" : {
-                            "template_type":"generic",
-                            "elements" : campaignList
-                         }
-                      }
-                   }
-                };
-                console.log(JSON.stringify(messageData));
-                callSendAPI(messageData);
-                setTimeout(function() {
-                   sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
-                }, 1000)
-                setTimeout(function() {
-                    if (isTutorial) {
-                        showTutorial(recipientId);
-                    } else {
-                        showCampaignCategory(recipientId);
+            sso_jwt = apiResult.sso_jwt;
+            ol_jwt = apiResult.ol_jwt;
+            ol_refresh_token = apiResult.ol_refresh_token;
+
+            console.log('OL jwt token: '+ol_jwt);
+
+            // featured
+            if (categoryId == '0') {
+                apiService.getFeaturedCampaign(userLocale,ol_jwt,function(apiResult, totalCampaign){
+                    if (totalCampaign != 0) {
+                        var campaignList = [];
+                        for(var i=0; i < apiResult.length; i++) {
+                            var campaignTitle = apiResult[i].name;
+                            var campaignDesc = "無";
+                            var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                            if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+        //                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
+                                imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
+                            }
+                            if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                                campaignDesc = apiResult[i].shortDescription
+                            }
+                            var campaignBtn = [];
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
+                            campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
+                        }
+
+                        // prepare msg
+                        var messageData = {
+                        recipient: {
+                            id: recipientId
+                        },
+                        message: {
+                            "attachment" : {
+                                "type" : "template",
+                                "payload" : {
+                                    "template_type":"generic",
+                                    "elements" : campaignList
+                                }
+                            }
+                        }
+                        };
+                        console.log(JSON.stringify(messageData));
+                        callSendAPI(messageData);
+                        setTimeout(function() {
+                        sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
+                        }, 1000);
+                        setTimeout(function() {
+                            if (isTutorial) {
+                                showTutorial(recipientId);
+                            } else {
+                                showCampaignCategory(recipientId);
+                            }
+                        }, 2000);
                     }
-                }, 2000);
+                    else {
+                        sendTextMessage(recipientId, "無campaign :(");
+                        setTimeout(function() {
+                            if (isTutorial) {
+                                showTutorial(recipientId);
+                            } else {
+                                showCampaignCategory(recipientId);
+                            }
+                        },1000);
+                    }
+                });
             }
+            // By category
             else {
-                sendTextMessage(recipientId, "暫時未有優惠 :(");
-                setTimeout(function() {
-                    if (isTutorial) {
-                        showTutorial(recipientId);
-                    } else {
-                        showCampaignCategory(recipientId);
+                apiService.getCampaignByCategory(userLocale,categoryId,ol_jwt,function(apiResult, totalCampaign){
+                    if (totalCampaign != 0) {
+                        var campaignList = [];
+                        for(var i=0; i < apiResult.length; i++) {
+                            var campaignTitle = apiResult[i].name;
+                            var campaignDesc = "無";
+                            var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
+                            if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
+        //                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
+                                imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
+                            }
+                            if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
+                                campaignDesc = apiResult[i].shortDescription
+                            }
+                            var campaignBtn = [];
+                            campaignBtn.push(new genericTemplate.buttons('web_url','了解更多','https://middleware.prod.loyalty.motherapp.com/api/campaign/b5bc63cb-b3b6-44da-a171-299af59d049a/photo/1'));
+                            campaignList.push(new genericTemplate.elements(campaignTitle,imageUrl,campaignBtn));
+                        }
+
+                        // prepare msg
+                        var messageData = {
+                        recipient: {
+                            id: recipientId
+                        },
+                        message: {
+                            "attachment" : {
+                                "type" : "template",
+                                "payload" : {
+                                    "template_type":"generic",
+                                    "elements" : campaignList
+                                }
+                            }
+                        }
+                        };
+                        console.log(JSON.stringify(messageData));
+                        callSendAPI(messageData);
+                        setTimeout(function() {
+                        sendTextMessage(recipientId, ' Facebook最多可以顯示10個活動，如想得到更多推廣優惠，可以下載我的APP喔。');
+                        }, 1000)
+                        setTimeout(function() {
+                            if (isTutorial) {
+                                showTutorial(recipientId);
+                            } else {
+                                showCampaignCategory(recipientId);
+                            }
+                        }, 2000);
                     }
-                },1000);
+                    else {
+                        sendTextMessage(recipientId, "暫時未有優惠 :(");
+                        setTimeout(function() {
+                            if (isTutorial) {
+                                showTutorial(recipientId);
+                            } else {
+                                showCampaignCategory(recipientId);
+                            }
+                        },1000);
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
 
 // Register only for you push
@@ -985,13 +999,6 @@ function pushRegister(recipientId) {
         if (respCode==200){
             logger.debug('|app: pushRegister| login SUCCESS');
 
-             //SIT
-//            sso_jwt = apiResult.sso_jwt;
-//            ol_jwt = apiResult.ol_jwt;
-//            ol_refresh_token = apiResult.ol_refresh_token;
-
-
-            //PROD
             sso_jwt = apiResult.sso_jwt;
             ol_jwt = apiResult.ol_jwt;
             ol_refresh_token = apiResult.ol_refresh_token;

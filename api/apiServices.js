@@ -78,37 +78,52 @@ module.exports = {
          });
     },
 
-    getCampaignByCategory: function(userLocale,categoryId, callback) {
+    getCampaignByCategory: function(userLocale,categoryId, jwtToken, callback) {
         var apiPath = api.GET_CAMPAIGN_BY_CATEGORY + categoryId;
 
-        request.get(appBackendHost+apiPath, (error, response, body) => {
-            if(error) {
-               logger.error(error);
+        request({
+            headers: {
+                'Content-type':'application/json',
+                'Authorization': 'Bearer '+jwtToken
+            },
+            uri: appBackendHost+apiPath,
+            method: 'GET'
+         }, function(error, response, body) {
+            if (error) {
+                logger.error(error);
                 return console.log(error);
             }
+
             console.log(JSON.parse(body));
 
-//            var apiResult = JSON.parse(body).campaigns; //SIT
-            var apiResult = JSON.parse(body).result.campaigns;
+            var apiResult = JSON.parse(body).campaigns;
             var total = JSON.parse(body).total;
             callback(apiResult, total)
          });
     },
 
-    getFeaturedCampaign: function(userLocale,callback) {
+    getFeaturedCampaign: function(userLocale,jwtToken,callback) {
         var apiPath = api.GET_FEATURED_CAMPAIGN;
 
-        request.get(appBackendHost+apiPath, (error, response, body) => {
-            if(error) {
+        request({
+            headers: {
+                'Content-type':'application/json',
+                'Authorization': 'Bearer '+jwtToken
+            },
+            uri: appBackendHost+apiPath,
+            method: 'GET'
+         }, function(error, response, body) {
+            if (error) {
                 logger.error(error);
                 return console.log(error);
             }
+
             console.log(JSON.parse(body));
 
-            var apiResult = JSON.parse(body).result.campaigns;
+            var apiResult = JSON.parse(body).campaigns;
             var total = JSON.parse(body).total
             callback(apiResult, total)
-        });
+         });
     },
 
      getExclusiveCampaign: function(userLocale, jwtToken, callback) {
