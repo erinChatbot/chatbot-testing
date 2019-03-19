@@ -40,6 +40,9 @@ var sso_jwt = "";
 var ol_jwt = "";
 var ol_refresh_token = "";
 
+// image host
+var imageHost = 'https://backend.prod.aillia.motherapp.com/api/campaign/';
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -1008,7 +1011,7 @@ function pushRegister(recipientId) {
                             var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
                             if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
 //                               imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                               imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
+                               imageUrl = imageHost + apiResult[i].campaignId+'/photo/0';
                             }
                             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                                campaignDesc = apiResult[i].shortDescription
