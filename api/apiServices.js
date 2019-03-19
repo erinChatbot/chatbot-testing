@@ -5,22 +5,9 @@ var logger = require('../log');
 const appBackendHost = "https://backend.prod.aillia.motherapp.com";
 const connectorHost = "https://connector.prod.aillia.motherapp.com";
 
-// sso jwt
-// op jwt > backend.
-
-// getCampaignCategory: https://connector.prod.aillia.motherapp.com/api/campaignCategory
-// getFeaturedCampaign: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?isFeatured=true&perPage=5&page=1
-// getCampaignByCategory: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?perPage=5&page=1&categoryId[]=’+categoryId
-// getExclusiveCampaign: https://backend.prod.aillia.motherapp.com/api/customer/campaign/available?hasSegment=true&perPage=5&page=1
-// authenticate: https://connector.prod.aillia.motherapp.com/api/customer/login
-// getCustomerStatus: https://connector.prod.aillia.motherapp.com/api/customer/status?_locale=+userLocale
-
-// featured = exclusive ?
-
 module.exports = {
     getCampaignCategory: function(userLocale,callback) {
-//        var apiPath = '/api/public/campaignCategory?_locale='+userLocale; //SIT
-        var apiPath = '/api/campaign_category'; //PROD
+        var apiPath = '/api/campaign_category';
 
         request.get(connectorHost+apiPath, (error, response, body) => {
             if(error) {
@@ -28,17 +15,14 @@ module.exports = {
                 return console.log(error);
             }
             console.log(JSON.parse(body));
-    //            logger.debug('response body: '+JSON.stringify(body));
 
-//            var apiResult = JSON.parse(body).categories; //SIT
             var apiResult = JSON.parse(body).result.categories;
             callback(apiResult)
          });
      },
 
     getFeaturedCampaign: function(userLocale,callback) {
-//        var apiPath = '/api/campaign/public/available?isFeatured=true&_locale='+userLocale; //SIT
-        var apiPath = '/api/customer/campaign/available?isFeatured=true&perPage=5&page=1'; //PROD
+        var apiPath = '/api/customer/campaign/available?isFeatured=true&perPage=5&page=1';
 
         request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
@@ -47,16 +31,14 @@ module.exports = {
             }
             console.log(JSON.parse(body));
 
-//            var apiResult = JSON.parse(body).campaigns //SIT
-            var apiResult = JSON.parse(body).result.campaigns; //PROD
+            var apiResult = JSON.parse(body).result.campaigns;
             var total = JSON.parse(body).total
             callback(apiResult, total)
         });
     },
 
      getCampaignByCategory: function(userLocale,categoryId, callback) {
-//        var apiPath = '/api/campaign/public/available?categoryId[]='+categoryId; //SIT
-        var apiPath = '/api/customer/campaign/available?perPage=5&page=1&categoryId[]='+categoryId; //PROD
+        var apiPath = '/api/customer/campaign/available?perPage=5&page=1&categoryId[]='+categoryId;
 
         request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
@@ -73,7 +55,6 @@ module.exports = {
      },
 
      getExclusiveCampaign: function(userLocale, jwtToken, callback) {
-//        var apiPath = '/api/customer/campaign/available?hasSegment=true'; //SIT
         var apiPath = '/api/customer/campaign/available?hasSegment=true&perPage=5&page=1'; //PROD
 
         request({
@@ -92,8 +73,7 @@ module.exports = {
 
             console.log(JSON.parse(body));
 
-//            var apiResult = JSON.parse(body).campaigns; //SIT
-            var apiResult = JSON.parse(body).result.campaigns; //PROD
+            var apiResult = JSON.parse(body).result.campaigns;
             var total = JSON.parse(body).total;
 
             callback(response.statusCode,apiResult,total);
@@ -101,8 +81,7 @@ module.exports = {
      },
 
      authenticate: function(userName, password, callback) {
-//        var apiPath = '/api/customer/login'; //SIT
-        var apiPath = '/api/customer/login'; //PROD
+        var apiPath = '/api/customer/login';
 
         var requestBody = {
             'username': userName,
@@ -127,23 +106,20 @@ module.exports = {
 
             console.log(JSON.parse(body));
 
-//            var apiResult = JSON.parse(body).result; //SIT
             var apiResult = JSON.parse(body).result;
             callback(response.statusCode,apiResult)
         });
      },
 
      getCustomerStatus: function(userLocale, jwtToken, callback) {
-//        var apiPath = '/api/customer/status?_locale='+userLocale; //SIT
-        var apiPath = '/api/customer/status?_locale='+userLocale; //PROD
+        var apiPath = '/api/customer/status?_locale='+userLocale;
 
         request({
             headers: {
                 'Content-type': 'application/json',
                 'Authorization': 'JWT '+jwtToken
             },
-//            uri: connectorHost+apiPath, //SIT
-            uri: connectorHost+apiPath, //PROD
+            uri: connectorHost+apiPath,
             method: 'GET'
         }, function(error,response,body) {
             if (error) {
