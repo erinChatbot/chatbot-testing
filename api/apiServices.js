@@ -117,8 +117,7 @@ module.exports = {
         request({
             headers: {
                 'Content-type':'application/json',
-//                'Authorization': 'Bearer '+jwtToken //SIT
-                'Authorization': 'JWT '+jwtToken
+                'Authorization': 'Bearer '+jwtToken
             },
             uri: appBackendHost+apiPath,
             method: 'GET'
