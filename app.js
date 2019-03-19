@@ -874,8 +874,7 @@ function showCampaign(recipientId, categoryId) {
                             var campaignDesc = "無";
                             var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
                             if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-        //                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                                imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
+                                imageUrl = util.format(imageUrlFormat, apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
                             }
                             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                                 campaignDesc = apiResult[i].shortDescription
@@ -935,8 +934,7 @@ function showCampaign(recipientId, categoryId) {
                             var campaignDesc = "無";
                             var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
                             if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
-        //                        imageUrl = util.format('https://backend.sit.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                                imageUrl = 'https://middleware.prod.loyalty.motherapp.com/api/campaign/'+apiResult[i].campaignId+'/photo/0'; //PROD
+                                imageUrl = util.format(imageUrlFormat, apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
                             }
                             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                                 campaignDesc = apiResult[i].shortDescription
