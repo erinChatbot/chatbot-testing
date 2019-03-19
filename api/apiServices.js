@@ -1,6 +1,6 @@
 const request = require('request');
 var logger = require('../log');
-var api = require('.apiConfig');
+var api = require('./apiConfig');
 
 // PROD
 const appBackendHost = "https://backend.prod.aillia.motherapp.com";
