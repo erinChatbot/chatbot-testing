@@ -129,7 +129,7 @@ module.exports = {
 
             console.log(JSON.parse(body));
 
-            var apiResult = JSON.parse(body).result.campaigns;
+            var apiResult = JSON.parse(body).campaigns;
             var total = JSON.parse(body).total;
 
             callback(response.statusCode,apiResult,total);
