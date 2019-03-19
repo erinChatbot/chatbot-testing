@@ -99,7 +99,7 @@ module.exports = {
 
             var apiResult = JSON.parse(body).result.campaigns;
             var total = JSON.parse(body).total;
-            callback(apiResult, total)
+            callback(apiResult, total);
         });
     },
 
@@ -121,8 +121,9 @@ module.exports = {
             console.log(JSON.parse(body));
 
             var apiResult = JSON.parse(body).result.campaigns;
-            var total = JSON.parse(body).total
-            callback(apiResult, total)
+            var total = JSON.parse(body).total;
+
+            callback(apiResult, total);
         });
     },
 
