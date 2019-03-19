@@ -982,13 +982,6 @@ function pushRegister(recipientId) {
         if (respCode==200){
             logger.debug('|app: pushRegister| login SUCCESS');
 
-             //SIT
-//            sso_jwt = apiResult.sso_jwt;
-//            ol_jwt = apiResult.ol_jwt;
-//            ol_refresh_token = apiResult.ol_refresh_token;
-
-
-            //PROD
             sso_jwt = apiResult.sso_jwt;
             ol_jwt = apiResult.ol_jwt;
             ol_refresh_token = apiResult.ol_refresh_token;
