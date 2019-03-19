@@ -1,5 +1,6 @@
 const request = require('request');
 var logger = require('../log');
+var api = require('.apiConfig');
 
 // PROD
 const appBackendHost = "https://backend.prod.aillia.motherapp.com";
@@ -7,7 +8,7 @@ const connectorHost = "https://connector.prod.aillia.motherapp.com";
 
 module.exports = {
     authenticate: function(userName, password, callback) {
-        var apiPath = '/api/customer/login';
+        var apiPath = api.AUTHENTICATE;
 
         var requestBody = {
             'username': userName,
