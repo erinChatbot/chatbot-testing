@@ -39,7 +39,7 @@ module.exports = {
     },
 
     getCustomerStatus: function(userLocale, jwtToken, callback) {
-        var apiPath = '/api/customer/status?_locale='+userLocale;
+        var apiPath = api.GET_CUSTOMER_STATUS + userLocale;
 
         request({
             headers: {
@@ -64,7 +64,7 @@ module.exports = {
     },
 
     getCampaignCategory: function(userLocale,callback) {
-        var apiPath = '/api/campaign_category';
+        var apiPath = api.GET_CAMPAIGN_CATEGORY;
 
         request.get(connectorHost+apiPath, (error, response, body) => {
             if(error) {
@@ -79,7 +79,7 @@ module.exports = {
     },
 
     getCampaignByCategory: function(userLocale,categoryId, callback) {
-        var apiPath = '/api/customer/campaign/available?perPage=5&page=1&categoryId[]='+categoryId;
+        var apiPath = api.GET_CAMPAIGN_BY_CATEGORY + categoryId;
 
         request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
@@ -96,7 +96,7 @@ module.exports = {
     },
 
     getFeaturedCampaign: function(userLocale,callback) {
-        var apiPath = '/api/customer/campaign/available?isFeatured=true&perPage=5&page=1';
+        var apiPath = api.GET_FEATURED_CAMPAIGN;
 
         request.get(appBackendHost+apiPath, (error, response, body) => {
             if(error) {
@@ -112,7 +112,7 @@ module.exports = {
     },
 
      getExclusiveCampaign: function(userLocale, jwtToken, callback) {
-        var apiPath = '/api/customer/campaign/available?hasSegment=true&perPage=5&page=1'; //PROD
+        var apiPath = api.GET_EXCLUSIVE_CAMPAIGN;
 
         request({
             headers: {
