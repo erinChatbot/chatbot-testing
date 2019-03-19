@@ -41,7 +41,7 @@ var ol_jwt = "";
 var ol_refresh_token = "";
 
 // image host
-var imageHost = 'https://backend.prod.aillia.motherapp.com/api/campaign/';
+var imageUrlFormat = 'https://backend.prod.aillia.motherapp.com/api/campaign/%s/photo/%s';
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -1011,7 +1011,7 @@ function pushRegister(recipientId) {
                             var imageUrl = "https://www.sylff.org/wp-content/uploads/2016/04/noImage.jpg";
                             if (typeof apiResult[i].photos[0] !== 'undefined' && apiResult[i].photos[0] !== null) {
 //                               imageUrl = util.format('https://connector.uat.aillia.motherapp.com/api/campaign/%s/photo/%s', apiResult[i].campaignId, apiResult[i].photos[0].photoId.id); //SIT
-                               imageUrl = imageHost + apiResult[i].campaignId+'/photo/0';
+                               imageUrl = util.format(imageUrlFormat, apiResult[i].campaignId, apiResult[i].photos[0].photoId.id);
                             }
                             if (typeof apiResult[i].shortDescription !== 'undefined' && apiResult[i].shortDescription !== null) {
                                campaignDesc = apiResult[i].shortDescription
