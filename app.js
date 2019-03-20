@@ -32,7 +32,7 @@ var tutorialStage = 0;
 //SIT: +85264334904 / Ma123456!
 //PROD: cheukyyuen+susan@motherapp.com / Ma12345678!
 //Updatd PROD: +85291850281/ Ma!12345678
-var loginName = '+85291850281';
+var loginName = '+85264951955';
 var loginPwd = 'Ma!12345678';
 
 // store in mongodb
